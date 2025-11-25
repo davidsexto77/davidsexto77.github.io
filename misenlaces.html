@@ -67,6 +67,22 @@
                     color: #FF8C00; /* Naranja al hacer hover */
                     text-decoration: underline; /* Opcional: añade un subrayado */
                 }
+                /* esto para el puto boton */
+                /* 🔷 Estilos Iniciales del Botón (Estado por defecto) */
+                .mi-boton {
+                    background-color: #007bff; /* Color inicial de fondo: Azul */
+                    color: white;              /* Color del texto: Blanco */
+                    padding: 10px 20px;        /* Espaciado interno */
+                    border: none;              /* Quitar el borde predeterminado */
+                    border-radius: 5px;        /* Bordes redondeados */
+                    cursor: pointer;           /* Puntero interactivo */
+                    transition: background-color 0.3s ease; /* Transición suave */
+                }
+
+                /* 🔴 Estilos Aplicados al Pasar el Ratón (Estado :hover) */
+                .mi-boton:hover {
+                    background-color: #0056b3; /* Color de fondo al hacer hover: Azul Oscuro */
+                }
         </style>
     </head>
     <body>
@@ -87,7 +103,7 @@
         <footer>
             <br>
             <hr>
-            <button><a href="index.html">Inicio</a></button>
+            <button class="mi-boton"><a href="index.html">Volver al Index</a></button>
             <p>DAVID SEXTO - 2025 &copy; </p>
         </footer>
     </body>
