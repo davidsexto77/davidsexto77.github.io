@@ -53,6 +53,20 @@
             footer strong {
                 color: #000000;
             }
+
+            /* vamos a ponerle formato a los enlaces */
+            /* Estilos iniciales del enlace */
+                .enlaces {
+                    color: #0000FF; /* Azul inicial */
+                    text-decoration: none; /* Quita el subrayado predeterminado */
+                    font-weight: bold;
+                }
+
+                /* Estilos aplicados SOLAMENTE al pasar el ratón */
+                .enlaces:hover {
+                    color: #FF8C00; /* Naranja al hacer hover */
+                    text-decoration: underline; /* Opcional: añade un subrayado */
+                }
         </style>
     </head>
     <body>
@@ -64,14 +78,15 @@
                 
                     
         
-                    <p>- Ir a <a href="https://www.instagram.com/daviii__2507/">Instagram</a></p>
-                    <p>- Ir a <a href="https://x.com/GlxdeKroos">X (Twitter)</a></p>
+                    <p>- Ir a <a href="https://www.instagram.com/daviii__2507/" class="enlaces">Instagram</a></p>
+                    <p>- Ir a <a href="https://x.com/GlxdeKroos" class="enlaces">X (Twitter)</a></p>
                     <!-- <p>- Ir a <a href="https://www.instagram.com/daviii__2507/">Spotify</a></p> -->
                     
                 
         </nav>
         <footer>
             <br>
+            <hr>
             <button><a href="index.html">Inicio</a></button>
             <p>DAVID SEXTO - 2025 &copy; </p>
         </footer>
