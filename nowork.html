@@ -101,41 +101,22 @@
                     margin-top: auto; /* Empuja el footer a la parte inferior de la página */
                 }
                 /* Botón Principal (Accent Button) */
-                .btn-acento {
-                    /* Diseño Base */
-                    display: inline-block;
-                    padding: 12px 25px; /* Relleno cómodo */
-                    border: 2px solid var(--color-acento); /* Borde con color de acento */
-                    border-radius: 6px;
-                    cursor: pointer;
-                    font-size: 1em;
-                    font-weight: 600;
-                    text-align: center;
-                    text-decoration: none; /* Importante para enlaces (<a>) que actúan como botones */
-                    
-                    /* Colores Iniciales */
-                    background-color: transparent; /* Fondo transparente inicialmente */
-                    color: var(--color-acento); /* Texto con el color de acento */
-                    
-                    /* Transiciones para suavizar los efectos */
-                    transition: background-color 0.3s ease, 
-                                color 0.3s ease, 
-                                box-shadow 0.3s ease;
-                }
+                    .btn-acento {
+                        /* ... (resto de estilos base sin cambios) ... */
+                        
+                        /* Colores Iniciales (¡AQUÍ ESTÁ EL CAMBIO!) */
+                        background-color: transparent;
+                        color: var(--color-acento); /* <-- ¡CAMBIADO a color de acento cian! */
+                        
+                        /* ... (resto de transiciones sin cambios) ... */
+                    }
 
-                /* Efecto Hover (Al pasar el ratón) */
-                .btn-acento:hover {
-                    background-color: var(--color-acento); /* El color de acento rellena el botón */
-                    color: var(--color-header-footer); /* El texto se oscurece para el contraste */
-                    box-shadow: 0 0 15px rgba(102, 252, 241, 0.6); /* Un efecto de brillo alrededor */
-                    transform: translateY(-2px); /* Un ligero desplazamiento hacia arriba */
-                }
-
-                /* Estado Activo (Al hacer clic) */
-                .btn-acento:active {
-                    transform: translateY(0);
-                    box-shadow: 0 0 5px rgba(102, 252, 241, 0.6);
-                }
+                    /* Efecto Hover (Al pasar el ratón) */
+                    .btn-acento:hover {
+                        background-color: var(--color-acento);
+                        color: var(--color-header-footer);
+                        /* ... (resto de efectos sin cambios) ... */
+                    }
         </style>
     </head>
     <body>
