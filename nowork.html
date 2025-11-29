@@ -7,79 +7,98 @@
         <link rel="icon" type="imagen/png" href="Imagenes/advertencia_v2.png" width="500">
         <style>
 
-            body {
-                background: linear-gradient(to right, #a1c4fd, #c2e9fb);
-                font-family: 'Times New Roman', Tahoma, sans-serif;
-                margin: 0;
-                padding: 0;
-                line-height: 1.6;
-                color: #000000;
-            }
+            /* Variables para una fácil gestión de colores */
+                :root {
+                    --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
+                    --color-header-footer: #0b0c10; /* Negro profundo */
+                    --color-texto-principal: #c5c6c7; /* Gris claro para texto */
+                    --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
+                    --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
+                    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+                }
 
-            header {
-                background-color: #5fbbf8;
-                color: #5fbbf8b6;
-                text-align: center;
-                padding: 20px 0;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-                transition: 0.5s;
-            }
-            header:hover {
-                background-color:#5fbbf891;
-            }
-            h1 {
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-                color: rgb(0, 0, 0); 
-            }
+                /* Estilos Generales */
+                body {
+                    background-color: var(--color-fondo-principal);
+                    font-family: var(--font-stack);
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.6;
+                    color: var(--color-texto-principal);
+                    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
+                    display: flex;
+                    flex-direction: column;
+                }
 
-            h2 {
-                text-align: center;
-                margin-top: 40px;
-                color: #000000;
-            }
+                /* Estilos de Encabezado (Header) */
+                header {
+                    background-color: var(--color-header-footer);
+                    color: var(--color-acento); /* Usa el acento para el texto del header */
+                    text-align: center;
+                    padding: 30px 0;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada para un look profundo */
+                    transition: background-color 0.3s ease;
+                }
 
-             nav {
-                list-style-type: disc; 
-                text-align: center ; 
-            }
+                header:hover {
+                    background-color: #1a1a1e; /* Ligero cambio al pasar el ratón */
+                }
 
+                /* Títulos */
+                h1 {
+                    color: var(--color-acento);
+                    text-shadow: 0 0 8px rgba(102, 252, 241, 0.4); /* Un sutil efecto de brillo */
+                    font-weight: 700;
+                    margin: 0;
+                }
 
-            footer {
-                text-align: center;
-                padding: 10px 0;
-                font-size: 0.9em;
-                color: #000000;
-            }
-            footer strong {
-                color: #000000;
-            }
-            /* Estilos iniciales del enlace */
+                h2 {
+                    text-align: center;
+                    margin-top: 40px;
+                    margin-bottom: 20px;
+                    color: var(--color-texto-principal);
+                    border-bottom: 2px solid var(--color-acento-hover); /* Subrayado sutil con el color secundario */
+                    display: inline-block;
+                    padding-bottom: 5px;
+                }
+
+                /* Navegación (Enlaces) */
+                nav {
+                    text-align: center;
+                    flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+                    padding: 20px;
+                }
+
+                nav p {
+                    margin: 15px 0; /* Espaciado entre párrafos de enlaces */
+                }
+
+                /* Estilos de los Enlaces */
                 .enlaces {
-                    color: #0000FF; /* Azul inicial */
-                    text-decoration: none; /* Quita el subrayado predeterminado */
-                    font-weight: bold;
+                    color: var(--color-acento); /* Color de acento para los enlaces */
+                    text-decoration: none;
+                    font-weight: 600;
+                    transition: color 0.3s ease, text-shadow 0.3s ease;
+                    padding: 5px 10px;
+                    border-radius: 3px;
                 }
 
-                /* Estilos aplicados SOLAMENTE al pasar el ratón */
                 .enlaces:hover {
-                    color: #FF8C00; /* Naranja al hacer hover */
-                    text-decoration: underline; /* Opcional: añade un subrayado */
-                }
-            /* esto para el puto boton */
-                /* 🔷 Estilos Iniciales del Botón (Estado por defecto) */
-                .mi-boton {
-                    background-color: #5fbbf8; /* Color inicial de fondo: Azul */
-                    color: white;              /* Color del texto: Blanco */
-                    padding: 10px 20px;        /* Espaciado interno */
-                    border: none;              /* Quitar el borde predeterminado */
-                    border-radius: 5px;        /* Bordes redondeados */
-                    cursor: pointer;           /* Puntero interactivo */
-                    transition: background-color 0.3s ease; /* Transición suave */
+                    color: var(--color-acento-hover); /* Color secundario al hacer hover */
+                    text-decoration: none; /* No subrayamos, usamos el cambio de color */
+                    background-color: #2a3a4f; /* Fondo sutil al hacer hover */
+                    text-shadow: 0 0 5px rgba(102, 252, 241, 0.7); /* Efecto de brillo en el hover */
                 }
 
-                /* 🔴 Estilos Aplicados al Pasar el Ratón (Estado :hover) */
-                .mi-boton:hover {
-                    background-color: #5fbbf891; /* Color de fondo al hacer hover: Azul Oscuro */
+                /* Estilos de Pie de Página (Footer) */
+                footer {
+                    background-color: var(--color-header-footer);
+                    text-align: center;
+                    padding: 15px 0;
+                    font-size: 0.85em;
+                    color: #45a29e; /* Color de acento tenue para el texto del footer */
+                    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+                    margin-top: auto; /* Empuja el footer a la parte inferior de la página */
                 }
         </style>
     </head>
