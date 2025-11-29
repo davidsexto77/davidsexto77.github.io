@@ -8,98 +8,134 @@
         <style>
 
             /* Variables para una fácil gestión de colores */
-:root {
-    --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
-    --color-header-footer: #0b0c10; /* Negro profundo */
-    --color-texto-principal: #c5c6c7; /* Gris claro para texto */
-    --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
-    --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
-    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
-}
+                :root {
+                    --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
+                    --color-header-footer: #0b0c10; /* Negro profundo */
+                    --color-texto-principal: #c5c6c7; /* Gris claro para texto */
+                    --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
+                    --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
+                    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+                }
 
-/* Estilos Generales */
-body {
-    background-color: var(--color-fondo-principal);
-    font-family: var(--font-stack);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    color: var(--color-texto-principal);
-    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
-    display: flex;
-    flex-direction: column;
-}
+                /* Estilos Generales */
+                body {
+                    background-color: var(--color-fondo-principal);
+                    font-family: var(--font-stack);
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.6;
+                    color: var(--color-texto-principal);
+                    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
+                    display: flex;
+                    flex-direction: column;
+                }
 
-/* Estilos de Encabezado (Header) */
-header {
-    background-color: var(--color-header-footer);
-    color: var(--color-acento); /* Usa el acento para el texto del header */
-    text-align: center;
-    padding: 30px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada para un look profundo */
-    transition: background-color 0.3s ease;
-}
+                /* Estilos de Encabezado (Header) */
+                header {
+                    background-color: var(--color-header-footer);
+                    color: var(--color-acento); /* Usa el acento para el texto del header */
+                    text-align: center;
+                    padding: 30px 0;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada para un look profundo */
+                    transition: background-color 0.3s ease;
+                }
 
-header:hover {
-    background-color: #1a1a1e; /* Ligero cambio al pasar el ratón */
-}
+                header:hover {
+                    background-color: #1a1a1e; /* Ligero cambio al pasar el ratón */
+                }
 
-/* Títulos */
-h1 {
-    color: var(--color-acento);
-    text-shadow: 0 0 8px rgba(102, 252, 241, 0.4); /* Un sutil efecto de brillo */
-    font-weight: 700;
-    margin: 0;
-}
+                /* Títulos */
+                h1 {
+                    color: var(--color-acento);
+                    text-shadow: 0 0 8px rgba(102, 252, 241, 0.4); /* Un sutil efecto de brillo */
+                    font-weight: 700;
+                    margin: 0;
+                }
 
-h2 {
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    color: var(--color-texto-principal);
-    border-bottom: 2px solid var(--color-acento-hover); /* Subrayado sutil con el color secundario */
-    display: inline-block;
-    padding-bottom: 5px;
-}
+                h2 {
+                    text-align: center;
+                    margin-top: 40px;
+                    margin-bottom: 20px;
+                    color: var(--color-texto-principal);
+                    border-bottom: 2px solid var(--color-acento-hover); /* Subrayado sutil con el color secundario */
+                    display: inline-block;
+                    padding-bottom: 5px;
+                }
 
-/* Navegación (Enlaces) */
-nav {
-    text-align: center;
-    flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
-    padding: 20px;
-}
+                /* Navegación (Enlaces) */
+                nav {
+                    text-align: center;
+                    flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
+                    padding: 20px;
+                }
 
-nav p {
-    margin: 15px 0; /* Espaciado entre párrafos de enlaces */
-}
+                nav p {
+                    margin: 15px 0; /* Espaciado entre párrafos de enlaces */
+                }
 
-/* Estilos de los Enlaces */
-.enlaces {
-    color: var(--color-acento); /* Color de acento para los enlaces */
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
-    padding: 5px 10px;
-    border-radius: 3px;
-}
+                /* Estilos de los Enlaces */
+                .enlaces {
+                    color: var(--color-acento); /* Color de acento para los enlaces */
+                    text-decoration: none;
+                    font-weight: 600;
+                    transition: color 0.3s ease, text-shadow 0.3s ease;
+                    padding: 5px 10px;
+                    border-radius: 3px;
+                }
 
-.enlaces:hover {
-    color: var(--color-acento-hover); /* Color secundario al hacer hover */
-    text-decoration: none; /* No subrayamos, usamos el cambio de color */
-    background-color: #2a3a4f; /* Fondo sutil al hacer hover */
-    text-shadow: 0 0 5px rgba(102, 252, 241, 0.7); /* Efecto de brillo en el hover */
-}
+                .enlaces:hover {
+                    color: var(--color-acento-hover); /* Color secundario al hacer hover */
+                    text-decoration: none; /* No subrayamos, usamos el cambio de color */
+                    background-color: #2a3a4f; /* Fondo sutil al hacer hover */
+                    text-shadow: 0 0 5px rgba(102, 252, 241, 0.7); /* Efecto de brillo en el hover */
+                }
 
-/* Estilos de Pie de Página (Footer) */
-footer {
-    background-color: var(--color-header-footer);
-    text-align: center;
-    padding: 15px 0;
-    font-size: 0.85em;
-    color: #45a29e; /* Color de acento tenue para el texto del footer */
-    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-    margin-top: auto; /* Empuja el footer a la parte inferior de la página */
-}
+                /* Estilos de Pie de Página (Footer) */
+                footer {
+                    background-color: var(--color-header-footer);
+                    text-align: center;
+                    padding: 15px 0;
+                    font-size: 0.85em;
+                    color: #45a29e; /* Color de acento tenue para el texto del footer */
+                    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+                    margin-top: auto; /* Empuja el footer a la parte inferior de la página */
+                }
+                /* Botón Principal (Accent Button) */
+                .btn-acento {
+                    /* Diseño Base */
+                    display: inline-block;
+                    padding: 12px 25px; /* Relleno cómodo */
+                    border: 2px solid var(--color-acento); /* Borde con color de acento */
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 1em;
+                    font-weight: 600;
+                    text-align: center;
+                    text-decoration: none; /* Importante para enlaces (<a>) que actúan como botones */
+                    
+                    /* Colores Iniciales */
+                    background-color: transparent; /* Fondo transparente inicialmente */
+                    color: var(--color-acento); /* Texto con el color de acento */
+                    
+                    /* Transiciones para suavizar los efectos */
+                    transition: background-color 0.3s ease, 
+                                color 0.3s ease, 
+                                box-shadow 0.3s ease;
+                }
+
+                /* Efecto Hover (Al pasar el ratón) */
+                .btn-acento:hover {
+                    background-color: var(--color-acento); /* El color de acento rellena el botón */
+                    color: var(--color-header-footer); /* El texto se oscurece para el contraste */
+                    box-shadow: 0 0 15px rgba(102, 252, 241, 0.6); /* Un efecto de brillo alrededor */
+                    transform: translateY(-2px); /* Un ligero desplazamiento hacia arriba */
+                }
+
+                /* Estado Activo (Al hacer clic) */
+                .btn-acento:active {
+                    transform: translateY(0);
+                    box-shadow: 0 0 5px rgba(102, 252, 241, 0.6);
+                }
         </style>
     </head>
     <body>
