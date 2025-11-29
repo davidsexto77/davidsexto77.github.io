@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Bienvenido - Inicio</title>
-        <link rel="icon" type="imagen/png" href="Imagenes/icono.png">
+        <title>Advertencia</title>
+        <link rel="icon" type="imagen/png" href="Imagenes/advertencia_v2.png" width="500">
         <style>
 
             body {
@@ -65,19 +65,34 @@
                     color: #FF8C00; /* Naranja al hacer hover */
                     text-decoration: underline; /* Opcional: añade un subrayado */
                 }
+            /* esto para el puto boton */
+                /* 🔷 Estilos Iniciales del Botón (Estado por defecto) */
+                .mi-boton {
+                    background-color: #5fbbf8; /* Color inicial de fondo: Azul */
+                    color: white;              /* Color del texto: Blanco */
+                    padding: 10px 20px;        /* Espaciado interno */
+                    border: none;              /* Quitar el borde predeterminado */
+                    border-radius: 5px;        /* Bordes redondeados */
+                    cursor: pointer;           /* Puntero interactivo */
+                    transition: background-color 0.3s ease; /* Transición suave */
+                }
+
+                /* 🔴 Estilos Aplicados al Pasar el Ratón (Estado :hover) */
+                .mi-boton:hover {
+                    background-color: #5fbbf891; /* Color de fondo al hacer hover: Azul Oscuro */
+                }
         </style>
     </head>
     <body>
         <header>
-            <h1>Inicio</h1>
+            <h1>No Disponible</h1>
         </header>
-        <h2>Mis Páginas</h2>
+        <h2>Esta página no se encuentra disponible en estos momentos.</h2>
         <nav>
                 
                     
-                    <p>- Ir al <a href="Proyecto_final_HTML/index.html" class="enlaces">Blog de Ciberseguridad</a></p>
-                    <p>- Ir a <a href="misenlaces.html" class="enlaces">Más Páginas</a></p>
-                    <p>- Ir a <a href="nowork2.html" class="enlaces">PHP</a></p>
+                    <!-- <p><a href="https://davidsexto77.github.io/Proyecto_final_HTML/index.html" class="enlaces">Volver atrás.</a></p> -->
+                    <button class="mi-boton"><a href="https://davidsexto77.github.io/">Volver</a></button>
                     
                 
         </nav>
