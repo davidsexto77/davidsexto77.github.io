@@ -100,22 +100,61 @@
                     box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
                     margin-top: auto; /* Empuja el footer a la parte inferior de la página */
                 }
-                /* Botón Principal (Accent Button) */
-                .btn-acento {
-                    /* ... (resto de estilos base sin cambios) ... */
+               /* Botón Principal (Accent Button) */
+                /* .btn-acento {
+                    /* ... (resto de estilos base sin cambios) ...
                     
-                    /* Colores Iniciales (¡AQUÍ ESTÁ EL CAMBIO!) */
-                    background-color: transparent;
-                    color: var(--color-acento); /* <-- ¡CAMBIADO a color de acento cian! */
+                    /* Colores Iniciales (¡AQUÍ ESTÁ EL CAMBIO!) 
+                    /* background-color: transparent;
+                    color: var(--color-acento); /* <-- ¡CAMBIADO a color de acento cian!
                     
-                    /* ... (resto de transiciones sin cambios) ... */
+                     ... (resto de transiciones sin cambios) ... 
                 }
 
-                /* Efecto Hover (Al pasar el ratón) */
+                /* Efecto Hover (Al pasar el ratón)
                 .btn-acento:hover {
                     background-color: var(--color-acento);
                     color: var(--color-header-footer);
-                    /* ... (resto de efectos sin cambios) ... */
+                     ... (resto de efectos sin cambios) ...
+                } */
+                 
+                .btn-acento {
+                    background: var(--color-acento);              /* Relleno usando tu color */
+                    color: var(--color-header-footer);            /* Texto */
+                    border: 2px solid var(--color-acento);        /* Borde del mismo color */
+                    
+                    padding: 12px 26px;
+                    border-radius: 12px;
+
+                    font-weight: 600;
+                    font-size: 1rem;
+                    letter-spacing: 0.5px;
+
+                    cursor: pointer;
+
+                    /* Sombras suaves usando opacity, no colores directos */
+                    box-shadow:
+                        0 4px 12px rgba(0,0,0,0.15);
+
+                    transition: all 0.3s ease;
+                }
+
+                /* Hover */
+                .btn-acento:hover {
+                    background: var(--color-header-footer);       /* Invertimos los colores */
+                    color: var(--color-acento);
+                    
+                    box-shadow:
+                        0 6px 18px rgba(0,0,0,0.25);
+                    
+                    transform: translateY(-2px);
+                }
+
+                /* Active (cuando se presiona) */
+                .btn-acento:active {
+                    transform: translateY(1px);
+                    box-shadow:
+                        0 2px 6px rgba(0,0,0,0.2);
                 }
         </style>
     </head>
