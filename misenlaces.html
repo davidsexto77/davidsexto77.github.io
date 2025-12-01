@@ -119,42 +119,33 @@
                 } */
                  
                 .btn-acento {
-                    background: var(--color-acento);              /* Relleno usando tu color */
-                    color: var(--color-header-footer);            /* Texto */
-                    border: 2px solid var(--color-acento);        /* Borde del mismo color */
-                    
+                    background-color: var(--color-header-footer); /* Negro (suponiendo que tu header/footer es oscuro) */
+                    color: var(--color-acento);                   /* Texto cian */
+                    border: 2px solid var(--color-acento);        /* Borde cian */
+
                     padding: 12px 26px;
-                    border-radius: 12px;
-
+                    border-radius: 10px;
                     font-weight: 600;
-                    font-size: 1rem;
-                    letter-spacing: 0.5px;
-
                     cursor: pointer;
-
-                    /* Sombras suaves usando opacity, no colores directos */
-                    box-shadow:
-                        0 4px 12px rgba(0,0,0,0.15);
-
                     transition: all 0.3s ease;
+
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
                 }
 
-                /* Hover */
+                /* Hover → se rellena de cian */
                 .btn-acento:hover {
-                    background: var(--color-header-footer);       /* Invertimos los colores */
-                    color: var(--color-acento);
-                    
-                    box-shadow:
-                        0 6px 18px rgba(0,0,0,0.25);
-                    
+                    background-color: var(--color-acento);        /* Relleno cian */
+                    color: var(--color-header-footer);            /* Texto negro */
+                    border-color: var(--color-acento);
+
                     transform: translateY(-2px);
+                    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
                 }
 
-                /* Active (cuando se presiona) */
+                /* Active (clic) */
                 .btn-acento:active {
                     transform: translateY(1px);
-                    box-shadow:
-                        0 2px 6px rgba(0,0,0,0.2);
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
                 }
                 </style>
     </head>
