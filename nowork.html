@@ -1,175 +1,178 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Advertencia</title>
-        <link rel="icon" type="imagen/png" href="Imagenes/advertencia_v2.png" width="500">
-        <style>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertencia | No Disponible</title>
+    <!-- NOTA: La imagen del icono (favicon) no es accesible en el entorno de Canvas, por lo que se mantiene la ruta pero no cargará visualmente. -->
+    <link rel="icon" type="imagen/png" href="Imagenes/advertencia_v2.png">
+    <style>
+        /* -------------------------------------------------------------------
+           VARIABLES CSS
+           Gestión de colores para la estética oscura/cian (Dark Theme)
+           ------------------------------------------------------------------- */
+        :root {
+            --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
+            --color-header-footer: #0b0c10; /* Negro profundo */
+            --color-texto-principal: #c5c6c7; /* Gris claro para texto */
+            --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
+            --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
+            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+            --color-error: #ff4d4d; /* Rojo para mensajes de error */
+        }
 
-            /* Variables para una fácil gestión de colores */
-                :root {
-                    --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
-                    --color-header-footer: #0b0c10; /* Negro profundo */
-                    --color-texto-principal: #c5c6c7; /* Gris claro para texto */
-                    --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
-                    --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
-                    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
-                }
+        /* -------------------------------------------------------------------
+           ESTILOS GENERALES Y ESTRUCTURA
+           ------------------------------------------------------------------- */
+        body {
+            background-color: var(--color-fondo-principal);
+            font-family: var(--font-stack);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--color-texto-principal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra el contenido en el eje horizontal */
+        }
 
-                /* Estilos Generales */
-                body {
-                    background-color: var(--color-fondo-principal);
-                    font-family: var(--font-stack);
-                    margin: 0;
-                    padding: 0;
-                    line-height: 1.6;
-                    color: var(--color-texto-principal);
-                    min-height: 100vh; /* Asegura que el body ocupe al menos toda la altura de la vista */
-                    display: flex;
-                    flex-direction: column;
-                }
+        /* -------------------------------------------------------------------
+           HEADER
+           ------------------------------------------------------------------- */
+        header {
+            background-color: var(--color-header-footer);
+            width: 100%;
+            color: var(--color-acento);
+            text-align: center;
+            padding: 30px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: background-color 0.3s ease;
+        }
 
-                /* Estilos de Encabezado (Header) */
-                header {
-                    background-color: var(--color-header-footer);
-                    color: var(--color-acento); /* Usa el acento para el texto del header */
-                    text-align: center;
-                    padding: 30px 0;
-                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada para un look profundo */
-                    transition: background-color 0.3s ease;
-                }
+        header:hover {
+            background-color: #1a1a1e;
+        }
 
-                header:hover {
-                    background-color: #1a1a1e; /* Ligero cambio al pasar el ratón */
-                }
+        h1 {
+            color: var(--color-acento);
+            text-shadow: 0 0 8px rgba(102, 252, 241, 0.4);
+            font-weight: 700;
+            margin: 0;
+        }
 
-                /* Títulos */
-                h1 {
-                    color: var(--color-acento);
-                    text-shadow: 0 0 8px rgba(102, 252, 241, 0.4); /* Un sutil efecto de brillo */
-                    font-weight: 700;
-                    margin: 0;
-                }
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--color-error); /* Usamos el rojo para un mensaje de advertencia */
+            border-bottom: 2px solid var(--color-acento-hover);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
 
-                h2 {
-                    text-align: center;
-                    margin-top: 40px;
-                    margin-bottom: 20px;
-                    color: var(--color-texto-principal);
-                    border-bottom: 2px solid var(--color-acento-hover); /* Subrayado sutil con el color secundario */
-                    display: inline-block;
-                    padding-bottom: 5px;
-                }
+        /* Contenido principal para centrado */
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            text-align: center;
+            max-width: 800px; /* Limita el ancho del contenido principal */
+        }
 
-                /* Navegación (Enlaces) */
-                nav {
-                    text-align: center;
-                    flex-grow: 1; /* Permite que el contenido ocupe el espacio restante */
-                    padding: 20px;
-                }
+        /* -------------------------------------------------------------------
+           ENLACES (NO USADOS EN LA NAV, PERO MANTENIDOS POR SI ACASO)
+           ------------------------------------------------------------------- */
+        .enlaces {
+            color: var(--color-acento);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
 
-                nav p {
-                    margin: 15px 0; /* Espaciado entre párrafos de enlaces */
-                }
+        .enlaces:hover {
+            color: var(--color-acento-hover);
+            background-color: #2a3a4f;
+            text-shadow: 0 0 5px rgba(102, 252, 241, 0.7);
+        }
 
-                /* Estilos de los Enlaces */
-                .enlaces {
-                    color: var(--color-acento); /* Color de acento para los enlaces */
-                    text-decoration: none;
-                    font-weight: 600;
-                    transition: color 0.3s ease, text-shadow 0.3s ease;
-                    padding: 5px 10px;
-                    border-radius: 3px;
-                }
+        /* -------------------------------------------------------------------
+           BOTÓN PRINCIPAL (CAMBIO DE COLOR DE FONDO Y LETRA AL HOVER)
+           Usamos 'a' con la clase .btn-acento para la navegación.
+           ------------------------------------------------------------------- */
+        .btn-acento {
+            /* Estilos iniciales (Botón estilo "Outline" cian) */
+            display: inline-block; /* Crucial para que padding y margin funcionen en 'a' */
+            text-decoration: none;
+            
+            background-color: var(--color-header-footer); /* Fondo Negro */
+            color: var(--color-acento);                   /* Texto Cian (¡COLOR DE LETRA INICIAL!) */
+            border: 2px solid var(--color-acento);        /* Borde cian */
 
-                .enlaces:hover {
-                    color: var(--color-acento-hover); /* Color secundario al hacer hover */
-                    text-decoration: none; /* No subrayamos, usamos el cambio de color */
-                    background-color: #2a3a4f; /* Fondo sutil al hacer hover */
-                    text-shadow: 0 0 5px rgba(102, 252, 241, 0.7); /* Efecto de brillo en el hover */
-                }
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Transición para todo (color, fondo, sombra) */
 
-                /* Estilos de Pie de Página (Footer) */
-                footer {
-                    background-color: var(--color-header-footer);
-                    text-align: center;
-                    padding: 15px 0;
-                    font-size: 0.85em;
-                    color: #45a29e; /* Color de acento tenue para el texto del footer */
-                    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-                    margin-top: auto; /* Empuja el footer a la parte inferior de la página */
-                }
-                /* Botón Principal (Accent Button) */
-                /* .btn-acento {
-                    /* ... (resto de estilos base sin cambios) ...
-                    
-                    /* Colores Iniciales (¡AQUÍ ESTÁ EL CAMBIO!) 
-                    /* background-color: transparent;
-                    color: var(--color-acento); /* <-- ¡CAMBIADO a color de acento cian!
-                    
-                     ... (resto de transiciones sin cambios) ... 
-                }
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            margin-top: 20px;
+        }
 
-                /* Efecto Hover (Al pasar el ratón)
-                .btn-acento:hover {
-                    background-color: var(--color-acento);
-                    color: var(--color-header-footer);
-                     ... (resto de efectos sin cambios) ...
-                } */
-                 
-                .btn-acento {
-                    background-color: var(--color-header-footer); /* Negro (suponiendo que tu header/footer es oscuro) */
-                    color: var(--color-acento);                   /* Texto cian */
-                    border: 2px solid var(--color-acento);        /* Borde cian */
+        /* Estilos Hover (El color de fondo y el color de la letra se invierten) */
+        .btn-acento:hover {
+            background-color: var(--color-acento);       /* CAMBIO DE FONDO: relleno cyan */
+            color: var(--color-header-footer);           /* CAMBIO DE COLOR DE LETRA: texto oscuro */
+            
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); /* Sombra con el color de acento */
+        }
 
-                    padding: 12px 26px;
-                    border-radius: 10px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
+        /* Estilo Active (clic) */
+        .btn-acento:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
+        
+        /* -------------------------------------------------------------------
+           FOOTER
+           ------------------------------------------------------------------- */
+        footer {
+            width: 100%;
+            background-color: var(--color-header-footer);
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.85em;
+            color: #45a29e;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>No Disponible</h1>
+    </header>
 
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-                }
+    <main>
+        <!-- Título principal de la sección MODIFICADO -->
+        <h2 style="color: var(--color-error);">Servicio Temporalmente Fuera de Funcionamiento</h2>
+        
+        <!-- Contenido descriptivo MODIFICADO -->
+        <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1.1em;">
+            Lamentamos los inconvenientes. Actualmente, esta página o servicio se encuentra en un proceso de
+            mantenimiento o actualización. Por favor, inténtalo de nuevo en unos minutos.
+        </p>
 
-                /* Hover → se rellena de cian y texto en oscuro */
-                    .btn-acento:hover {
-                    background-color: var(--color-acento);       /* relleno cyan */
-                    color: rgba(0,0,0,0.35);            /* texto negro */
-                    transform: translateY(-2px);
-                    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-                    }
+        <!-- Botón de acción usando <a> con la clase de botón -->
+        <a href="https://davidsexto77.github.io/Proyecto_final_HTML/index.html" class="btn-acento" role="button">
+            Volver a la Página Principal
+        </a>
+    </main>
 
-                /* Active (clic) */
-                .btn-acento:active {
-                    transform: translateY(1px);
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-                }
-                .btn-acento,
-                .btn-acento:link,
-                .btn-acento a:link,
-                .btn-acento:visited,
-                .btn-acento:active,
-                .btn-acento .btn-inner {
-                    color: var(--color-acento);
-                }
-        </style>
-    </head>
-    <body>
-        <header>
-            <h1>No Disponible</h1>
-        </header>
-        <h2>Esta página no se encuentra disponible en estos momentos.</h2>
-        <nav>
-                
-                    
-                    <!-- <p><a href="https://davidsexto77.github.io/Proyecto_final_HTML/index.html" class="enlaces">Volver atrás.</a></p> -->
-                    <button class="btn-acento"><a href="https://davidsexto77.github.io/Proyecto_final_HTML/index.html">Volver</a></button>
-                    
-                
-        </nav>
-        <footer>
-            <p>DAVID SEXTO - 2025 &copy; </p>
-        </footer>
-    </body>
+    <footer>
+        <p>DAVID SEXTO - 2025 &copy; </p>
+    </footer>
+</body>
 </html>
