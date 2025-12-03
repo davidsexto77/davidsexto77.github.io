@@ -19,6 +19,7 @@
             --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
             --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
             --color-error: #ff4d4d; /* Rojo para mensajes de error */
+            --color-texto-hover-btn: #0d161a; /* Gris muy oscuro para mejor contraste en el hover del botón */
         }
 
         /* -------------------------------------------------------------------
@@ -34,7 +35,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centra el contenido en el eje horizontal */
+            align-items: center; 
         }
 
         /* -------------------------------------------------------------------
@@ -65,7 +66,7 @@
             text-align: center;
             margin-top: 40px;
             margin-bottom: 20px;
-            color: var(--color-error); /* Usamos el rojo para un mensaje de advertencia */
+            color: var(--color-error); 
             border-bottom: 2px solid var(--color-acento-hover);
             display: inline-block;
             padding-bottom: 5px;
@@ -76,11 +77,28 @@
             flex-grow: 1;
             padding: 20px;
             text-align: center;
-            max-width: 800px; /* Limita el ancho del contenido principal */
+            max-width: 800px; 
         }
 
         /* -------------------------------------------------------------------
-           ENLACES (NO USADOS EN LA NAV, PERO MANTENIDOS POR SI ACASO)
+           ICONO DE ADVERTENCIA (NUEVO)
+           ------------------------------------------------------------------- */
+        .icon-advertencia {
+            font-size: 5rem; 
+            color: var(--color-error); /* Color rojo llamativo */
+            display: block;
+            margin: 30px auto 10px;
+            animation: pulse 1.5s infinite alternate; /* Animación sutil de pulso */
+        }
+
+        /* Definición de la animación */
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        /* -------------------------------------------------------------------
+           ENLACES (MANTENIDOS)
            ------------------------------------------------------------------- */
         .enlaces {
             color: var(--color-acento);
@@ -98,35 +116,34 @@
         }
 
         /* -------------------------------------------------------------------
-           BOTÓN PRINCIPAL (CAMBIO DE COLOR DE FONDO Y LETRA AL HOVER)
-           Usamos 'a' con la clase .btn-acento para la navegación.
+           BOTÓN PRINCIPAL (CON MEJORA DE CONTRASTE)
            ------------------------------------------------------------------- */
         .btn-acento {
             /* Estilos iniciales (Botón estilo "Outline" cian) */
-            display: inline-block; /* Crucial para que padding y margin funcionen en 'a' */
+            display: inline-block; 
             text-decoration: none;
             
-            background-color: var(--color-header-footer); /* Fondo Negro */
+            background-color: var(--color-header-footer); 
             color: var(--color-acento);                   /* Texto Cian (¡COLOR DE LETRA INICIAL!) */
-            border: 2px solid var(--color-acento);        /* Borde cian */
+            border: 2px solid var(--color-acento);        
 
             padding: 12px 26px;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease; /* Transición para todo (color, fondo, sombra) */
+            transition: all 0.3s ease; 
 
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
             margin-top: 20px;
         }
 
-        /* Estilos Hover (El color de fondo y el color de la letra se invierten) */
+        /* Estilos Hover (El color de fondo y el color de la letra se invierten - MEJORA DE CONTRASTE) */
         .btn-acento:hover {
             background-color: var(--color-acento);       /* CAMBIO DE FONDO: relleno cyan */
-            color: var(--color-header-footer);           /* CAMBIO DE COLOR DE LETRA: texto oscuro */
+            color: var(--color-texto-hover-btn);         /* CAMBIO DE COLOR DE LETRA: usando variable de alto contraste */
             
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); /* Sombra con el color de acento */
+            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); 
         }
 
         /* Estilo Active (clic) */
@@ -156,16 +173,21 @@
     </header>
 
     <main>
-        <!-- Título principal de la sección MODIFICADO -->
+        <!-- ICONO DE ADVERTENCIA (NUEVO) -->
+        <span class="icon-advertencia" aria-hidden="true">
+            ❗
+        </span>
+
+        <!-- Título principal de la sección -->
         <h2 style="color: var(--color-error);">Servicio Temporalmente Fuera de Funcionamiento</h2>
         
-        <!-- Contenido descriptivo MODIFICADO -->
+        <!-- Contenido descriptivo -->
         <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1.1em;">
             Lamentamos los inconvenientes. Actualmente, esta página o servicio se encuentra en un proceso de
-            mantenimiento o actualización. Por favor, inténtalo de nuevo más tarde.
+            mantenimiento o actualización. Por favor, inténtalo de nuevo en unos minutos.
         </p>
 
-        <!-- Botón de acción usando <a> con la clase de botón -->
+        <!-- Botón de acción (etiqueta <nav> eliminada) -->
         <a href="https://davidsexto77.github.io/Proyecto_final_HTML/index.html" class="btn-acento" role="button">
             Volver a la Página Principal
         </a>
