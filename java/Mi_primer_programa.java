@@ -1,7 +1,7 @@
 //Primer programa
 IO.println("Hola que tal.");
 
-//FUncion?
+//Funcion?
 void main() {
     IO.println("Hola mundo");
 }
