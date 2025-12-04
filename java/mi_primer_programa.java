@@ -3,5 +3,5 @@ IO.println("Hola que tal.");
 
 //FUncion?
 void main() {
-    IO.println("Hello, World!");
+    IO.println("Hola mundo");
 }
