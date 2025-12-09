@@ -196,7 +196,7 @@ natsort($archivos);
 <footer>
     <p style="margin-bottom: 5px;">
         ¿Problemas? 
-        <a href="mailto:soporte@ejemplo.com">
+        <a href="mailto:dsexgar0311@g.educaand.es">
             Reportar un problema
         </a>
     </p>
