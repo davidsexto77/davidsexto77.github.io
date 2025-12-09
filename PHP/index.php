@@ -117,5 +117,10 @@ usort($archivos, function($a, $b) {
     </ul>
 </div>
 
+    <a href="https://davidsexto77.github.io/" class="btn-acento" role="button">
+            Volver a la Página Principal
+        </a>
+
+
 </body>
 </html>
