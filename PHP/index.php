@@ -11,8 +11,9 @@ $archivos = array_filter($archivos, function($archivo) use ($current_file) {
     return $archivo !== $current_file && $archivo[0] !== '.';
 });
 
-// 2. Ordenar alfabéticamente. La ordenación numérica anterior no aplica a nombres mixtos como 'bucle.php'.
-sort($archivos);
+// 2. Ordenar de forma natural (alfabética y numérica).
+// natsort() ordena las cadenas reconociendo los números dentro de ellas (ej: a2 antes de a10).
+natsort($archivos);
 ?>
 <!DOCTYPE html>
 <html lang="es">
