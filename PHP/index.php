@@ -159,6 +159,8 @@ usort($archivos, function($a, $b) {
         Volver a la Página Principal
     </a>
 </div>
-
+    <footer>
+            <p>DAVID SEXTO - 2025 &copy; </p>
+    </footer>
 </body>
 </html>
