@@ -13,6 +13,7 @@ usort($archivos, function($a, $b) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="imagen/png" href="https://davidsexto77.github.io/Imagenes/icono.png">
     <title>Listado de actividades</title>
     <style>
         /* -------------------------------------------------------------------
@@ -40,8 +41,9 @@ usort($archivos, function($a, $b) {
             color: var(--color-texto-principal);
             min-height: 100vh;
             display: flex;
-            justify-content: center; /* Centra horizontalmente */
-            align-items: flex-start; /* Alinea arriba */
+            flex-direction: column; /* Cambiado a columna para el footer */
+            justify-content: flex-start; 
+            align-items: center; 
         }
 
         /* Contenedor principal para simular la tarjeta de sección */
@@ -53,6 +55,7 @@ usort($archivos, function($a, $b) {
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             text-align: center; /* Centra el botón al final */
+            margin-bottom: 40px; /* Espacio antes del footer */
         }
 
         /* -------------------------------------------------------------------
@@ -138,6 +141,31 @@ usort($archivos, function($a, $b) {
             transform: translateY(1px);
             box-shadow: 0 2px 8px rgba(0,0,0,0.25);
         }
+
+        /* -------------------------------------------------------------------
+           FOOTER (Nuevo)
+           ------------------------------------------------------------------- */
+        footer {
+            width: 100%;
+            background-color: var(--color-header-footer);
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.85em;
+            color: #45a29e;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: auto; /* Asegura que se quede al fondo si el contenido es corto */
+        }
+        
+        footer a {
+            color: var(--color-acento-hover); 
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--color-acento); 
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -154,13 +182,22 @@ usort($archivos, function($a, $b) {
         <?php endforeach; ?>
     </ul>
     
-    <!-- Botón de regreso añadido aquí -->
+    <!-- Botón de regreso -->
     <a href="https://davidsexto77.github.io/" class="btn-acento" role="button">
         Volver a la Página Principal
     </a>
 </div>
-    <footer>
-            <p>DAVID SEXTO - 2025 &copy; </p>
-    </footer>
+
+<!-- FOOTER AÑADIDO -->
+<footer>
+    <p style="margin-bottom: 5px;">
+        ¿Problemas? 
+        <a href="mailto:soporte@ejemplo.com">
+            Reportar un problema
+        </a>
+    </p>
+    <p style="margin-top: 5px;">DAVID SEXTO - 2025 &copy; </p>
+</footer>
+
 </body>
 </html>
