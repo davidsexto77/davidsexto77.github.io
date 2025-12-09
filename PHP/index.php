@@ -1,12 +1,18 @@
 <?php
-// Buscar archivos tipo a1.php, a2.php...
-$archivos = glob("a*.php"); 
+// Buscar TODOS los archivos .php del directorio
+$archivos = glob("*.php"); 
 
-// Ordenar por número (a1, a2, a3...)
-usort($archivos, function($a, $b) {
-    // Extrae el número después de 'a' para la ordenación
-    return intval(substr($a, 1)) - intval(substr($b, 1));
+// 1. Identificar y excluir el archivo actual del listado
+// Usamos basename(__FILE__) para obtener "listado_actividades.php" de forma segura.
+$current_file = basename(__FILE__);
+
+$archivos = array_filter($archivos, function($archivo) use ($current_file) {
+    // Excluye el archivo actual y cualquier archivo que empiece con un punto (oculto)
+    return $archivo !== $current_file && $archivo[0] !== '.';
 });
+
+// 2. Ordenar alfabéticamente. La ordenación numérica anterior no aplica a nombres mixtos como 'bucle.php'.
+sort($archivos);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -174,11 +180,8 @@ usort($archivos, function($a, $b) {
     <h1>Listado de Actividades</h1>
     <ul>
         <?php foreach ($archivos as $archivo): ?>
-            <?php
-                // Sacamos solo el número: "a3.php" → 3
-                $num = intval(substr($archivo, 1));
-            ?>
-            <li><a href="<?= $archivo ?>">Actividad <?= $num ?></a></li>
+            <!-- Mostramos el nombre del archivo directamente -->
+            <li><a href="<?= $archivo ?>"><?= $archivo ?></a></li>
         <?php endforeach; ?>
     </ul>
     
