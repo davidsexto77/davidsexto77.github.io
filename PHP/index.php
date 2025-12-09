@@ -4,6 +4,7 @@ $archivos = glob("a*.php");
 
 // Ordenar por número (a1, a2, a3...)
 usort($archivos, function($a, $b) {
+    // Extrae el número después de 'a' para la ordenación
     return intval(substr($a, 1)) - intval(substr($b, 1));
 });
 ?>
@@ -11,46 +12,109 @@ usort($archivos, function($a, $b) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de actividades</title>
     <style>
+        /* -------------------------------------------------------------------
+           VARIABLES CSS (Copiadas del proyecto anterior)
+           ------------------------------------------------------------------- */
+        :root {
+            --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
+            --color-header-footer: #0b0c10; /* Negro profundo */
+            --color-texto-principal: #c5c6c7; /* Gris claro para texto */
+            --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
+            --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
+            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+        }
+
+        /* -------------------------------------------------------------------
+           ESTILOS GENERALES Y ESTRUCTURA
+           ------------------------------------------------------------------- */
         body {
-            font-family: Arial, sans-serif;
-            padding: 40px;
-            background: #f5f5f5;
+            background-color: var(--color-fondo-principal);
+            font-family: var(--font-stack);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            color: var(--color-texto-principal);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: flex-start; /* Alinea arriba */
         }
+
+        /* Contenedor principal para simular la tarjeta de sección */
+        .listado-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            background-color: #1a2027; /* Fondo ligeramente diferente al body */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* -------------------------------------------------------------------
+           TIPOGRAFÍA
+           ------------------------------------------------------------------- */
         h1 {
-            color: #333;
+            color: var(--color-acento);
+            text-shadow: 0 0 8px rgba(102, 252, 241, 0.4); 
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--color-acento-hover);
+            padding-bottom: 10px;
         }
+
+        /* -------------------------------------------------------------------
+           LISTA Y ENLACES
+           ------------------------------------------------------------------- */
         ul {
             list-style: none;
             padding-left: 0;
         }
+
         li {
-            background: white;
-            padding: 10px 15px;
-            margin: 8px 0;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--color-header-footer); /* Negro profundo para los ítems */
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
+
+        li:hover {
+            background-color: #1a2027; /* Fondo un poco más claro al pasar el ratón */
+            transform: translateX(5px); /* Pequeño desplazamiento para efecto */
+        }
+
         a {
             text-decoration: none;
-            color: #0077cc;
-            font-weight: bold;
+            color: var(--color-acento); /* Color cian */
+            font-weight: 600;
+            display: block; /* Hace que el enlace ocupe todo el <li> */
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--color-acento-hover);
         }
     </style>
 </head>
 <body>
 
-<h1>Listado de Actividades</h1>
-<ul>
-    <?php foreach ($archivos as $archivo): ?>
-        <?php
-            // Sacamos solo el número: "a3.php" → 3
-            $num = intval(substr($archivo, 1));
-        ?>
-        <li><a href="<?= $archivo ?>">Actividad <?= $num ?></a></li>
-    <?php endforeach; ?>
-</ul>
+<div class="listado-container">
+    <h1>Listado de Actividades</h1>
+    <ul>
+        <?php foreach ($archivos as $archivo): ?>
+            <?php
+                // Sacamos solo el número: "a3.php" → 3
+                $num = intval(substr($archivo, 1));
+            ?>
+            <li><a href="<?= $archivo ?>">Actividad <?= $num ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
 
 </body>
 </html>
