@@ -153,7 +153,7 @@
         }
         
         /* -------------------------------------------------------------------
-           FOOTER
+           FOOTER (Nuevo)
            ------------------------------------------------------------------- */
         footer {
             width: 100%;
@@ -163,7 +163,18 @@
             font-size: 0.85em;
             color: #45a29e;
             box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: auto;
+            margin-top: auto; /* Asegura que se quede al fondo si el contenido es corto */
+        }
+        
+        footer a {
+            color: var(--color-acento-hover); 
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--color-acento); 
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -194,7 +205,13 @@
     </main>
 
     <footer>
-        <p>DAVID SEXTO - 2025 &copy; </p>
-    </footer>
+            <p style="margin-bottom: 5px;">
+            ¿Problemas? <br>
+            <a href="mailto:dsexgar0311@g.educaand.es">
+              <strong>Reportar un problema</strong>
+        </a>
+        </p>
+        <p style="margin-top: 5px;">DAVID SEXTO - 2025 &copy; </p>
+        </footer>
 </body>
 </html>
