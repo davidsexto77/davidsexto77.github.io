@@ -14,7 +14,6 @@ usort($archivos, function($a, $b) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de actividades</title>
-    <link rel="icon" type="imagen/png" href="https://davidsexto77.github.io/Imagenes/icono.png">
     <style>
         /* -------------------------------------------------------------------
            VARIABLES CSS (Copiadas del proyecto anterior)
@@ -26,6 +25,7 @@ usort($archivos, function($a, $b) {
             --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
             --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
             --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+            --color-texto-hover-btn: #0d161a; /* Gris muy oscuro para el hover del botón */
         }
 
         /* -------------------------------------------------------------------
@@ -52,6 +52,7 @@ usort($archivos, function($a, $b) {
             background-color: #1a2027; /* Fondo ligeramente diferente al body */
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            text-align: center; /* Centra el botón al final */
         }
 
         /* -------------------------------------------------------------------
@@ -73,6 +74,7 @@ usort($archivos, function($a, $b) {
         ul {
             list-style: none;
             padding-left: 0;
+            text-align: left; /* Asegura que la lista se alinee a la izquierda */
         }
 
         li {
@@ -100,6 +102,42 @@ usort($archivos, function($a, $b) {
         a:hover {
             color: var(--color-acento-hover);
         }
+
+        /* -------------------------------------------------------------------
+           BOTÓN PRINCIPAL (Volver a la Página Principal)
+           ------------------------------------------------------------------- */
+        .btn-acento {
+            display: inline-block; 
+            text-decoration: none;
+            
+            background-color: var(--color-header-footer); 
+            color: var(--color-acento);                   /* Texto Cian */
+            border: 2px solid var(--color-acento);        
+
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease; 
+
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            margin-top: 30px;
+            /* Asegura que el botón no se estire y se centre dentro de .listado-container */
+            width: fit-content; 
+        }
+
+        .btn-acento:hover {
+            background-color: var(--color-acento);       
+            color: var(--color-texto-hover-btn);         
+            
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); 
+        }
+
+        .btn-acento:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        }
     </style>
 </head>
 <body>
@@ -115,12 +153,12 @@ usort($archivos, function($a, $b) {
             <li><a href="<?= $archivo ?>">Actividad <?= $num ?></a></li>
         <?php endforeach; ?>
     </ul>
-</div>
-
+    
+    <!-- Botón de regreso añadido aquí -->
     <a href="https://davidsexto77.github.io/" class="btn-acento" role="button">
-            Volver a la Página Principal
-        </a>
-
+        Volver a la Página Principal
+    </a>
+</div>
 
 </body>
 </html>
