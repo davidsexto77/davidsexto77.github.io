@@ -20,7 +20,7 @@ natsort($archivos);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="imagen/png" href="https://davidsexto77.github.io/Imagenes/icono.png">
+    <link rel="icon" type="imagen/png" href="https://davidsexto77.github.io/.imagenes/icono.png">
     <title>Listado de actividades</title>
     <style>
         /* -------------------------------------------------------------------
