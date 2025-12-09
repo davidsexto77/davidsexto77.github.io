@@ -1,5 +1,5 @@
 <?php
-$nombre = "Alejandro Fernández López-Cepero";
+$nombre = "David Sexto";
 $curso = "2º de SMR";
 $módulo = "Aplicaciones Web";
 ?>
