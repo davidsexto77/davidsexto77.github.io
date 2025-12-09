@@ -14,6 +14,7 @@ usort($archivos, function($a, $b) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de actividades</title>
+    <link rel="icon" type="imagen/png" href="https://davidsexto77.github.io/Imagenes/icono.png">
     <style>
         /* -------------------------------------------------------------------
            VARIABLES CSS (Copiadas del proyecto anterior)
