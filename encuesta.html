@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta Gaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- INICIO DE ESTILOS PERSONALIZADOS (USUARIO) -->
+    <style>
+        /* -------------------------------------------------------------------
+           VARIABLES CSS
+           Gestión de colores para la estética oscura/cian (Dark Theme)
+           ------------------------------------------------------------------- */
+        :root {
+            --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
+            --color-header-footer: #0b0c10; /* Negro profundo */
+            --color-texto-principal: #c5c6c7; /* Gris claro para texto */
+            --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
+            --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
+            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+            --color-error: #ff4d4d; /* Rojo para mensajes de error */
+            --color-card: #2a3a4f; /* Fondo ligeramente más claro para tarjetas */
+            --color-input-bg: #1f2833; /* Fondo para campos de texto/radio/checkbox */
+        }
+
+        /* -------------------------------------------------------------------
+           ESTILOS GENERALES Y ESTRUCTURA
+           ------------------------------------------------------------------- */
+        body {
+            background-color: var(--color-fondo-principal);
+            font-family: var(--font-stack);
+            margin: 0;
+            padding: 2rem 0;
+            line-height: 1.6;
+            color: var(--color-texto-principal);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Contenedor principal */
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Estilo de la tarjeta/sección principal */
+        .card {
+            background-color: var(--color-card);
+            border: 1px solid var(--color-acento-hover);
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 0 25px rgba(102, 252, 241, 0.3);
+        }
+
+        /* Títulos de sección */
+        .section-title {
+            color: var(--color-acento);
+            text-shadow: 0 0 5px rgba(102, 252, 241, 0.5);
+        }
+
+        /* -------------------------------------------------------------------
+           BOTÓN PRINCIPAL (ADAPTADO AL SUBMIT)
+           ------------------------------------------------------------------- */
+        .submit-btn {
+            /* Estilos iniciales (Botón estilo "Outline" cian) */
+            display: inline-block;
+            text-decoration: none;
+            
+            background-color: var(--color-card); /* Fondo Tarjeta */
+            color: var(--color-acento);                   /* Texto Cian (¡COLOR DE LETRA INICIAL!) */
+            border: 2px solid var(--color-acento);        /* Borde cian */
+
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        /* Estilos Hover (El color de fondo y el color de la letra se invierten) */
+        .submit-btn:hover {
+            background-color: var(--color-acento);       /* CAMBIO DE FONDO: relleno cyan */
+            color: var(--color-header-footer);           /* CAMBIO DE COLOR DE LETRA: texto oscuro */
+            
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); /* Sombra con el color de acento */
+        }
+        
+        /* -------------------------------------------------------------------
+           ESTILOS DE INPUTS (RADIO, CHECKBOX, TEXTO)
+           ------------------------------------------------------------------- */
+        
+        /* Campos de texto y áreas */
+        input[type="text"], textarea {
+            background-color: var(--color-input-bg) !important;
+            color: var(--color-texto-principal) !important;
+            border: 1px solid var(--color-acento-hover) !important;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: var(--color-acento) !important;
+            box-shadow: 0 0 5px rgba(102, 252, 241, 0.7);
+        }
+
+        /* Estilo Custom Checkbox/Radio */
+        .input-option {
+            background-color: var(--color-input-bg);
+            transition: background-color 0.2s;
+        }
+        .input-option:hover {
+            background-color: #3b4e66;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.375rem;
+            border: 2px solid var(--color-acento-hover);
+            background-color: var(--color-input-bg);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        /* Estado Checked (Radio y Checkbox usan el color de acento) */
+        input[type="radio"]:checked, input[type="checkbox"]:checked {
+            border-color: var(--color-acento);
+            background-color: var(--color-acento);
+            box-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
+        }
+        
+        /* Punto interior para Radio */
+        input[type="radio"]::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 50%;
+            background-color: var(--color-header-footer); /* Negro profundo */
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s ease;
+        }
+        input[type="radio"]:checked::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        /* Marca interior para Checkbox */
+        input[type="checkbox"]::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color: var(--color-header-footer);
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.2s ease;
+        }
+        input[type="checkbox"]:checked::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Estilos de la tabla de resultados */
+        #results-table th {
+            color: var(--color-acento);
+            background-color: var(--color-header-footer);
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 2px solid var(--color-acento);
+        }
+        #results-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #333;
+        }
+        #results-table tbody tr:hover {
+            background-color: #3b4e66;
+        }
+    </style>
+    <!-- FIN DE ESTILOS PERSONALIZADOS -->
+</head>
+<body>
+
+<div id="survey-app" class="container p-4 sm:p-8">
+    <div class="text-center mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold mb-2" style="color: var(--color-acento); text-shadow: 0 0 10px rgba(102, 252, 241, 0.4);">
+            Encuesta sobre Hábitos y Preferencias de Compra Gaming
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+            Estamos creando una nueva tienda online y tu opinión nos ayuda a definir nuestra estrategia de productos y servicios. ¡Gracias por tu tiempo!
+        </p>
+    </div>
+
+    <form id="gaming-survey" class="space-y-8">
+
+        <!-- Sección 1: Sobre ti -->
+        <div class="card p-6 sm:p-8 rounded-xl space-y-6">
+            <h2 class="section-title text-2xl font-bold mb-4">🧑‍💻 1. Sobre ti</h2>
+
+            <!-- Pregunta 1.1: Edad (Opción múltiple) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">Edad:</label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="age1" name="edad" value="12–17" required>
+                        <label for="age1">12–17</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="age2" name="edad" value="18–24">
+                        <label for="age2">18–24</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="age3" name="edad" value="25–30">
+                        <label for="age3">25–30</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="age4" name="edad" value="31–40">
+                        <label for="age4">31–40</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="age5" name="edad" value="Más de 40">
+                        <label for="age5">Más de 40</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 1.2: ¿Qué tipo de jugador eres? (Opción múltiple) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Qué tipo de jugador eres?</label>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="player1" name="tipo_jugador" value="Casual" required>
+                        <label for="player1">Casual</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="player2" name="tipo_jugador" value="Competitivo">
+                        <label for="player2">Competitivo</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="player3" name="tipo_jugador" value="Solo juego ocasionalmente">
+                        <label for="player3">Solo juego ocasionalmente</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="player4" name="tipo_jugador" value="No juego, pero compro para otros">
+                        <label for="player4">No juego, pero compro para otros</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 2: Hábitos de compra -->
+        <div class="card p-6 sm:p-8 rounded-xl space-y-6">
+            <h2 class="section-title text-2xl font-bold mb-4">🛒 2. Hábitos de compra</h2>
+
+            <!-- Pregunta 2.1: ¿Con qué frecuencia compras productos gaming? (Opción múltiple) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Con qué frecuencia compras productos gaming?</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="freq1" name="frecuencia_compra" value="Cada mes" required>
+                        <label for="freq1">Cada mes</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="freq2" name="frecuencia_compra" value="Cada 3–6 meses">
+                        <label for="freq2">Cada 3–6 meses</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="freq3" name="frecuencia_compra" value="Una vez al año">
+                        <label for="freq3">Una vez al año</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="freq4" name="frecuencia_compra" value="Casi nunca">
+                        <label for="freq4">Casi nunca</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 2.2: ¿Dónde sueles comprarlos? (Casillas de verificación con opción "Otro") -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Dónde sueles comprarlos?</label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="where1" name="lugar_compra" value="Amazon">
+                        <label for="where1">Amazon</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="where2" name="lugar_compra" value="PcComponentes">
+                        <label for="where2">PcComponentes</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="where3" name="lugar_compra" value="Tiendas físicas">
+                        <label for="where3">Tiendas físicas</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="where4" name="lugar_compra" value="Instagram/TikTok Shops">
+                        <label for="where4">Instagram/TikTok Shops</label>
+                    </div>
+                    <div class="col-span-2 md:col-span-1">
+                        <label for="other_shop" class="block text-sm text-gray-400 mb-1">Otras webs (indica cuáles):</label>
+                        <input type="text" id="other_shop" name="other_shop" placeholder="Escribe aquí..." class="w-full border rounded-lg p-2 focus:outline-none">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 3: Preferencias de productos -->
+        <div class="card p-6 sm:p-8 rounded-xl space-y-6">
+            <h2 class="section-title text-2xl font-bold mb-4">💸 3. Preferencias de productos</h2>
+
+            <!-- Pregunta 3.1: ¿Qué productos gaming te interesan más? (Casillas de verificación) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Qué productos gaming te interesan más? (puedes marcar varios)</label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="prod1" name="productos_interes" value="Ratones">
+                        <label for="prod1">Ratones</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="prod2" name="productos_interes" value="Teclados">
+                        <label for="prod2">Teclados</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="prod3" name="productos_interes" value="Cascos">
+                        <label for="prod3">Cascos</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="prod4" name="productos_interes" value="PCs completos">
+                        <label for="prod4">PCs completos</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="prod5" name="productos_interes" value="Componentes sueltos">
+                        <label for="prod5">Componentes sueltos</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="prod6" name="productos_interes" value="Sillas gaming">
+                        <label for="prod6">Sillas gaming</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option col-span-2 md:col-span-1">
+                        <input type="checkbox" id="prod7" name="productos_interes" value="Accesorios (alfombrillas, soportes, etc.)">
+                        <label for="prod7">Accesorios (alfombrillas, soportes, etc.)</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 3.2: ¿Cuánto sueles gastar en productos gaming? (Opción múltiple) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Cuánto sueles gastar en productos gaming?</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="cost1" name="coste_gasto" value="Menos de 20€" required>
+                        <label for="cost1">Menos de 20€</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="cost2" name="coste_gasto" value="20–50€">
+                        <label for="cost2">20–50€</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="cost3" name="coste_gasto" value="50–100€">
+                        <label for="cost3">50–100€</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="cost4" name="coste_gasto" value="Más de 100€">
+                        <label for="cost4">Más de 100€</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 4: Factores importantes al comprar online -->
+        <div class="card p-6 sm:p-8 rounded-xl space-y-6">
+            <h2 class="section-title text-2xl font-bold mb-4">⭐ 4. Factores importantes al comprar online</h2>
+
+            <!-- Pregunta 4.1: ¿Qué valoras más al comprar productos gaming? (Casillas de verificación, máx. 3) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Qué valoras más al comprar productos gaming? <span style="color:var(--color-acento-hover);" class="text-sm">(Elige 3 máximo)</span></label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="important_factors_group">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="factor1" name="factores_importantes" value="Precio bajo">
+                        <label for="factor1">Precio bajo</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="factor2" name="factores_importantes" value="Buena relación calidad-precio">
+                        <label for="factor2">Buena relación calidad-precio</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="factor3" name="factores_importantes" value="Opiniones de otros usuarios">
+                        <label for="factor3">Opiniones de otros usuarios</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="factor4" name="factores_importantes" value="Rapidez de envío">
+                        <label for="factor4">Rapidez de envío</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="factor5" name="factores_importantes" value="Garantía y devoluciones claras">
+                        <label for="factor5">Garantía y devoluciones claras</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="factor6" name="factores_importantes" value="Atención al cliente">
+                        <label for="factor6">Atención al cliente</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="factor7" name="factores_importantes" value="Seguridad en el pago">
+                        <label for="factor7">Seguridad en el pago</label>
+                    </div>
+                </div>
+                <p id="factor_error" class="text-sm mt-2 hidden" style="color: var(--color-error);">Máximo 3 opciones permitidas.</p>
+            </div>
+        </div>
+
+        <!-- Sección 5: Envíos y pagos -->
+        <div class="card p-6 sm:p-8 rounded-xl space-y-6">
+            <h2 class="section-title text-2xl font-bold mb-4">🚚 5. Envíos y pagos</h2>
+
+            <!-- Pregunta 5.1: ¿Qué método de pago prefieres? (Opción múltiple) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Qué método de pago prefieres?</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="pay1" name="metodo_pago" value="Tarjeta" required>
+                        <label for="pay1">Tarjeta</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="pay2" name="metodo_pago" value="PayPal">
+                        <label for="pay2">PayPal</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="pay3" name="metodo_pago" value="Bizum">
+                        <label for="pay3">Bizum</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="pay4" name="metodo_pago" value="Contrareembolso">
+                        <label for="pay4">Contrareembolso</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 5.2: ¿Qué tiempo de envío consideras aceptable? (Opción múltiple) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Qué tiempo de envío consideras aceptable?</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="ship1" name="tiempo_envio" value="24h" required>
+                        <label for="ship1">24h</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="ship2" name="tiempo_envio" value="48–72h">
+                        <label for="ship2">48–72h</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="ship3" name="tiempo_envio" value="3–5 días">
+                        <label for="ship3">3–5 días</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="ship4" name="tiempo_envio" value="Me da igual si el precio es barato">
+                        <label for="ship4">Me da igual si el precio es barato</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 6: Opiniones sobre la tienda -->
+        <div class="card p-6 sm:p-8 rounded-xl space-y-6">
+            <h2 class="section-title text-2xl font-bold mb-4">🧩 6. Opiniones sobre la tienda</h2>
+
+            <!-- Pregunta 6.1: ¿Comprarías en una tienda gaming de bajo costo gestionada por un equipo joven? (Opción múltiple con "Depende") -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Comprarías en una tienda gaming de bajo costo gestionada por un equipo joven?</label>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="buy1" name="comprarias_tienda" value="Sí" required>
+                        <label for="buy1">Sí</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="buy2" name="comprarias_tienda" value="No">
+                        <label for="buy2">No</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="radio" id="buy3" name="comprarias_tienda" value="Depende">
+                        <label for="buy3">Depende</label>
+                    </div>
+                </div>
+                <div id="depende_input" class="mt-4 hidden">
+                    <label for="depende_text" class="block text-sm text-gray-400 mb-1">¿De qué dependería tu decisión?</label>
+                    <input type="text" id="depende_text" name="depende_text" placeholder="Escribe aquí..." class="w-full border rounded-lg p-2 focus:outline-none">
+                </div>
+            </div>
+
+            <!-- Pregunta 6.2: ¿Qué te haría confiar más en esta tienda? (Casillas de verificación) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Qué te haría confiar más en esta tienda?</label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="trust1" name="factores_confianza" value="Fotos reales">
+                        <label for="trust1">Fotos reales</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="trust2" name="factores_confianza" value="Vídeos en redes sociales">
+                        <label for="trust2">Vídeos en redes sociales</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="trust3" name="factores_confianza" value="Reseñas verificadas">
+                        <label for="trust3">Reseñas verificadas</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="trust4" name="factores_confianza" value="Política de devoluciones clara">
+                        <label for="trust4">Política de devoluciones clara</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="trust5" name="factores_confianza" value="Garantía 3 años">
+                        <label for="trust5">Garantía 3 años</label>
+                    </div>
+                    <div class="flex items-center space-x-3 p-3 rounded-lg input-option">
+                        <input type="checkbox" id="trust6" name="factores_confianza" value="Chat de atención al cliente">
+                        <label for="trust6">Chat de atención al cliente</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 6.3: ¿Qué mejorarías o qué te gustaría que esta tienda ofreciera? (Párrafo) -->
+            <div>
+                <label for="mejoras_texto" class="block text-lg font-semibold mb-3">¿Qué mejorarías o qué te gustaría que esta tienda ofreciera?</label>
+                <textarea id="mejoras_texto" name="mejoras_texto" rows="3" placeholder="Escribe tus ideas y sugerencias aquí..." class="w-full border rounded-lg p-3 focus:outline-none"></textarea>
+            </div>
+        </div>
+
+        <!-- Sección 7: Valoración final -->
+        <div class="card p-6 sm:p-8 rounded-xl space-y-6">
+            <h2 class="section-title text-2xl font-bold mb-4">❤️ 7. Valoración final</h2>
+
+            <!-- Pregunta 7.1: ¿Qué tan probable es que compraras en nuestra tienda? (Escala lineal) -->
+            <div>
+                <label class="block text-lg font-semibold mb-3">¿Qué tan probable es que compraras en nuestra tienda?</label>
+                <div class="flex justify-between items-center p-4 rounded-lg input-option">
+                    <span class="text-sm text-gray-400">1 (Nada probable)</span>
+                    <div class="flex space-x-4">
+                        <div class="flex flex-col items-center">
+                            <input type="radio" id="rating1" name="probabilidad_compra" value="1" required>
+                            <label for="rating1" class="text-sm mt-1">1</label>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <input type="radio" id="rating2" name="probabilidad_compra" value="2">
+                            <label for="rating2" class="text-sm mt-1">2</label>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <input type="radio" id="rating3" name="probabilidad_compra" value="3">
+                            <label for="rating3" class="text-sm mt-1">3</label>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <input type="radio" id="rating4" name="probabilidad_compra" value="4">
+                            <label for="rating4" class="text-sm mt-1">4</label>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <input type="radio" id="rating5" name="probabilidad_compra" value="5">
+                            <label for="rating5" class="text-sm mt-1">5</label>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-400">5 (Muy probable)</span>
+                </div>
+            </div>
+
+            <!-- Pregunta 7.2: Comentarios adicionales (Párrafo) -->
+            <div>
+                <label for="comments" class="block text-lg font-semibold mb-3">Comentarios adicionales:</label>
+                <textarea id="comments" name="comentarios_adicionales" rows="3" placeholder="Si tienes algún comentario extra, déjalo aquí..." class="w-full border rounded-lg p-3 focus:outline-none"></textarea>
+            </div>
+        </div>
+
+        <div class="text-center pt-4">
+            <button type="submit" class="submit-btn px-12 py-3 text-xl shadow-lg">
+                Enviar Encuesta
+            </button>
+        </div>
+
+        <div id="thank-you-message" class="card p-8 rounded-xl text-center hidden">
+            <h3 class="text-3xl font-bold" style="color: var(--color-acento);">¡Gracias por completar la encuesta!</h3>
+            <p class="mt-4" style="color: var(--color-texto-principal);">Tu opinión ha sido registrada y es muy valiosa para nosotros.</p>
+            <a href="index.html" class="submit-btn mt-6 px-8 py-3 text-lg shadow-lg">
+                Ir a la Página Principal
+            </a>
+        </div>
+        <div id="error-message" class="card p-4 rounded-xl text-center hidden" style="background-color: #4a1e1e; border-color: #7b2424;">
+            <p class="font-semibold" style="color: var(--color-error);">Error: Por favor, revisa todos los campos obligatorios y asegúrate de elegir un máximo de 3 factores importantes.</p>
+        </div>
+
+    </form>
+
+    <!-- Sección de Resultados en Tiempo Real -->
+    <div id="results-section" class="mt-16 pt-8 border-t" style="border-color: var(--color-acento-hover);">
+        <h2 class="text-3xl font-bold mb-6" style="color: var(--color-acento); text-shadow: 0 0 5px rgba(102, 252, 241, 0.3);">
+            📊 Resultados de la Encuesta (Tiempo Real)
+        </h2>
+        <p class="text-sm mb-4" style="color: var(--color-texto-principal);">
+            ID de Usuario (para referencia): <span id="current-user-id" style="color: var(--color-acento); font-family: monospace;">Cargando...</span>
+        </p>
+
+        <div class="overflow-x-auto card p-4 rounded-xl">
+            <table id="results-table" class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="rounded-tl-lg">ID</th>
+                        <th>Edad</th>
+                        <th>Tipo Jugador</th>
+                        <th>Frecuencia Compra</th>
+                        <th>Factores Clave (Max 3)</th>
+                        <th>Probabilidad Compra (1-5)</th>
+                        <th class="rounded-tr-lg">Comentarios</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <tr><td colspan="7" class="text-center py-4" style="color: var(--color-acento-hover);">Aún no hay respuestas. ¡Envía la primera!</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="loading-results" class="text-center mt-4 hidden">
+            <svg class="animate-spin h-5 w-5 mr-3 inline" style="color: var(--color-acento);" viewBox="0 0 24 24">...</svg>
+            Cargando resultados...
+        </div>
+    </div>
+    <!-- Fin de la Sección de Resultados -->
+
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Configuración y variables globales del entorno
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+    let db;
+    let auth;
+    let userId = null;
+    const COLLECTION_PATH = `artifacts/${appId}/public/data/gaming_surveys`;
+    
+    // Configuración del Logger para depuración (opcional)
+    // setLogLevel('Debug');
+
+    // Referencias del DOM
+    const form = document.getElementById('gaming-survey');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const errorMessage = document.getElementById('error-message');
+    const factorCheckboxes = document.querySelectorAll('input[name="factores_importantes"]');
+    const factorError = document.getElementById('factor_error');
+    const dependeRadios = document.querySelectorAll('input[name="comprarias_tienda"]');
+    const dependeInput = document.getElementById('depende_input');
+    const resultsBody = document.getElementById('results-body');
+    const userIdDisplay = document.getElementById('current-user-id');
+    const loadingResults = document.getElementById('loading-results');
+
+    // --- FUNCIÓN DE INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN ---
+    async function initFirebase() {
+        if (!firebaseConfig) {
+            console.error("Firebase configuration not found. Cannot initialize Firebase.");
+            return;
+        }
+        
+        try {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+
+            // 1. Manejo de la autenticación
+            if (initialAuthToken) {
+                await signInWithCustomToken(auth, initialAuthToken);
+            } else {
+                await signInAnonymously(auth);
+            }
+            
+            // 2. Establecer el ID de usuario y el listener de Firestore
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    userId = user.uid;
+                    userIdDisplay.textContent = userId;
+                    // Iniciar la escucha de resultados solo después de la autenticación
+                    setupRealtimeResultsListener();
+                } else {
+                    // Esto debería ser raro con la autenticación anterior, pero es un fallback
+                    userId = crypto.randomUUID();
+                    userIdDisplay.textContent = 'Anónimo (' + userId.substring(0, 8) + '...)';
+                }
+            });
+
+        } catch (error) {
+            console.error("Error al inicializar o autenticar Firebase:", error);
+            userIdDisplay.textContent = 'Error de conexión.';
+        }
+    }
+
+    // --- FUNCIÓN PARA ENVIAR DATOS A FIRESTORE ---
+    async function submitSurvey(surveyData) {
+        if (!db) {
+            console.error("Firestore no está inicializado.");
+            return;
+        }
+        
+        const dataToSave = {
+            ...surveyData,
+            timestamp: new Date().toISOString(),
+            userId: userId,
+            // Guardamos los factores importantes como un array
+            factores_importantes: Array.isArray(surveyData.factores_importantes) ? surveyData.factores_importantes : [surveyData.factores_importantes].filter(Boolean)
+        };
+
+        try {
+            // Añade un nuevo documento a la colección
+            await addDoc(collection(db, COLLECTION_PATH), dataToSave);
+            
+            form.reset(); 
+            form.classList.add('hidden');
+            thankYouMessage.classList.remove('hidden');
+            thankYouMessage.scrollIntoView({ behavior: 'smooth' });
+
+        } catch (error) {
+            console.error("Error al guardar la encuesta en Firestore:", error);
+            errorMessage.querySelector('p').textContent = `Error al guardar: ${error.message}`;
+            errorMessage.classList.remove('hidden');
+        }
+    }
+    
+    // --- FUNCIÓN PARA ESCUCHAR Y MOSTRAR RESULTADOS EN TIEMPO REAL ---
+    function setupRealtimeResultsListener() {
+        if (!db) return;
+        
+        loadingResults.classList.remove('hidden');
+        resultsBody.innerHTML = ''; // Limpiar resultados anteriores
+        
+        const surveysQuery = query(collection(db, COLLECTION_PATH));
+
+        onSnapshot(surveysQuery, (snapshot) => {
+            loadingResults.classList.add('hidden');
+            
+            if (snapshot.empty) {
+                resultsBody.innerHTML = '<tr><td colspan="7" class="text-center py-4" style="color: var(--color-acento-hover);">Aún no hay respuestas. ¡Envía la primera!</td></tr>';
+                return;
+            }
+
+            resultsBody.innerHTML = ''; // Limpiar la tabla antes de rellenar
+            
+            snapshot.docs.forEach(doc => {
+                const data = doc.data();
+                const factors = Array.isArray(data.factores_importantes) ? data.factores_importantes.join(', ') : data.factores_importantes || '-';
+                const comments = data.comentarios_adicionales || data.mejoras_texto || '-';
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="color: var(--color-acento); font-family: monospace; font-size: 0.75rem;">${doc.id.substring(0, 6)}...</td>
+                    <td>${data.edad || '-'}</td>
+                    <td>${data.tipo_jugador || '-'}</td>
+                    <td>${data.frecuencia_compra || '-'}</td>
+                    <td>${factors}</td>
+                    <td>${data.probabilidad_compra || '-'}</td>
+                    <td style="color: #999;">${comments.substring(0, 50)}${comments.length > 50 ? '...' : ''}</td>
+                `;
+                resultsBody.appendChild(row);
+            });
+        }, (error) => {
+            console.error("Error en la escucha de resultados en tiempo real:", error);
+            loadingResults.classList.add('hidden');
+            resultsBody.innerHTML = '<tr><td colspan="7" class="text-center py-4" style="color: var(--color-error);">Error al cargar los datos.</td></tr>';
+        });
+    }
+
+    // --- LÓGICA DEL FORMULARIO Y LISTENERS ---
+    document.addEventListener('DOMContentLoaded', () => {
+        initFirebase(); // Inicia Firebase
+
+        // Validación de Máximo 3 Opciones (Factores Importantes)
+        factorCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const checkedCount = Array.from(factorCheckboxes).filter(c => c.checked).length;
+                if (checkedCount > 3) {
+                    checkbox.checked = false; 
+                    factorError.classList.remove('hidden');
+                } else {
+                    factorError.classList.add('hidden');
+                }
+            });
+        });
+
+        // Lógica de 'Depende' (Mostrar/Ocultar campo de texto)
+        dependeRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'Depende' && radio.checked) {
+                    dependeInput.classList.remove('hidden');
+                    document.getElementById('depende_text').setAttribute('required', 'true');
+                } else {
+                    dependeInput.classList.add('hidden');
+                    document.getElementById('depende_text').removeAttribute('required');
+                }
+            });
+        });
+
+        // Manejo del Envío del Formulario (Ahora guarda en Firestore)
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorMessage.classList.add('hidden');
+
+            const checkedCount = Array.from(factorCheckboxes).filter(c => c.checked).length;
+            if (checkedCount > 3) {
+                errorMessage.querySelector('p').textContent = "Error: Solo puedes elegir un máximo de 3 factores importantes.";
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+
+            const formData = new FormData(form);
+            const data = {};
+            // Recopilar datos y manejar arrays para checkboxes
+            for (const [key, value] of formData.entries()) {
+                if (key === 'factores_importantes' || key === 'productos_interes' || key === 'lugar_compra' || key === 'factores_confianza') {
+                    if (data[key]) {
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Llamar a la función de guardado en Firestore
+            await submitSurvey(data);
+        });
+    });
+</script>
+</body>
+</html>
