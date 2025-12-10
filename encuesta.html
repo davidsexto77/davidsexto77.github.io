@@ -635,9 +635,23 @@
     import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, onSnapshot, query, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // Configuración y variables globales del entorno
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+    // --- CONFIGURACIÓN DE FIREBASE (ADAPTADO PARA GITHUB) ---
+    // Si ejecutas esto en GitHub o fuera del Canvas, el script usará la configuración de 'mockFirebaseConfig'.
+    // Para que la base de datos funcione, DEBES reemplazar los valores MOCK_... con tus credenciales REALES.
+    const mockFirebaseConfig = {
+        apiKey: "MOCK_API_KEY_REEMPLAZAME", 
+        authDomain: "MOCK_AUTH_DOMAIN_REEMPLAZAME",
+        projectId: "MOCK-PROJECT-ID-REEMPLAZAME", 
+        storageBucket: "MOCK-BUCKET.appspot.com",
+        messagingSenderId: "MOCK-SENDER-ID",
+        appId: "MOCK-APP-ID"
+    };
+
+    // Usamos la configuración del Canvas si existe, sino la configuración mock.
+    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : mockFirebaseConfig;
+    
+    // Usamos el app_id del Canvas si existe, sino un ID genérico para GitHub.
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'github-static-app';
     const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
     let db;
@@ -662,50 +676,60 @@
 
     // --- FUNCIÓN DE INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN ---
     async function initFirebase() {
-        if (!firebaseConfig) {
-            console.error("Firebase configuration not found. Cannot initialize Firebase.");
-            return;
-        }
-        
-        try {
-            const app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-
-            // 1. Manejo de la autenticación
-            if (initialAuthToken) {
-                await signInWithCustomToken(auth, initialAuthToken);
-            } else {
-                await signInAnonymously(auth);
-            }
+        if (!firebaseConfig || !firebaseConfig.apiKey.includes('MOCK')) {
+            // Solo inicializamos si tenemos credenciales válidas o de Canvas.
+            // Si tiene MOCK, la inicialización puede fallar, pero al menos no falla el JS.
             
-            // 2. Establecer el ID de usuario y el listener de Firestore
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    userId = user.uid;
-                    userIdDisplay.textContent = userId;
-                    // Iniciar la escucha de resultados solo después de la autenticación
-                    setupRealtimeResultsListener();
-                } else {
-                    // Esto debería ser raro con la autenticación anterior, pero es un fallback
-                    userId = crypto.randomUUID();
-                    userIdDisplay.textContent = 'Anónimo (' + userId.substring(0, 8) + '...)';
-                }
-            });
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
 
-        } catch (error) {
-            console.error("Error al inicializar o autenticar Firebase:", error);
-            userIdDisplay.textContent = 'Error de conexión.';
+                // 1. Manejo de la autenticación
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                
+                // 2. Establecer el ID de usuario y el listener de Firestore
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        userIdDisplay.textContent = userId;
+                        // Iniciar la escucha de resultados solo después de la autenticación
+                        setupRealtimeResultsListener();
+                    } else {
+                        userId = crypto.randomUUID();
+                        userIdDisplay.textContent = 'Anónimo (' + userId.substring(0, 8) + '...)';
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error al inicializar o autenticar Firebase:", error);
+                userIdDisplay.textContent = 'Error: Revisar config de Firebase.';
+                // Si la configuración mock falla, se muestra un error claro.
+                if (firebaseConfig.apiKey.includes('MOCK')) {
+                     alert("ADVERTENCIA: Parece que está ejecutando esto fuera del Canvas. Reemplace los valores 'MOCK_...' en el script con su configuración real de Firebase para que la base de datos funcione.");
+                }
+            }
+        } else {
+            // Caso de que esté usando las credenciales MOCK en GitHub y no queremos que intente inicializar.
+            console.warn("ADVERTENCIA: Firebase no se inicializará. Reemplace las credenciales 'MOCK' para usar Firestore.");
+            userIdDisplay.textContent = 'MOCK/GitHub (DB Desactivada)';
         }
     }
 
     // --- FUNCIÓN PARA ENVIAR DATOS A FIRESTORE ---
     async function submitSurvey(surveyData) {
-        if (!db) {
-            console.error("Firestore no está inicializado.");
+        // Impedir el envío si estamos usando credenciales mock
+        if (!db || firebaseConfig.apiKey.includes('MOCK')) {
+            console.error("Firestore no está inicializado o se está utilizando una configuración de prueba (MOCK). Los datos no se guardarán.");
+            errorMessage.querySelector('p').textContent = "ERROR: La base de datos no está activa (use la configuración REAL de Firebase en GitHub).";
+            errorMessage.classList.remove('hidden');
             return;
         }
-        
+
         const dataToSave = {
             ...surveyData,
             timestamp: new Date().toISOString(),
