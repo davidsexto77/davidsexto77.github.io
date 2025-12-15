@@ -11,18 +11,17 @@
     <style>
         /* -------------------------------------------------------------------
            VARIABLES CSS
-           Gestión de colores para la estética oscura/cian (Dark Theme)
            ------------------------------------------------------------------- */
         :root {
-            --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
-            --color-header-footer: #0b0c10; /* Negro profundo */
-            --color-texto-principal: #c5c6c7; /* Gris claro para texto */
-            --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
-            --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
-            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
-            --color-error: #ff4d4d; /* Rojo para mensajes de error */
-            --color-card: #2a3a4f; /* Fondo ligeramente más claro para tarjetas */
-            --color-input-bg: #1f2833; /* Fondo para campos de texto/radio/checkbox */
+            --color-fondo-principal: #1f2833; 
+            --color-header-footer: #0b0c10; 
+            --color-texto-principal: #c5c6c7; 
+            --color-acento: #66fcf1; 
+            --color-acento-hover: #45a29e; 
+            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            --color-error: #ff4d4d; 
+            --color-card: #2a3a4f; 
+            --color-input-bg: #1f2833; 
         }
 
         /* -------------------------------------------------------------------
@@ -65,16 +64,15 @@
         }
 
         /* -------------------------------------------------------------------
-           BOTÓN PRINCIPAL (ADAPTADO AL SUBMIT)
+           BOTÓN PRINCIPAL
            ------------------------------------------------------------------- */
         .submit-btn {
-            /* Estilos iniciales (Botón estilo "Outline" cian) */
             display: inline-block;
             text-decoration: none;
             
-            background-color: var(--color-card); /* Fondo Tarjeta */
-            color: var(--color-acento);                   /* Texto Cian (¡COLOR DE LETRA INICIAL!) */
-            border: 2px solid var(--color-acento);        /* Borde cian */
+            background-color: var(--color-card); 
+            color: var(--color-acento);                   
+            border: 2px solid var(--color-acento);        
 
             padding: 12px 26px;
             border-radius: 10px;
@@ -85,20 +83,19 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
 
-        /* Estilos Hover (El color de fondo y el color de la letra se invierten) */
+        /* Estilos Hover */
         .submit-btn:hover {
-            background-color: var(--color-acento);       /* CAMBIO DE FONDO: relleno cyan */
-            color: var(--color-header-footer);           /* CAMBIO DE COLOR DE LETRA: texto oscuro */
+            background-color: var(--color-acento);       
+            color: var(--color-header-footer);           
             
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); /* Sombra con el color de acento */
+            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); 
         }
         
         /* -------------------------------------------------------------------
-           ESTILOS DE INPUTS (RADIO, CHECKBOX, TEXTO)
+           ESTILOS DE INPUTS
            ------------------------------------------------------------------- */
         
-        /* Campos de texto y áreas */
         input[type="text"], textarea {
             background-color: var(--color-input-bg) !important;
             color: var(--color-texto-principal) !important;
@@ -110,7 +107,6 @@
             box-shadow: 0 0 5px rgba(102, 252, 241, 0.7);
         }
 
-        /* Estilo Custom Checkbox/Radio */
         .input-option {
             background-color: var(--color-input-bg);
             transition: background-color 0.2s;
@@ -131,14 +127,12 @@
             transition: all 0.2s ease;
         }
         
-        /* Estado Checked (Radio y Checkbox usan el color de acento) */
         input[type="radio"]:checked, input[type="checkbox"]:checked {
             border-color: var(--color-acento);
             background-color: var(--color-acento);
             box-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
         }
         
-        /* Punto interior para Radio */
         input[type="radio"]::after {
             content: '';
             position: absolute;
@@ -147,7 +141,7 @@
             width: 0.5rem;
             height: 0.5rem;
             border-radius: 50%;
-            background-color: var(--color-header-footer); /* Negro profundo */
+            background-color: var(--color-header-footer); 
             transform: translate(-50%, -50%) scale(0);
             transition: transform 0.2s ease;
         }
@@ -155,7 +149,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
         
-        /* Marca interior para Checkbox */
         input[type="checkbox"]::after {
             content: '✓';
             position: absolute;
@@ -171,21 +164,9 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* Estilos de la tabla de resultados (MANTENIDOS POR SI ACASO, PERO ESTÁN OCULTOS EN EL JS) */
-        #results-table th {
-            color: var(--color-acento);
-            background-color: var(--color-header-footer);
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 2px solid var(--color-acento);
-        }
-        #results-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid #333;
-        }
-        #results-table tbody tr:hover {
-            background-color: #3b4e66;
-        }
+        /* La sección de resultados está oculta, estos estilos son irrelevantes para el usuario final */
+        #results-section { display: none !important; }
+
     </style>
     </head>
 <body>
@@ -572,59 +553,28 @@
 
     </form>
 
-    <div id="results-section" class="mt-16 pt-8 border-t hidden" style="border-color: var(--color-acento-hover);">
-        <h2 class="text-3xl font-bold mb-6" style="color: var(--color-acento); text-shadow: 0 0 5px rgba(102, 252, 241, 0.3);">
-            📊 Resultados de la Encuesta (Ocultos a Usuarios)
-        </h2>
-        <p class="text-sm mb-4" style="color: var(--color-texto-principal);">
-            ID de Usuario (para referencia): <span id="current-user-id" style="color: var(--color-acento); font-family: monospace;">Cargando...</span>
-        </p>
-
-        <div class="overflow-x-auto card p-4 rounded-xl">
-            <table id="results-table" class="min-w-full">
-                <thead>
-                    <tr>
-                        <th class="rounded-tl-lg">ID</th>
-                        <th>Edad</th>
-                        <th>Tipo Jugador</th>
-                        <th>Frecuencia Compra</th>
-                        <th>Factores Clave (Max 3)</th>
-                        <th>Probabilidad Compra (1-5)</th>
-                        <th class="rounded-tr-lg">Comentarios</th>
-                    </tr>
-                </thead>
-                <tbody id="results-body">
-                    <tr><td colspan="7" class="text-center py-4" style="color: var(--color-acento-hover);">Esta sección está oculta por configuración.</td></tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="loading-results" class="text-center mt-4 hidden">
-            <svg class="animate-spin h-5 w-5 mr-3 inline" style="color: var(--color-acento);" viewBox="0 0 24 24">...</svg>
-            Cargando resultados...
-        </div>
-    </div>
     </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // --- CONFIGURACIÓN DE FIREBASE (ADAPTADO PARA GITHUB) ---
-    // ¡IMPORTANTE! Reemplaza los valores MOCK_... con tus credenciales REALES de Firebase
+    // --- CONFIGURACIÓN DE FIREBASE (¡CON TUS CLAVES REALES!) ---
+    // ESTOS VALORES SE REEMPLAZARON CON LOS DE TU CAPTURA DE PANTALLA
     const mockFirebaseConfig = {
-        apiKey: "MOCK_API_KEY_REEMPLAZAME", 
-        authDomain: "MOCK_AUTH_DOMAIN_REEMPLAZAME",
-        projectId: "MOCK-PROJECT-ID-REEMPLAZAME", 
-        storageBucket: "MOCK-BUCKET.appspot.com",
-        messagingSenderId: "MOCK-SENDER-ID",
-        appId: "MOCK-APP-ID"
+        apiKey: "AIzaSyD6chWFR-jaoXMVBuVFAwZZIPFCPhw6-a8", 
+        authDomain: "encuesta-5e82d.firebaseapp.com",
+        projectId: "encuesta-5e82d", 
+        storageBucket: "encuesta-5e82d.appspot.com",
+        messagingSenderId: "423729903918",
+        appId: "1:423729903918:web:c65f4e0ec6866e6dc562bf"
     };
 
-    // Usamos la configuración del Canvas si existe, sino la configuración mock.
+    // Esto se mantiene para usar las credenciales de arriba en GitHub Pages.
     const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : mockFirebaseConfig;
     
-    // Usamos el app_id del Canvas si existe, sino un ID genérico para GitHub.
+    // Se usa un ID genérico para GitHub/entornos no-Canvas.
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'github-static-app';
     const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
@@ -641,56 +591,55 @@
     const factorError = document.getElementById('factor_error');
     const dependeRadios = document.querySelectorAll('input[name="comprarias_tienda"]');
     const dependeInput = document.getElementById('depende_input');
+    // Se deja userIdDisplay, aunque no es crítico, para mostrar si la conexión va bien
     const userIdDisplay = document.getElementById('current-user-id');
-    // Las referencias a resultsBody y loadingResults han sido eliminadas ya que no se usan.
 
 
     // --- FUNCIÓN DE INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN ---
     async function initFirebase() {
-        if (!firebaseConfig || !firebaseConfig.apiKey.includes('MOCK')) {
+        // La condición de 'MOCK' ahora falla si las credenciales son reales
+        if (!firebaseConfig.apiKey.includes('MOCK')) {
             try {
                 const app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
 
-                // 1. Manejo de la autenticación
+                // Manejo de la autenticación anónima
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
                 } else {
                     await signInAnonymously(auth);
                 }
                 
-                // 2. Establecer el ID de usuario
+                // Establecer el ID de usuario
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         userId = user.uid;
-                        userIdDisplay.textContent = userId;
-                        // *** NOTA IMPORTANTE: LA LLAMADA A setupRealtimeResultsListener() FUE ELIMINADA AQUÍ. ***
+                        // El elemento para mostrar el ID está oculto, pero mantenemos la variable
                     } else {
                         userId = crypto.randomUUID();
-                        userIdDisplay.textContent = 'Anónimo (' + userId.substring(0, 8) + '...)';
                     }
                 });
 
             } catch (error) {
                 console.error("Error al inicializar o autenticar Firebase:", error);
-                userIdDisplay.textContent = 'Error: Revisar config de Firebase.';
-                if (firebaseConfig.apiKey.includes('MOCK')) {
-                     alert("ADVERTENCIA: Parece que está ejecutando esto fuera del Canvas. Reemplace los valores 'MOCK_...' en el script con su configuración real de Firebase para que la base de datos funcione.");
-                }
+                // Si falla, al menos el usuario puede seguir usando el formulario
+                errorMessage.querySelector('p').textContent = `Error de conexión con Firebase. La encuesta no se guardará. (${error.code})`;
+                errorMessage.classList.remove('hidden');
             }
         } else {
-            console.warn("ADVERTENCIA: Firebase no se inicializará. Reemplace las credenciales 'MOCK' para usar Firestore.");
-            userIdDisplay.textContent = 'MOCK/GitHub (DB Desactivada)';
+             // Esto solo ocurriría si no se reemplazaron las claves 'MOCK' (que ya hemos hecho).
+            console.warn("ADVERTENCIA: Usando configuración MOCK. Los datos no se guardarán.");
+            errorMessage.querySelector('p').textContent = "ERROR: La base de datos no está activa (Usando claves MOCK).";
+            errorMessage.classList.remove('hidden');
         }
     }
 
     // --- FUNCIÓN PARA ENVIAR DATOS A FIRESTORE ---
     async function submitSurvey(surveyData) {
-        // Impedir el envío si estamos usando credenciales mock
-        if (!db || firebaseConfig.apiKey.includes('MOCK')) {
-            console.error("Firestore no está inicializado o se está utilizando una configuración de prueba (MOCK). Los datos no se guardarán.");
-            errorMessage.querySelector('p').textContent = "ERROR: La base de datos no está activa (use la configuración REAL de Firebase en GitHub y configure las reglas).";
+        // Evita el envío si la base de datos falló al inicializar
+        if (!db) {
+            errorMessage.querySelector('p').textContent = "Error: No se pudo conectar a la base de datos. Inténtalo de nuevo más tarde.";
             errorMessage.classList.remove('hidden');
             return;
         }
@@ -698,13 +647,11 @@
         const dataToSave = {
             ...surveyData,
             timestamp: new Date().toISOString(),
-            userId: userId,
-            // Guardamos los factores importantes como un array
+            userId: userId || 'anonymous', // Usa el UID real si está disponible
             factores_importantes: Array.isArray(surveyData.factores_importantes) ? surveyData.factores_importantes : [surveyData.factores_importantes].filter(Boolean)
         };
 
         try {
-            // Añade un nuevo documento a la colección
             await addDoc(collection(db, COLLECTION_PATH), dataToSave);
             
             form.reset(); 
@@ -719,8 +666,6 @@
         }
     }
     
-    // *** FUNCIÓN setupRealtimeResultsListener() FUE ELIMINADA COMPLETAMENTE PARA GARANTIZAR LA PRIVACIDAD. ***
-
     // --- LÓGICA DEL FORMULARIO Y LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
         initFirebase(); // Inicia Firebase
@@ -751,7 +696,7 @@
             });
         });
 
-        // Manejo del Envío del Formulario (Ahora guarda en Firestore)
+        // Manejo del Envío del Formulario
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             errorMessage.classList.add('hidden');
@@ -782,7 +727,6 @@
                 }
             }
             
-            // Llamar a la función de guardado en Firestore
             await submitSurvey(data);
         });
     });
