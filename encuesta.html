@@ -8,7 +8,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- INICIO DE ESTILOS PERSONALIZADOS (USUARIO) -->
     <style>
         /* -------------------------------------------------------------------
            VARIABLES CSS
@@ -172,7 +171,7 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* Estilos de la tabla de resultados */
+        /* Estilos de la tabla de resultados (MANTENIDOS POR SI ACASO, PERO ESTÁN OCULTOS EN EL JS) */
         #results-table th {
             color: var(--color-acento);
             background-color: var(--color-header-footer);
@@ -188,8 +187,7 @@
             background-color: #3b4e66;
         }
     </style>
-    <!-- FIN DE ESTILOS PERSONALIZADOS -->
-</head>
+    </head>
 <body>
 
 <div id="survey-app" class="container p-4 sm:p-8">
@@ -204,11 +202,9 @@
 
     <form id="gaming-survey" class="space-y-8">
 
-        <!-- Sección 1: Sobre ti -->
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🧑‍💻 1. Sobre ti</h2>
 
-            <!-- Pregunta 1.1: Edad (Opción múltiple) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">Edad:</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -235,7 +231,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 1.2: ¿Qué tipo de jugador eres? (Opción múltiple) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué tipo de jugador eres?</label>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -259,11 +254,9 @@
             </div>
         </div>
 
-        <!-- Sección 2: Hábitos de compra -->
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🛒 2. Hábitos de compra</h2>
 
-            <!-- Pregunta 2.1: ¿Con qué frecuencia compras productos gaming? (Opción múltiple) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Con qué frecuencia compras productos gaming?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -286,7 +279,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 2.2: ¿Dónde sueles comprarlos? (Casillas de verificación con opción "Otro") -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Dónde sueles comprarlos?</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -314,11 +306,9 @@
             </div>
         </div>
 
-        <!-- Sección 3: Preferencias de productos -->
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">💸 3. Preferencias de productos</h2>
 
-            <!-- Pregunta 3.1: ¿Qué productos gaming te interesan más? (Casillas de verificación) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué productos gaming te interesan más? (puedes marcar varios)</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -353,7 +343,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 3.2: ¿Cuánto sueles gastar en productos gaming? (Opción múltiple) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Cuánto sueles gastar en productos gaming?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -377,11 +366,9 @@
             </div>
         </div>
 
-        <!-- Sección 4: Factores importantes al comprar online -->
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">⭐ 4. Factores importantes al comprar online</h2>
 
-            <!-- Pregunta 4.1: ¿Qué valoras más al comprar productos gaming? (Casillas de verificación, máx. 3) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué valoras más al comprar productos gaming? <span style="color:var(--color-acento-hover);" class="text-sm">(Elige 3 máximo)</span></label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="important_factors_group">
@@ -418,11 +405,9 @@
             </div>
         </div>
 
-        <!-- Sección 5: Envíos y pagos -->
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🚚 5. Envíos y pagos</h2>
 
-            <!-- Pregunta 5.1: ¿Qué método de pago prefieres? (Opción múltiple) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué método de pago prefieres?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -445,7 +430,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 5.2: ¿Qué tiempo de envío consideras aceptable? (Opción múltiple) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué tiempo de envío consideras aceptable?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -469,11 +453,9 @@
             </div>
         </div>
 
-        <!-- Sección 6: Opiniones sobre la tienda -->
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🧩 6. Opiniones sobre la tienda</h2>
 
-            <!-- Pregunta 6.1: ¿Comprarías en una tienda gaming de bajo costo gestionada por un equipo joven? (Opción múltiple con "Depende") -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Comprarías en una tienda gaming de bajo costo gestionada por un equipo joven?</label>
                 <div class="grid grid-cols-3 gap-4">
@@ -496,7 +478,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 6.2: ¿Qué te haría confiar más en esta tienda? (Casillas de verificación) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué te haría confiar más en esta tienda?</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -527,18 +508,15 @@
                 </div>
             </div>
 
-            <!-- Pregunta 6.3: ¿Qué mejorarías o qué te gustaría que esta tienda ofreciera? (Párrafo) -->
             <div>
                 <label for="mejoras_texto" class="block text-lg font-semibold mb-3">¿Qué mejorarías o qué te gustaría que esta tienda ofreciera?</label>
                 <textarea id="mejoras_texto" name="mejoras_texto" rows="3" placeholder="Escribe tus ideas y sugerencias aquí..." class="w-full border rounded-lg p-3 focus:outline-none"></textarea>
             </div>
         </div>
 
-        <!-- Sección 7: Valoración final -->
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">❤️ 7. Valoración final</h2>
 
-            <!-- Pregunta 7.1: ¿Qué tan probable es que compraras en nuestra tienda? (Escala lineal) -->
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué tan probable es que compraras en nuestra tienda?</label>
                 <div class="flex justify-between items-center p-4 rounded-lg input-option">
@@ -569,7 +547,6 @@
                 </div>
             </div>
 
-            <!-- Pregunta 7.2: Comentarios adicionales (Párrafo) -->
             <div>
                 <label for="comments" class="block text-lg font-semibold mb-3">Comentarios adicionales:</label>
                 <textarea id="comments" name="comentarios_adicionales" rows="3" placeholder="Si tienes algún comentario extra, déjalo aquí..." class="w-full border rounded-lg p-3 focus:outline-none"></textarea>
@@ -595,10 +572,9 @@
 
     </form>
 
-    <!-- Sección de Resultados en Tiempo Real -->
-    <div id="results-section" class="mt-16 pt-8 border-t" style="border-color: var(--color-acento-hover);">
+    <div id="results-section" class="mt-16 pt-8 border-t hidden" style="border-color: var(--color-acento-hover);">
         <h2 class="text-3xl font-bold mb-6" style="color: var(--color-acento); text-shadow: 0 0 5px rgba(102, 252, 241, 0.3);">
-            📊 Resultados de la Encuesta (Tiempo Real)
+            📊 Resultados de la Encuesta (Ocultos a Usuarios)
         </h2>
         <p class="text-sm mb-4" style="color: var(--color-texto-principal);">
             ID de Usuario (para referencia): <span id="current-user-id" style="color: var(--color-acento); font-family: monospace;">Cargando...</span>
@@ -618,7 +594,7 @@
                     </tr>
                 </thead>
                 <tbody id="results-body">
-                    <tr><td colspan="7" class="text-center py-4" style="color: var(--color-acento-hover);">Aún no hay respuestas. ¡Envía la primera!</td></tr>
+                    <tr><td colspan="7" class="text-center py-4" style="color: var(--color-acento-hover);">Esta sección está oculta por configuración.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -627,9 +603,7 @@
             Cargando resultados...
         </div>
     </div>
-    <!-- Fin de la Sección de Resultados -->
-
-</div>
+    </div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -637,8 +611,7 @@
     import { getFirestore, collection, addDoc, onSnapshot, query, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     // --- CONFIGURACIÓN DE FIREBASE (ADAPTADO PARA GITHUB) ---
-    // Si ejecutas esto en GitHub o fuera del Canvas, el script usará la configuración de 'mockFirebaseConfig'.
-    // Para que la base de datos funcione, DEBES reemplazar los valores MOCK_... con tus credenciales REALES.
+    // ¡IMPORTANTE! Reemplaza los valores MOCK_... con tus credenciales REALES de Firebase
     const mockFirebaseConfig = {
         apiKey: "MOCK_API_KEY_REEMPLAZAME", 
         authDomain: "MOCK_AUTH_DOMAIN_REEMPLAZAME",
@@ -660,9 +633,6 @@
     let userId = null;
     const COLLECTION_PATH = `artifacts/${appId}/public/data/gaming_surveys`;
     
-    // Configuración del Logger para depuración (opcional)
-    // setLogLevel('Debug');
-
     // Referencias del DOM
     const form = document.getElementById('gaming-survey');
     const thankYouMessage = document.getElementById('thank-you-message');
@@ -671,16 +641,13 @@
     const factorError = document.getElementById('factor_error');
     const dependeRadios = document.querySelectorAll('input[name="comprarias_tienda"]');
     const dependeInput = document.getElementById('depende_input');
-    const resultsBody = document.getElementById('results-body');
     const userIdDisplay = document.getElementById('current-user-id');
-    const loadingResults = document.getElementById('loading-results');
+    // Las referencias a resultsBody y loadingResults han sido eliminadas ya que no se usan.
+
 
     // --- FUNCIÓN DE INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN ---
     async function initFirebase() {
         if (!firebaseConfig || !firebaseConfig.apiKey.includes('MOCK')) {
-            // Solo inicializamos si tenemos credenciales válidas o de Canvas.
-            // Si tiene MOCK, la inicialización puede fallar, pero al menos no falla el JS.
-            
             try {
                 const app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
@@ -693,13 +660,12 @@
                     await signInAnonymously(auth);
                 }
                 
-                // 2. Establecer el ID de usuario y el listener de Firestore
+                // 2. Establecer el ID de usuario
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         userId = user.uid;
                         userIdDisplay.textContent = userId;
-                        // Iniciar la escucha de resultados solo después de la autenticación
-                        setupRealtimeResultsListener();
+                        // *** NOTA IMPORTANTE: LA LLAMADA A setupRealtimeResultsListener() FUE ELIMINADA AQUÍ. ***
                     } else {
                         userId = crypto.randomUUID();
                         userIdDisplay.textContent = 'Anónimo (' + userId.substring(0, 8) + '...)';
@@ -709,13 +675,11 @@
             } catch (error) {
                 console.error("Error al inicializar o autenticar Firebase:", error);
                 userIdDisplay.textContent = 'Error: Revisar config de Firebase.';
-                // Si la configuración mock falla, se muestra un error claro.
                 if (firebaseConfig.apiKey.includes('MOCK')) {
                      alert("ADVERTENCIA: Parece que está ejecutando esto fuera del Canvas. Reemplace los valores 'MOCK_...' en el script con su configuración real de Firebase para que la base de datos funcione.");
                 }
             }
         } else {
-            // Caso de que esté usando las credenciales MOCK en GitHub y no queremos que intente inicializar.
             console.warn("ADVERTENCIA: Firebase no se inicializará. Reemplace las credenciales 'MOCK' para usar Firestore.");
             userIdDisplay.textContent = 'MOCK/GitHub (DB Desactivada)';
         }
@@ -726,7 +690,7 @@
         // Impedir el envío si estamos usando credenciales mock
         if (!db || firebaseConfig.apiKey.includes('MOCK')) {
             console.error("Firestore no está inicializado o se está utilizando una configuración de prueba (MOCK). Los datos no se guardarán.");
-            errorMessage.querySelector('p').textContent = "ERROR: La base de datos no está activa (use la configuración REAL de Firebase en GitHub).";
+            errorMessage.querySelector('p').textContent = "ERROR: La base de datos no está activa (use la configuración REAL de Firebase en GitHub y configure las reglas).";
             errorMessage.classList.remove('hidden');
             return;
         }
@@ -755,48 +719,7 @@
         }
     }
     
-    // --- FUNCIÓN PARA ESCUCHAR Y MOSTRAR RESULTADOS EN TIEMPO REAL ---
-    function setupRealtimeResultsListener() {
-        if (!db) return;
-        
-        loadingResults.classList.remove('hidden');
-        resultsBody.innerHTML = ''; // Limpiar resultados anteriores
-        
-        const surveysQuery = query(collection(db, COLLECTION_PATH));
-
-        onSnapshot(surveysQuery, (snapshot) => {
-            loadingResults.classList.add('hidden');
-            
-            if (snapshot.empty) {
-                resultsBody.innerHTML = '<tr><td colspan="7" class="text-center py-4" style="color: var(--color-acento-hover);">Aún no hay respuestas. ¡Envía la primera!</td></tr>';
-                return;
-            }
-
-            resultsBody.innerHTML = ''; // Limpiar la tabla antes de rellenar
-            
-            snapshot.docs.forEach(doc => {
-                const data = doc.data();
-                const factors = Array.isArray(data.factores_importantes) ? data.factores_importantes.join(', ') : data.factores_importantes || '-';
-                const comments = data.comentarios_adicionales || data.mejoras_texto || '-';
-
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td style="color: var(--color-acento); font-family: monospace; font-size: 0.75rem;">${doc.id.substring(0, 6)}...</td>
-                    <td>${data.edad || '-'}</td>
-                    <td>${data.tipo_jugador || '-'}</td>
-                    <td>${data.frecuencia_compra || '-'}</td>
-                    <td>${factors}</td>
-                    <td>${data.probabilidad_compra || '-'}</td>
-                    <td style="color: #999;">${comments.substring(0, 50)}${comments.length > 50 ? '...' : ''}</td>
-                `;
-                resultsBody.appendChild(row);
-            });
-        }, (error) => {
-            console.error("Error en la escucha de resultados en tiempo real:", error);
-            loadingResults.classList.add('hidden');
-            resultsBody.innerHTML = '<tr><td colspan="7" class="text-center py-4" style="color: var(--color-error);">Error al cargar los datos.</td></tr>';
-        });
-    }
+    // *** FUNCIÓN setupRealtimeResultsListener() FUE ELIMINADA COMPLETAMENTE PARA GARANTIZAR LA PRIVACIDAD. ***
 
     // --- LÓGICA DEL FORMULARIO Y LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
