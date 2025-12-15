@@ -9,9 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* -------------------------------------------------------------------
-           VARIABLES CSS
-           ------------------------------------------------------------------- */
+        /* [ ... Tu CSS se mantiene aquí ... ] */
         :root {
             --color-fondo-principal: #1f2833; 
             --color-header-footer: #0b0c10; 
@@ -23,10 +21,7 @@
             --color-card: #2a3a4f; 
             --color-input-bg: #1f2833; 
         }
-
-        /* -------------------------------------------------------------------
-           ESTILOS GENERALES Y ESTRUCTURA
-           ------------------------------------------------------------------- */
+        /* [ ... Resto del CSS para estilos y layout ... ] */
         body {
             background-color: var(--color-fondo-principal);
             font-family: var(--font-stack);
@@ -39,14 +34,10 @@
             justify-content: center;
             align-items: flex-start;
         }
-
-        /* Contenedor principal */
         .container {
             width: 100%;
             max-width: 800px;
         }
-
-        /* Estilo de la tarjeta/sección principal */
         .card {
             background-color: var(--color-card);
             border: 1px solid var(--color-acento-hover);
@@ -56,46 +47,29 @@
         .card:hover {
             box-shadow: 0 0 25px rgba(102, 252, 241, 0.3);
         }
-
-        /* Títulos de sección */
         .section-title {
             color: var(--color-acento);
             text-shadow: 0 0 5px rgba(102, 252, 241, 0.5);
         }
-
-        /* -------------------------------------------------------------------
-           BOTÓN PRINCIPAL
-           ------------------------------------------------------------------- */
         .submit-btn {
             display: inline-block;
             text-decoration: none;
-            
             background-color: var(--color-card); 
             color: var(--color-acento);                   
             border: 2px solid var(--color-acento);        
-
             padding: 12px 26px;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
-
-        /* Estilos Hover */
         .submit-btn:hover {
             background-color: var(--color-acento);       
             color: var(--color-header-footer);           
-            
             transform: translateY(-2px);
             box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); 
         }
-        
-        /* -------------------------------------------------------------------
-           ESTILOS DE INPUTS
-           ------------------------------------------------------------------- */
-        
         input[type="text"], textarea {
             background-color: var(--color-input-bg) !important;
             color: var(--color-texto-principal) !important;
@@ -106,7 +80,6 @@
             border-color: var(--color-acento) !important;
             box-shadow: 0 0 5px rgba(102, 252, 241, 0.7);
         }
-
         .input-option {
             background-color: var(--color-input-bg);
             transition: background-color 0.2s;
@@ -114,7 +87,6 @@
         .input-option:hover {
             background-color: #3b4e66;
         }
-
         input[type="radio"], input[type="checkbox"] {
             appearance: none;
             width: 1.25rem;
@@ -126,13 +98,11 @@
             position: relative;
             transition: all 0.2s ease;
         }
-        
         input[type="radio"]:checked, input[type="checkbox"]:checked {
             border-color: var(--color-acento);
             background-color: var(--color-acento);
             box-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
         }
-        
         input[type="radio"]::after {
             content: '';
             position: absolute;
@@ -148,7 +118,6 @@
         input[type="radio"]:checked::after {
             transform: translate(-50%, -50%) scale(1);
         }
-        
         input[type="checkbox"]::after {
             content: '✓';
             position: absolute;
@@ -163,9 +132,7 @@
         input[type="checkbox"]:checked::after {
             transform: translate(-50%, -50%) scale(1);
         }
-
         #results-section { display: none !important; }
-
     </style>
     </head>
 <body>
@@ -184,7 +151,6 @@
 
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🧑‍💻 1. Sobre ti</h2>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">Edad:</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -210,7 +176,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué tipo de jugador eres?</label>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -236,7 +201,6 @@
 
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🛒 2. Hábitos de compra</h2>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Con qué frecuencia compras productos gaming?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -258,7 +222,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Dónde sueles comprarlos?</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -288,7 +251,6 @@
 
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">💸 3. Preferencias de productos</h2>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué productos gaming te interesan más? (puedes marcar varios)</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -322,7 +284,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Cuánto sueles gastar en productos gaming?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -348,7 +309,6 @@
 
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">⭐ 4. Factores importantes al comprar online</h2>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué valoras más al comprar productos gaming? <span style="color:var(--color-acento-hover);" class="text-sm">(Elige 3 máximo)</span></label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="important_factors_group">
@@ -387,7 +347,6 @@
 
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🚚 5. Envíos y pagos</h2>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué método de pago prefieres?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -409,7 +368,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué tiempo de envío consideras aceptable?</label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -435,7 +393,6 @@
 
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">🧩 6. Opiniones sobre la tienda</h2>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Comprarías en una tienda gaming de bajo costo gestionada por un equipo joven?</label>
                 <div class="grid grid-cols-3 gap-4">
@@ -457,7 +414,6 @@
                     <input type="text" id="depende_text" name="depende_text" placeholder="Escribe aquí..." class="w-full border rounded-lg p-2 focus:outline-none">
                 </div>
             </div>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué te haría confiar más en esta tienda?</label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -487,7 +443,6 @@
                     </div>
                 </div>
             </div>
-
             <div>
                 <label for="mejoras_texto" class="block text-lg font-semibold mb-3">¿Qué mejorarías o qué te gustaría que esta tienda ofreciera?</label>
                 <textarea id="mejoras_texto" name="mejoras_texto" rows="3" placeholder="Escribe tus ideas y sugerencias aquí..." class="w-full border rounded-lg p-3 focus:outline-none"></textarea>
@@ -496,7 +451,6 @@
 
         <div class="card p-6 sm:p-8 rounded-xl space-y-6">
             <h2 class="section-title text-2xl font-bold mb-4">❤️ 7. Valoración final</h2>
-
             <div>
                 <label class="block text-lg font-semibold mb-3">¿Qué tan probable es que compraras en nuestra tienda?</label>
                 <div class="flex justify-between items-center p-4 rounded-lg input-option">
@@ -526,7 +480,6 @@
                     <span class="text-sm text-gray-400">5 (Muy probable)</span>
                 </div>
             </div>
-
             <div>
                 <label for="comments" class="block text-lg font-semibold mb-3">Comentarios adicionales:</label>
                 <textarea id="comments" name="comentarios_adicionales" rows="3" placeholder="Si tienes algún comentario extra, déjalo aquí..." class="w-full border rounded-lg p-3 focus:outline-none"></textarea>
@@ -547,43 +500,33 @@
             </a>
         </div>
         <div id="error-message" class="card p-4 rounded-xl text-center hidden" style="background-color: #4a1e1e; border-color: #7b2424;">
-            <p class="font-semibold" style="color: var(--color-error);">Error: Por favor, revisa todos los campos obligatorios y asegúrate de elegir un máximo de 3 factores importantes.</p>
+            <p class="font-semibold" style="color: var(--color-error);">ERROR: Fallo al conectar con la base de datos. Verifique la clave API y las reglas de Firebase (debe permitir `create: if true`).</p>
         </div>
 
     </form>
 </div>
 
 <script type="module">
-    // -------------------------------------------------------------------
-    // PASO 1: IMPORTAR MÓDULOS NECESARIOS (App, Auth, Firestore)
-    // Se añade la versión 12.6.0 que usas, pero con las rutas correctas para AUTH y FIRESTORE.
-    // -------------------------------------------------------------------
+    // --- IMPORTACIONES MÍNIMAS (Solo App y Firestore) ---
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-
-    // -------------------------------------------------------------------
-    // PASO 2: CONFIGURACIÓN Y DECLARACIÓN DE VARIABLES
-    // -------------------------------------------------------------------
+    // --- CONFIGURACIÓN DE FIREBASE (DIRECTA) ---
     const firebaseConfig = {
-        apiKey: "AIzaSyD6chWFR-jaoXWBvVuFAWZzIPFcPHw6-a8",
+        apiKey: "AIzaSyD6chWFR-jaoXWBvVuFAWZzIPFcPHw6-a8", 
         authDomain: "encuesta-5e82d.firebaseapp.com",
-        projectId: "encuesta-5e82d",
+        projectId: "encuesta-5e82d", 
         storageBucket: "encuesta-5e82d.firebasestorage.app",
         messagingSenderId: "423729903918",
         appId: "1:423729903918:web:c65f4e0ec6866e6dc562bf",
-        measurementId: "G-H9MEB1SC6V"
+        // measurementId ya no es necesario aquí
     };
 
-    // Variables de servicio
     let app;
-    let auth;
     let db;
-    let userId = null;
+    let userId = "Anonimo_" + Math.random().toString(36).substring(2, 8); // Generamos un ID localmente
     
-    // RUTA SIMPLIFICADA DE LA COLECCIÓN
+    // RUTA DE LA COLECCIÓN
     const COLLECTION_PATH = `surveys/gaming_data`; 
 
     // Referencias del DOM
@@ -596,46 +539,25 @@
     const dependeInput = document.getElementById('depende_input');
 
 
-    // -------------------------------------------------------------------
-    // PASO 3: FUNCIÓN DE INICIALIZACIÓN (UNIFICADA Y CORREGIDA)
-    // -------------------------------------------------------------------
+    // --- FUNCIÓN DE INICIALIZACIÓN MÍNIMA ---
     async function initFirebase() {
         try {
-            // 1. Inicializar la App y Analytics
             app = initializeApp(firebaseConfig);
-            getAnalytics(app); 
-            
-            // 2. Obtener instancias de servicios de Auth y Firestore
-            auth = getAuth(app);
             db = getFirestore(app);
-
-            // 3. Iniciar sesión anónimamente
-            await signInAnonymously(auth);
-            
-            // 4. Establecer el ID de usuario
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    userId = user.uid;
-                } else {
-                    userId = crypto.randomUUID(); 
-                }
-            });
-
+            // La conexión fue exitosa
             errorMessage.classList.add('hidden');
 
         } catch (error) {
-            console.error("Error al inicializar o autenticar Firebase:", error);
-            errorMessage.querySelector('p').textContent = `ERROR: Fallo al iniciar Firebase. Verifique la clave API, las importaciones (SDK) y la configuración de Auth en la consola. Código: ${error.code || 'Desconocido'}`;
+            console.error("Error al inicializar Firebase (MÍNIMO):", error);
+            errorMessage.querySelector('p').textContent = `ERROR: Fallo al conectar la aplicación. Verifique la clave API y la existencia de la DB. Código: ${error.code || 'Desconocido'}`;
             errorMessage.classList.remove('hidden');
         }
     }
 
-    // -------------------------------------------------------------------
-    // PASO 4: FUNCIÓN PARA ENVIAR DATOS A FIRESTORE
-    // -------------------------------------------------------------------
+    // --- FUNCIÓN PARA ENVIAR DATOS A FIRESTORE ---
     async function submitSurvey(surveyData) {
         if (!db) {
-            errorMessage.querySelector('p').textContent = "Error: La base de datos no está activa o falló al conectarse. Recarga la página.";
+            errorMessage.querySelector('p').textContent = "Error: El servicio de Firestore no está inicializado. Recargue la página.";
             errorMessage.classList.remove('hidden');
             return;
         }
@@ -643,7 +565,7 @@
         const dataToSave = {
             ...surveyData,
             timestamp: new Date().toISOString(),
-            userId: userId || 'anonymous',
+            userId: userId, 
             factores_importantes: Array.isArray(surveyData.factores_importantes) ? surveyData.factores_importantes : [surveyData.factores_importantes].filter(Boolean)
         };
 
@@ -657,18 +579,16 @@
 
         } catch (error) {
             console.error("Error al guardar la encuesta en Firestore:", error);
-            errorMessage.querySelector('p').textContent = `Error al guardar: ${error.message}. ¡Verifica que las reglas permitan 'allow create' para usuarios anónimos!`;
+            errorMessage.querySelector('p').textContent = `Error al guardar: ${error.message}. ¡Verifique las Reglas de Seguridad (deben ser 'allow create: if true;')!`;
             errorMessage.classList.remove('hidden');
         }
     }
     
-    // -------------------------------------------------------------------
-    // PASO 5: LÓGICA DEL FORMULARIO Y LISTENERS
-    // -------------------------------------------------------------------
+    // --- LÓGICA DEL FORMULARIO Y LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
-        initFirebase(); // Inicia Firebase al cargar la página
+        initFirebase(); // Inicia la conexión mínima
 
-        // Validación de Máximo 3 Opciones (Factores Importantes)
+        // [ ... Validaciones de formulario ... ]
         factorCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
                 const checkedCount = Array.from(factorCheckboxes).filter(c => c.checked).length;
@@ -681,7 +601,6 @@
             });
         });
 
-        // Lógica de 'Depende' (Mostrar/Ocultar campo de texto)
         dependeRadios.forEach(radio => {
             radio.addEventListener('change', () => {
                 if (radio.value === 'Depende' && radio.checked) {
@@ -708,7 +627,6 @@
 
             const formData = new FormData(form);
             const data = {};
-            // Recopilar datos y manejar arrays para checkboxes
             for (const [key, value] of formData.entries()) {
                 if (key === 'factores_importantes' || key === 'productos_interes' || key === 'lugar_compra' || key === 'factores_confianza') {
                     if (data[key]) {
