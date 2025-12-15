@@ -556,10 +556,10 @@
 <script type="module">
     // -------------------------------------------------------------------
     // PASO 1: IMPORTAR MÓDULOS NECESARIOS (App, Auth, Firestore)
+    // Se añade la versión 12.6.0 que usas, pero con las rutas correctas para AUTH y FIRESTORE.
     // -------------------------------------------------------------------
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-    // IMPORTACIONES DE AUTH y FIRESTORE (¡ESTAS FALTABAN O ERAN INCORRECTAS!)
     import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
@@ -577,7 +577,7 @@
         measurementId: "G-H9MEB1SC6V"
     };
 
-    // Variables de servicio deben ser declaradas en el ámbito global del módulo
+    // Variables de servicio
     let app;
     let auth;
     let db;
@@ -597,22 +597,22 @@
 
 
     // -------------------------------------------------------------------
-    // PASO 3: FUNCIÓN DE INICIALIZACIÓN (UNIFICADA)
+    // PASO 3: FUNCIÓN DE INICIALIZACIÓN (UNIFICADA Y CORREGIDA)
     // -------------------------------------------------------------------
     async function initFirebase() {
         try {
-            // Inicialización de la App y Analytics
+            // 1. Inicializar la App y Analytics
             app = initializeApp(firebaseConfig);
             getAnalytics(app); 
             
-            // Obtener instancias de servicios
+            // 2. Obtener instancias de servicios de Auth y Firestore
             auth = getAuth(app);
             db = getFirestore(app);
 
-            // Iniciar sesión anónimamente
+            // 3. Iniciar sesión anónimamente
             await signInAnonymously(auth);
             
-            // Establecer el ID de usuario una vez que la autenticación anónima se complete
+            // 4. Establecer el ID de usuario
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     userId = user.uid;
@@ -621,13 +621,11 @@
                 }
             });
 
-            // Ocultar mensaje de error si la conexión fue exitosa
             errorMessage.classList.add('hidden');
 
         } catch (error) {
             console.error("Error al inicializar o autenticar Firebase:", error);
-            // Mostrar error si la conexión de la app falla
-            errorMessage.querySelector('p').textContent = `ERROR: Fallo al iniciar Firebase. Verifique la clave API, las importaciones (SDK) y la configuración de Auth. Código: ${error.code || 'Desconocido'}`;
+            errorMessage.querySelector('p').textContent = `ERROR: Fallo al iniciar Firebase. Verifique la clave API, las importaciones (SDK) y la configuración de Auth en la consola. Código: ${error.code || 'Desconocido'}`;
             errorMessage.classList.remove('hidden');
         }
     }
@@ -650,10 +648,8 @@
         };
 
         try {
-            // Añadir documento a surveys/gaming_data
             await addDoc(collection(db, COLLECTION_PATH), dataToSave);
             
-            // Éxito
             form.reset(); 
             form.classList.add('hidden');
             thankYouMessage.classList.remove('hidden');
@@ -667,7 +663,7 @@
     }
     
     // -------------------------------------------------------------------
-    // PASO 5: LÓGICA DEL FORMULARIO Y LISTENERS (Se mantiene intacta)
+    // PASO 5: LÓGICA DEL FORMULARIO Y LISTENERS
     // -------------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         initFirebase(); // Inicia Firebase al cargar la página
