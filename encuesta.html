@@ -554,29 +554,34 @@
 </div>
 
 <script type="module">
-      // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+    // -------------------------------------------------------------------
+    // PASO 1: IMPORTAR MÓDULOS NECESARIOS (App, Auth, Firestore)
+    // -------------------------------------------------------------------
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+    // IMPORTACIONES DE AUTH y FIRESTORE (¡ESTAS FALTABAN O ERAN INCORRECTAS!)
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyD6chWFR-jaoXWBvVuFAWZzIPFcPHw6-a8",
-            authDomain: "encuesta-5e82d.firebaseapp.com",
-            projectId: "encuesta-5e82d",
-            storageBucket: "encuesta-5e82d.firebasestorage.app",
-            messagingSenderId: "423729903918",
-            appId: "1:423729903918:web:c65f4e0ec6866e6dc562bf",
-            measurementId: "G-H9MEB1SC6V"
-        };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+    // -------------------------------------------------------------------
+    // PASO 2: CONFIGURACIÓN Y DECLARACIÓN DE VARIABLES
+    // -------------------------------------------------------------------
+    const firebaseConfig = {
+        apiKey: "AIzaSyD6chWFR-jaoXWBvVuFAWZzIPFcPHw6-a8",
+        authDomain: "encuesta-5e82d.firebaseapp.com",
+        projectId: "encuesta-5e82d",
+        storageBucket: "encuesta-5e82d.firebasestorage.app",
+        messagingSenderId: "423729903918",
+        appId: "1:423729903918:web:c65f4e0ec6866e6dc562bf",
+        measurementId: "G-H9MEB1SC6V"
+    };
 
-    
+    // Variables de servicio deben ser declaradas en el ámbito global del módulo
+    let app;
+    let auth;
+    let db;
+    let userId = null;
     
     // RUTA SIMPLIFICADA DE LA COLECCIÓN
     const COLLECTION_PATH = `surveys/gaming_data`; 
@@ -591,37 +596,48 @@
     const dependeInput = document.getElementById('depende_input');
 
 
-    // --- FUNCIÓN DE INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN ---
+    // -------------------------------------------------------------------
+    // PASO 3: FUNCIÓN DE INICIALIZACIÓN (UNIFICADA)
+    // -------------------------------------------------------------------
     async function initFirebase() {
         try {
-            const app = initializeApp(firebaseConfig);
+            // Inicialización de la App y Analytics
+            app = initializeApp(firebaseConfig);
+            getAnalytics(app); 
+            
+            // Obtener instancias de servicios
             auth = getAuth(app);
             db = getFirestore(app);
 
-            // Iniciar sesión anónimamente para obtener un UID de usuario
+            // Iniciar sesión anónimamente
             await signInAnonymously(auth);
             
+            // Establecer el ID de usuario una vez que la autenticación anónima se complete
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     userId = user.uid;
                 } else {
-                    userId = crypto.randomUUID(); // Fallback si la autenticación falla
+                    userId = crypto.randomUUID(); 
                 }
             });
 
+            // Ocultar mensaje de error si la conexión fue exitosa
+            errorMessage.classList.add('hidden');
+
         } catch (error) {
             console.error("Error al inicializar o autenticar Firebase:", error);
-            // Mostrar un error claro si la conexión falla
-            errorMessage.querySelector('p').textContent = `ERROR: No se pudo conectar a Firebase. Asegúrate de que las reglas de seguridad estén bien configuradas. Código: ${error.code}`;
+            // Mostrar error si la conexión de la app falla
+            errorMessage.querySelector('p').textContent = `ERROR: Fallo al iniciar Firebase. Verifique la clave API, las importaciones (SDK) y la configuración de Auth. Código: ${error.code || 'Desconocido'}`;
             errorMessage.classList.remove('hidden');
         }
     }
 
-    // --- FUNCIÓN PARA ENVIAR DATOS A FIRESTORE ---
+    // -------------------------------------------------------------------
+    // PASO 4: FUNCIÓN PARA ENVIAR DATOS A FIRESTORE
+    // -------------------------------------------------------------------
     async function submitSurvey(surveyData) {
-        // Evita el envío si la base de datos no está inicializada correctamente
         if (!db) {
-            errorMessage.querySelector('p').textContent = "Error: La base de datos no está activa o falló al conectarse.";
+            errorMessage.querySelector('p').textContent = "Error: La base de datos no está activa o falló al conectarse. Recarga la página.";
             errorMessage.classList.remove('hidden');
             return;
         }
@@ -630,13 +646,11 @@
             ...surveyData,
             timestamp: new Date().toISOString(),
             userId: userId || 'anonymous',
-            // Asegura que los checkboxes se guarden como array (si se marcó más de uno)
             factores_importantes: Array.isArray(surveyData.factores_importantes) ? surveyData.factores_importantes : [surveyData.factores_importantes].filter(Boolean)
         };
 
         try {
-            // Añade un nuevo documento a la colección
-            // El docId será generado automáticamente por Firestore
+            // Añadir documento a surveys/gaming_data
             await addDoc(collection(db, COLLECTION_PATH), dataToSave);
             
             // Éxito
@@ -647,12 +661,14 @@
 
         } catch (error) {
             console.error("Error al guardar la encuesta en Firestore:", error);
-            errorMessage.querySelector('p').textContent = `Error al guardar: ${error.message}. Verifica las reglas de 'create'.`;
+            errorMessage.querySelector('p').textContent = `Error al guardar: ${error.message}. ¡Verifica que las reglas permitan 'allow create' para usuarios anónimos!`;
             errorMessage.classList.remove('hidden');
         }
     }
     
-    // --- LÓGICA DEL FORMULARIO Y LISTENERS ---
+    // -------------------------------------------------------------------
+    // PASO 5: LÓGICA DEL FORMULARIO Y LISTENERS (Se mantiene intacta)
+    // -------------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
         initFirebase(); // Inicia Firebase al cargar la página
 
