@@ -164,7 +164,6 @@
             transform: translate(-50%, -50%) scale(1);
         }
 
-        /* La sección de resultados está oculta, estos estilos son irrelevantes para el usuario final */
         #results-section { display: none !important; }
 
     </style>
@@ -552,17 +551,16 @@
         </div>
 
     </form>
-
-    </div>
+</div>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // --- CONFIGURACIÓN DE FIREBASE (¡CON TUS CLAVES REALES!) ---
-    // ESTOS VALORES SE REEMPLAZARON CON LOS DE TU CAPTURA DE PANTALLA
-    const mockFirebaseConfig = {
+    // --- CONFIGURACIÓN DE FIREBASE (DIRECTA Y ÚNICA) ---
+    // Claves reales obtenidas de tu consola de Firebase
+    const firebaseConfig = {
         apiKey: "AIzaSyD6chWFR-jaoXMVBuVFAwZZIPFCPhw6-a8", 
         authDomain: "encuesta-5e82d.firebaseapp.com",
         projectId: "encuesta-5e82d", 
@@ -571,18 +569,13 @@
         appId: "1:423729903918:web:c65f4e0ec6866e6dc562bf"
     };
 
-    // Esto se mantiene para usar las credenciales de arriba en GitHub Pages.
-    const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : mockFirebaseConfig;
-    
-    // Se usa un ID genérico para GitHub/entornos no-Canvas.
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'github-static-app';
-    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
     let db;
     let auth;
     let userId = null;
-    const COLLECTION_PATH = `artifacts/${appId}/public/data/gaming_surveys`;
     
+    // RUTA SIMPLIFICADA DE LA COLECCIÓN
+    const COLLECTION_PATH = `surveys/gaming_data`; 
+
     // Referencias del DOM
     const form = document.getElementById('gaming-survey');
     const thankYouMessage = document.getElementById('thank-you-message');
@@ -591,55 +584,39 @@
     const factorError = document.getElementById('factor_error');
     const dependeRadios = document.querySelectorAll('input[name="comprarias_tienda"]');
     const dependeInput = document.getElementById('depende_input');
-    // Se deja userIdDisplay, aunque no es crítico, para mostrar si la conexión va bien
-    const userIdDisplay = document.getElementById('current-user-id');
 
 
     // --- FUNCIÓN DE INICIALIZACIÓN DE FIREBASE Y AUTENTICACIÓN ---
     async function initFirebase() {
-        // La condición de 'MOCK' ahora falla si las credenciales son reales
-        if (!firebaseConfig.apiKey.includes('MOCK')) {
-            try {
-                const app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
+        try {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
 
-                // Manejo de la autenticación anónima
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
+            // Iniciar sesión anónimamente para obtener un UID de usuario
+            await signInAnonymously(auth);
+            
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    userId = user.uid;
                 } else {
-                    await signInAnonymously(auth);
+                    userId = crypto.randomUUID(); // Fallback si la autenticación falla
                 }
-                
-                // Establecer el ID de usuario
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        // El elemento para mostrar el ID está oculto, pero mantenemos la variable
-                    } else {
-                        userId = crypto.randomUUID();
-                    }
-                });
+            });
 
-            } catch (error) {
-                console.error("Error al inicializar o autenticar Firebase:", error);
-                // Si falla, al menos el usuario puede seguir usando el formulario
-                errorMessage.querySelector('p').textContent = `Error de conexión con Firebase. La encuesta no se guardará. (${error.code})`;
-                errorMessage.classList.remove('hidden');
-            }
-        } else {
-             // Esto solo ocurriría si no se reemplazaron las claves 'MOCK' (que ya hemos hecho).
-            console.warn("ADVERTENCIA: Usando configuración MOCK. Los datos no se guardarán.");
-            errorMessage.querySelector('p').textContent = "ERROR: La base de datos no está activa (Usando claves MOCK).";
+        } catch (error) {
+            console.error("Error al inicializar o autenticar Firebase:", error);
+            // Mostrar un error claro si la conexión falla
+            errorMessage.querySelector('p').textContent = `ERROR: No se pudo conectar a Firebase. Asegúrate de que las reglas de seguridad estén bien configuradas. Código: ${error.code}`;
             errorMessage.classList.remove('hidden');
         }
     }
 
     // --- FUNCIÓN PARA ENVIAR DATOS A FIRESTORE ---
     async function submitSurvey(surveyData) {
-        // Evita el envío si la base de datos falló al inicializar
+        // Evita el envío si la base de datos no está inicializada correctamente
         if (!db) {
-            errorMessage.querySelector('p').textContent = "Error: No se pudo conectar a la base de datos. Inténtalo de nuevo más tarde.";
+            errorMessage.querySelector('p').textContent = "Error: La base de datos no está activa o falló al conectarse.";
             errorMessage.classList.remove('hidden');
             return;
         }
@@ -647,13 +624,17 @@
         const dataToSave = {
             ...surveyData,
             timestamp: new Date().toISOString(),
-            userId: userId || 'anonymous', // Usa el UID real si está disponible
+            userId: userId || 'anonymous',
+            // Asegura que los checkboxes se guarden como array (si se marcó más de uno)
             factores_importantes: Array.isArray(surveyData.factores_importantes) ? surveyData.factores_importantes : [surveyData.factores_importantes].filter(Boolean)
         };
 
         try {
+            // Añade un nuevo documento a la colección
+            // El docId será generado automáticamente por Firestore
             await addDoc(collection(db, COLLECTION_PATH), dataToSave);
             
+            // Éxito
             form.reset(); 
             form.classList.add('hidden');
             thankYouMessage.classList.remove('hidden');
@@ -661,14 +642,14 @@
 
         } catch (error) {
             console.error("Error al guardar la encuesta en Firestore:", error);
-            errorMessage.querySelector('p').textContent = `Error al guardar: ${error.message}`;
+            errorMessage.querySelector('p').textContent = `Error al guardar: ${error.message}. Verifica las reglas de 'create'.`;
             errorMessage.classList.remove('hidden');
         }
     }
     
     // --- LÓGICA DEL FORMULARIO Y LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
-        initFirebase(); // Inicia Firebase
+        initFirebase(); // Inicia Firebase al cargar la página
 
         // Validación de Máximo 3 Opciones (Factores Importantes)
         factorCheckboxes.forEach(checkbox => {
