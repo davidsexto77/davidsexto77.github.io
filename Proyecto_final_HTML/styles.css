@@ -10,7 +10,7 @@
     align-items: center;
     min-height: 100vh;
 }
-/* 2. El contenedor principal */
+
 .container {
     max-width: 1000px;
     width: 100%;
@@ -18,15 +18,15 @@
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    /* text-align: center; */
+    
 }
-/* 3. NAVEGACIÓN UNIFICADA EN MORADO */
+
 nav {
     margin-bottom: 40px;
     border-bottom: 1px solid #333;
     padding-bottom: 20px;
 }
-/* Título del menú en morado suave */
+
 nav h3 {
     color: #bb86fc; 
     font-size: 1rem;
@@ -43,37 +43,36 @@ nav ul {
     flex-wrap: wrap;
     gap: 15px;
 }
-/* Formato de los elementos de la lista */
+
 nav li h3 {
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 600;
 }
-/* Estilo base para los enlaces */
+
 nav a {
     text-decoration: none;
-    color: #b0b0b0; /* Gris para estado inactivo */
+    color: #b0b0b0; 
     display: inline-block;
     padding: 8px 20px;
     border-radius: 30px;
     border: 1px solid #333;
     transition: all 0.3s ease;
 }
-/* Herencia de color para h3 dentro de enlaces */
+
 nav a h3 {
     color: inherit; 
     font-size: inherit;
 }
-/* EFECTO HOVER EN MORADO */
+
 nav a:hover, 
 nav a:hover h3 {
     color: #bb86fc;             
     border-color: #bb86fc;
-    background-color: rgba(187, 134, 252, 0.08); /* Fondo lila muy tenue */
-    box-shadow: 0 0 15px rgba(187, 134, 252, 0.3); /* Resplandor morado */
+    background-color: rgba(187, 134, 252, 0.08);
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.3);
     transform: translateY(-3px);
 }
-/* 4. Título principal y contenido */
 h1 {
     color: #bb86fc; 
     margin-top: 20px;
@@ -105,10 +104,10 @@ p {
     margin-bottom: 25px;
     color: #b0b0b0;
 }
-/* BOTÓN PRINCIPAL EN MORADO */
+
 button {
     background-color: #bb86fc;
-    color: #121212; /* Texto oscuro para mejor lectura sobre morado claro */
+    color: #121212;
     border: none;
     padding: 12px 28px;
     border-radius: 8px;
@@ -117,7 +116,7 @@ button {
     transition: all 0.3s;
 }
 button:hover {
-    background-color: #9965f4; /* Un morado un poco más intenso */
+    background-color: #9965f4;
     box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
-    transform: scale(1.05); /* Ligero aumento de tamaño */
+    transform: scale(1.05);
 } 
