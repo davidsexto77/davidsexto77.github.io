@@ -6,6 +6,50 @@ body {
     margin: 0;
     padding: 0;
 }
+/* 3. NAVEGACIÓN PERSONALIZADA */
+nav {
+    margin-bottom: 40px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 20px;
+}
+nav h3 {
+    color: #b0b0b0;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Para que en móviles se ajusten */
+    gap: 15px;
+}
+/* Quitamos los márgenes de los h3 que están dentro de la lista */
+nav li h3 {
+    margin: 0;
+    font-size: inherit;
+}
+nav a {
+    text-decoration: none;
+    color: #e0e0e0;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 30px;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+/* Efecto al pasar el ratón */
+nav a:hover {
+    color: #bb86fc;
+    border-color: #bb86fc;
+    background-color: rgba(187, 134, 252, 0.1);
+    box-shadow: 0 0 15px rgba(187, 134, 252, 0.4);
+    transform: translateY(-2px); /* Pequeño salto hacia arriba */
+}
 hr {
     border: 0;        
     height: 1px;          
