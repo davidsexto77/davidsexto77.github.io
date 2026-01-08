@@ -1,0 +1,40 @@
+/* 1. Configuración general */
+body {
+    background-color: #121212; /* Gris casi negro */
+    color: #e0e0e0;            /* Blanco suave para no lastimar los ojos */
+    font-family: Arial, sans-serif;
+    line-height: 1.6;          /* Espaciado entre líneas para leer mejor */
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. El contenedor principal para centrar el contenido */
+.container {
+    max-width: 800px;
+    margin: 50px auto;         /* Centra el contenido y da espacio arriba */
+    padding: 20px;
+    background-color: #1e1e1e; /* Un gris un poco más claro para resaltar */
+    border-radius: 8px;        /* Bordes redondeados */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra sutil */
+}
+
+/* 3. Títulos y enlaces */
+h1 {
+    color: #bb86fc;            /* Color púrpura neón (clásico de temas oscuros) */
+    text-align: center;
+}
+
+/* 4. Botones básicos */
+button {
+    background-color: #03dac6; /* Color turquesa */
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #018786; /* Un tono más oscuro al pasar el mouse */
+}
