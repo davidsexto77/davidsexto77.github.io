@@ -159,7 +159,7 @@ natsort($elementos);
     </ul>
     
     <a href="../" class="btn-acento" role="button">
-        Volver a la Página Principal
+        Volver a Inicio
     </a>
 </div>
 
