@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------
-   1. CONFIGURACIÓN Y VARIABLES
+   1. VARIABLES Y CONFIGURACIÓN BASE
    ------------------------------------------------------------------- */
 :root {
     --color-fondo: #1f2833;
@@ -10,8 +10,8 @@
     --color-error: #ff4d4d;
     --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --glow: 0 0 15px rgba(102, 252, 241, 0.4);
-    /* Ancho estándar para escritorio */
-    --ancho-boton: 320px; 
+    /* Tamaño idéntico para todos los botones */
+    --ancho-fijo: 320px; 
 }
 
 * {
@@ -27,7 +27,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    align-items: center; 
+    align-items: center; /* Centra horizontalmente todo el cuerpo */
 }
 
 /* -------------------------------------------------------------------
@@ -52,11 +52,11 @@ h1 {
 }
 
 main.container {
-    flex: 1; 
+    flex: 1; /* Empuja el footer siempre al final */
     display: flex;
     flex-direction: column;
-    align-items: center;    
-    justify-content: center;
+    align-items: center;    /* Centra los botones horizontalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
     width: 100%;
     max-width: 800px;
     padding: 40px 20px;
@@ -72,7 +72,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 15px; 
     width: 100%;
 }
 
@@ -83,9 +83,11 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    max-width: var(--ancho-boton);
-    height: 52px;
+    
+    /* El !important asegura que ningún otro estilo cambie el tamaño */
+    width: var(--ancho-fijo) !important; 
+    height: 52px;                  
+    
     border-radius: 8px;
     font-weight: 700;
     text-decoration: none;
@@ -98,7 +100,7 @@ nav {
     overflow: hidden;
 }
 
-/* Efecto de brillo */
+/* Efecto de brillo al pasar el mouse */
 .btn::after {
     content: "";
     position: absolute;
@@ -111,15 +113,27 @@ nav {
     transition: 0.5s;
 }
 
-.btn:hover::after { left: 150%; }
+.btn:hover::after {
+    left: 150%;
+}
 
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: var(--glow);
 }
 
-.btn-primary { background-color: var(--color-acento); color: var(--color-oscuro); border: none; }
-.btn-outline { background: transparent; color: var(--color-acento); border: 2px solid var(--color-acento); }
+/* Colores de botones */
+.btn-primary {
+    background-color: var(--color-acento);
+    color: var(--color-oscuro);
+    border: none;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-acento);
+    border: 2px solid var(--color-acento);
+}
 
 .btn-danger {
     background: transparent;
@@ -134,6 +148,11 @@ nav {
     100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
 }
 
+.btn-danger:hover {
+    background-color: var(--color-error);
+    color: white;
+}
+
 .enlaces {
     color: var(--color-acento);
     text-decoration: none;
@@ -143,49 +162,45 @@ nav {
     opacity: 0.8;
 }
 
-.enlaces:hover { opacity: 1; text-shadow: var(--glow); }
+.enlaces:hover {
+    opacity: 1;
+    text-shadow: var(--glow);
+}
 
 /* -------------------------------------------------------------------
-   4. FOOTER (CENTRADO TOTAL)
+   4. FOOTER (CENTRADO TOTAL CORREGIDO)
    ------------------------------------------------------------------- */
 footer {
     width: 100%;
     background-color: var(--color-oscuro);
     padding: 40px 20px;
     border-top: 1px solid rgba(102, 252, 241, 0.2);
+    
+    /* Configuración Flex para centrar el botón de reporte */
     display: flex;
     flex-direction: column;
     align-items: center; 
     text-align: center;
 }
 
-footer p { margin: 5px 0; }
+footer p {
+    margin: 5px 0;
+}
 
 /* -------------------------------------------------------------------
    5. DISEÑO RESPONSIVO (MÓVILES)
    ------------------------------------------------------------------- */
 @media (max-width: 480px) {
-    /* Ajustamos el tamaño para que no se corten en móviles */
     :root {
-        --ancho-boton: 90%; 
+        --ancho-fijo: 90%; /* En móviles ocupan casi todo el ancho */
     }
 
     h1 {
-        font-size: 1.6rem;
-        letter-spacing: 3px;
-    }
-
-    .btn {
-        height: 48px;
-        font-size: 0.75rem;
-    }
-
-    header {
-        padding: 25px 0;
+        font-size: 1.8rem;
     }
 }
 
-/* Animación de entrada */
+/* Animación de entrada suave */
 header, main, footer {
     animation: fadeIn 0.6s ease-out forwards;
 }
