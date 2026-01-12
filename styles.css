@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------
-   VARIABLES Y BASE
+   VARIABLES Y CONFIGURACIÓN
    ------------------------------------------------------------------- */
 :root {
     --color-fondo: #1f2833;
@@ -8,8 +8,13 @@
     --color-acento: #66fcf1;
     --color-acento-hover: #45a29e;
     --font-stack: 'Segoe UI', Roboto, sans-serif;
+    --glow: 0 0 15px rgba(102, 252, 241, 0.4);
+    --anim-velocidad: 0.4s;
 }
 
+/* -------------------------------------------------------------------
+   BASE Y ANIMACIÓN DE CARGA
+   ------------------------------------------------------------------- */
 body {
     background-color: var(--color-fondo);
     color: var(--color-texto);
@@ -19,95 +24,234 @@ body {
     flex-direction: column;
     min-height: 100vh;
     align-items: center;
+    overflow-x: hidden;
+}
+
+/* Animación de entrada para todo el contenido */
+header, h2, nav, footer {
+    animation: aparecer var(--anim-velocidad) ease-out forwards;
+    opacity: 0;
+}
+
+header { animation-delay: 0.1s; }
+h2     { animation-delay: 0.3s; }
+nav    { animation-delay: 0.5s; }
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* -------------------------------------------------------------------
-   HEADER
+   HEADER (Efecto Neón)
    ------------------------------------------------------------------- */
 header {
     background-color: var(--color-oscuro);
     width: 100%;
     padding: 30px 0;
     text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(102, 252, 241, 0.2);
 }
 
 h1 {
     color: var(--color-acento);
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 5px;
     margin: 0;
-    text-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+    text-shadow: var(--glow);
 }
 
 /* -------------------------------------------------------------------
-   CONTENIDO CENTRAL (NAV Y H2)
+   BOTONES Y ENLACES (La magia está aquí)
    ------------------------------------------------------------------- */
-h2 {
-    border-bottom: 2px solid var(--color-acento);
-    display: inline-block;
-    padding-bottom: 8px;
-    margin-bottom: 30px;
-}
-
 nav {
     width: 90%;
-    max-width: 500px;
-    background: rgba(11, 12, 16, 0.5);
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid rgba(102, 252, 241, 0.1);
+    max-width: 600px;
+    margin: 20px 0;
 }
 
+/* Transformamos los párrafos en contenedores de botones */
 nav p {
     margin: 15px 0;
-    font-size: 1.1rem;
-    color: var(--color-texto);
+    transition: transform 0.3s ease;
 }
 
-/* Estilo específico para tus enlaces */
+/* Convertimos el enlace en un botón estilizado */
 .enlaces {
+    display: inline-block;
     color: var(--color-acento);
     text-decoration: none;
-    font-weight: 600;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid transparent;
+    font-weight: 700;
+    padding: 12px 25px;
+    border: 2px solid var(--color-acento);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    background: transparent;
+    z-index: 1;
+}
+
+/* Efecto de relleno al pasar el ratón */
+.enlaces::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--color-acento);
+    transition: all 0.4s ease;
+    z-index: -1;
 }
 
 .enlaces:hover {
-    color: #ffffff;
-    background-color: rgba(102, 252, 241, 0.1);
-    border-bottom: 1px solid var(--color-acento);
-    padding-left: 15px; /* Efecto de desplazamiento */
+    color: var(--color-oscuro);
+    box-shadow: var(--glow);
+    transform: scale(1.05) translateX(10px);
+}
+
+.enlaces:hover::before {
+    left: 0;
+}
+
+/* Animación de "latido" suave para los botones principales */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(102, 252, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(102, 252, 241, 0); }
 }
 
 /* -------------------------------------------------------------------
-   FOOTER
+   FOOTER ANIMADO
    ------------------------------------------------------------------- */
 footer {
-    margin-top: auto; /* Empuja el footer al final */
+    margin-top: auto;
     width: 100%;
     background-color: var(--color-oscuro);
-    padding: 25px 0;
+    padding: 30px 0;
     text-align: center;
-    font-size: 0.9rem;
-    border-top: 1px solid var(--color-acento-hover);
+    border-top: 2px solid var(--color-acento-hover);
 }
 
 footer a {
     color: var(--color-acento);
     text-decoration: none;
-    transition: color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.3s;
 }
 
 footer a:hover {
-    color: #ffffff;
-    text-decoration: underline;
+    background: rgba(102, 252, 241, 0.1);
+    color: #fff;
 }
 
-footer strong {
+/* -------------------------------------------------------------------
+   ELEMENTOS DE DECORACIÓN (OPCIONAL)
+   ------------------------------------------------------------------- */
+h2 {
+    color: #fff;
+    margin-top: 40px;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--color-acento);
+    margin: 10px auto;
+    transition: width 0.5s ease;
+}
+
+h2:hover::after {
+    width: 150px;
+}
+/* -------------------------------------------------------------------
+   SISTEMA DE BOTONES (UI KIT)
+   ------------------------------------------------------------------- */
+
+/* Clase base para todos los botones */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    margin: 10px 5px;
+}
+
+/* BOTÓN PRIMARIO: Sólido con brillo (Glow) */
+.btn-primary {
+    background-color: var(--color-acento);
+    color: var(--color-oscuro);
+    box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(102, 252, 241, 0.6);
+    background-color: #fff;
+}
+
+/* BOTÓN SECUNDARIO: Estilo "Outline" (El que tienes ahora) */
+.btn-outline {
+    background: transparent;
     color: var(--color-acento);
+    border: 2px solid var(--color-acento);
+}
+
+.btn-outline:hover {
+    background: var(--color-acento);
+    color: var(--color-oscuro);
+    box-shadow: 0 0 20px rgba(102, 252, 241, 0.4);
+}
+
+/* ANIMACIÓN: El efecto de "Escaneo" que cruza el botón */
+.btn::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 20%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(30deg);
+    transition: none;
+}
+
+.btn:hover::after {
+    left: 120%;
+    transition: all 0.6s ease;
+}
+
+/* ANIMACIÓN: Pulso de atención para el botón de Reportar */
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+}
+
+.btn-danger {
+    background: transparent;
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+    animation: pulse-red 2s infinite;
+}
+
+.btn-danger:hover {
+    background: var(--color-error);
+    color: white;
 }
