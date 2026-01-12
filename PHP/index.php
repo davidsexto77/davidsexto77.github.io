@@ -1,19 +1,16 @@
 <?php
-// Buscar TODOS los archivos .php del directorio
-$archivos = glob("*.php"); 
+// 1. Cambiamos "*.php" por "*" para obtener tanto archivos como carpetas
+$elementos = glob("*"); 
 
-// 1. Identificar y excluir el archivo actual del listado
-// Usamos basename(__FILE__) para obtener "listado_actividades.php" de forma segura.
 $current_file = basename(__FILE__);
 
-$archivos = array_filter($archivos, function($archivo) use ($current_file) {
-    // Excluye el archivo actual y cualquier archivo que empiece con un punto (oculto)
-    return $archivo !== $current_file && $archivo[0] !== '.';
+// 2. Filtramos para excluir el propio index y archivos ocultos
+$elementos = array_filter($elementos, function($item) use ($current_file) {
+    return $item !== $current_file && $item[0] !== '.';
 });
 
-// 2. Ordenar de forma natural (alfabética y numérica).
-// natsort() ordena las cadenas reconociendo los números dentro de ellas (ej: a2 antes de a10).
-natsort($archivos);
+// 3. Ordenación natural
+natsort($elementos);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,22 +20,17 @@ natsort($archivos);
     <link rel="icon" type="imagen/png" href="https://davidsexto77.github.io/imagenes/icono.png">
     <title>Listado de actividades</title>
     <style>
-        /* -------------------------------------------------------------------
-           VARIABLES CSS (Copiadas del proyecto anterior)
-           ------------------------------------------------------------------- */
+        /* Mantenemos tus estilos originales */
         :root {
-            --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
-            --color-header-footer: #0b0c10; /* Negro profundo */
-            --color-texto-principal: #c5c6c7; /* Gris claro para texto */
-            --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
-            --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
-            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
-            --color-texto-hover-btn: #0d161a; /* Gris muy oscuro para el hover del botón */
+            --color-fondo-principal: #1f2833;
+            --color-header-footer: #0b0c10;
+            --color-texto-principal: #c5c6c7;
+            --color-acento: #66fcf1;
+            --color-acento-hover: #45a29e;
+            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --color-texto-hover-btn: #0d161a;
         }
 
-        /* -------------------------------------------------------------------
-           ESTILOS GENERALES Y ESTRUCTURA
-           ------------------------------------------------------------------- */
         body {
             background-color: var(--color-fondo-principal);
             font-family: var(--font-stack);
@@ -48,26 +40,22 @@ natsort($archivos);
             color: var(--color-texto-principal);
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Cambiado a columna para el footer */
+            flex-direction: column;
             justify-content: flex-start; 
             align-items: center; 
         }
 
-        /* Contenedor principal para simular la tarjeta de sección */
         .listado-container {
             width: 100%;
             max-width: 600px;
             padding: 30px;
-            background-color: #1a2027; /* Fondo ligeramente diferente al body */
+            background-color: #1a2027;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            text-align: center; /* Centra el botón al final */
-            margin-bottom: 40px; /* Espacio antes del footer */
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        /* -------------------------------------------------------------------
-           TIPOGRAFÍA
-           ------------------------------------------------------------------- */
         h1 {
             color: var(--color-acento);
             text-shadow: 0 0 8px rgba(102, 252, 241, 0.4); 
@@ -78,17 +66,14 @@ natsort($archivos);
             padding-bottom: 10px;
         }
 
-        /* -------------------------------------------------------------------
-           LISTA Y ENLACES
-           ------------------------------------------------------------------- */
         ul {
             list-style: none;
             padding-left: 0;
-            text-align: left; /* Asegura que la lista se alinee a la izquierda */
+            text-align: left;
         }
 
         li {
-            background: var(--color-header-footer); /* Negro profundo para los ítems */
+            background: var(--color-header-footer);
             padding: 15px 20px;
             margin: 15px 0;
             border-radius: 8px;
@@ -97,15 +82,15 @@ natsort($archivos);
         }
 
         li:hover {
-            background-color: #1a2027; /* Fondo un poco más claro al pasar el ratón */
-            transform: translateX(5px); /* Pequeño desplazamiento para efecto */
+            background-color: #1a2027;
+            transform: translateX(5px);
         }
 
         a {
             text-decoration: none;
-            color: var(--color-acento); /* Color cian */
+            color: var(--color-acento);
             font-weight: 600;
-            display: block; /* Hace que el enlace ocupe todo el <li> */
+            display: block;
             transition: color 0.3s ease;
         }
         
@@ -113,45 +98,29 @@ natsort($archivos);
             color: var(--color-acento-hover);
         }
 
-        /* -------------------------------------------------------------------
-           BOTÓN PRINCIPAL (Volver a la Página Principal)
-           ------------------------------------------------------------------- */
         .btn-acento {
             display: inline-block; 
             text-decoration: none;
-            
             background-color: var(--color-header-footer); 
-            color: var(--color-acento);                   /* Texto Cian */
-            border: 2px solid var(--color-acento);        
-
+            color: var(--color-acento);
+            border: 2px solid var(--color-acento);
             padding: 12px 26px;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease; 
-
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
             margin-top: 30px;
-            /* Asegura que el botón no se estire y se centre dentro de .listado-container */
             width: fit-content; 
         }
 
         .btn-acento:hover {
-            background-color: var(--color-acento);       
-            color: var(--color-texto-hover-btn);         
-            
+            background-color: var(--color-acento); 
+            color: var(--color-texto-hover-btn);
             transform: translateY(-2px);
             box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); 
         }
 
-        .btn-acento:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-        }
-
-        /* -------------------------------------------------------------------
-           FOOTER
-           ------------------------------------------------------------------- */
         footer {
             width: 100%;
             background-color: var(--color-header-footer);
@@ -160,18 +129,12 @@ natsort($archivos);
             font-size: 0.85em;
             color: #45a29e;
             box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: auto; /* Asegura que se quede al fondo si el contenido es corto */
+            margin-top: auto;
         }
         
         footer a {
             color: var(--color-acento-hover); 
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--color-acento); 
-            text-decoration: underline;
+            display: inline;
         }
     </style>
 </head>
@@ -180,25 +143,30 @@ natsort($archivos);
 <div class="listado-container">
     <h1>Listado de Actividades</h1>
     <ul>
-        <?php foreach ($archivos as $archivo): ?>
-            <!-- Mostramos el nombre del archivo directamente -->
-            <li><a href="<?= $archivo ?>"><?= $archivo ?></a></li>
+        <?php foreach ($elementos as $elemento): ?>
+            <?php 
+                // Comprobamos si es una carpeta para añadir un icono visual
+                $es_carpeta = is_dir($elemento);
+                $icono = $es_carpeta ? "📁 " : "📄 ";
+                $nombre_final = $es_carpeta ? $elemento . "/" : $elemento;
+            ?>
+            <li>
+                <a href="<?= $elemento ?>">
+                    <?= $icono . $nombre_final ?>
+                </a>
+            </li>
         <?php endforeach; ?>
     </ul>
     
-    <!-- Botón de regreso -->
     <a href="https://davidsexto77.github.io/" class="btn-acento" role="button">
         Volver a la Página Principal
     </a>
 </div>
 
-<!-- FOOTER AÑADIDO -->
 <footer>
     <p style="margin-bottom: 5px;">
         ¿Problemas? 
-        <a href="mailto:dsexgar0311@g.educaand.es">
-            Reportar un problema
-        </a>
+        <a href="mailto:dsexgar0311@g.educaand.es">Reportar un problema</a>
     </p>
     <p style="margin-top: 5px;">DAVID SEXTO - 2025 &copy; </p>
 </footer>
