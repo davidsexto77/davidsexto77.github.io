@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------
-   1. VARIABLES Y CONFIGURACIÓN BASE
+   1. CONFIGURACIÓN Y VARIABLES
    ------------------------------------------------------------------- */
 :root {
     --color-fondo: #1f2833;
@@ -10,8 +10,7 @@
     --color-error: #ff4d4d;
     --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --glow: 0 0 15px rgba(102, 252, 241, 0.4);
-    --anim-velocidad: 0.5s;
-    /* Ancho estándar para que todos los botones sean iguales */
+    /* Todos los botones medirán lo mismo para mantener la simetría */
     --ancho-boton: 320px; 
 }
 
@@ -28,12 +27,11 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    align-items: center;
-    overflow-x: hidden;
+    align-items: center; /* Centra horizontalmente header, main y footer */
 }
 
 /* -------------------------------------------------------------------
-   2. CENTRADO Y ESTRUCTURA PRINCIPAL
+   2. ESTRUCTURA (HEADER Y CONTENEDOR)
    ------------------------------------------------------------------- */
 header {
     background-color: var(--color-oscuro);
@@ -44,69 +42,57 @@ header {
     border-bottom: 1px solid rgba(102, 252, 241, 0.2);
 }
 
-main.container {
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;    /* Centrado horizontal total */
-    justify-content: center; /* Centrado vertical total */
-    width: 100%;
-    max-width: 800px;
-    padding: 40px 20px;
-}
-
 h1 {
     color: var(--color-acento);
     text-transform: uppercase;
     letter-spacing: 6px;
     margin: 0;
-    font-size: 2.2rem;
     text-shadow: var(--glow);
+}
+
+main.container {
+    flex: 1; /* Empuja el footer hacia abajo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Centra los botones horizontalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 20px;
 }
 
 h2 {
     color: #fff;
     margin-bottom: 30px;
-    font-weight: 500;
-    letter-spacing: 1px;
+    text-align: center;
 }
 
-h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: var(--color-acento);
-    margin: 8px auto 0;
-}
-
-/* Contenedor de los botones */
 nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px; /* Espaciado uniforme entre botones */
+    gap: 15px; /* Espacio igual entre cada botón */
     width: 100%;
 }
 
 /* -------------------------------------------------------------------
-   3. SISTEMA DE BOTONES UNIFORMES
+   3. SISTEMA DE BOTONES (SIMETRÍA TOTAL)
    ------------------------------------------------------------------- */
 .btn {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: var(--ancho-boton); /* Todos miden lo mismo */
-    height: 54px;                  /* Altura uniforme */
+    max-width: var(--ancho-boton); /* Ancho idéntico para todos */
+    height: 52px;                  /* Altura idéntica para todos */
     border-radius: 8px;
     font-weight: 700;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 1.5px;
+    transition: all 0.3s ease;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
 }
@@ -121,42 +107,30 @@ nav {
     height: 200%;
     background: rgba(255, 255, 255, 0.1);
     transform: rotate(35deg);
-    transition: all 0.5s ease;
+    transition: 0.5s;
 }
 
 .btn:hover::after {
     left: 150%;
 }
 
-/* Estilo Primario (Sólido) */
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow);
+}
+
 .btn-primary {
     background-color: var(--color-acento);
     color: var(--color-oscuro);
     border: none;
-    box-shadow: 0 4px 15px rgba(102, 252, 241, 0.2);
 }
 
-.btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(102, 252, 241, 0.4);
-    background-color: #fff;
-}
-
-/* Estilo Outline (Borde) */
 .btn-outline {
-    background: rgba(102, 252, 241, 0.03);
+    background: transparent;
     color: var(--color-acento);
     border: 2px solid var(--color-acento);
 }
 
-.btn-outline:hover {
-    background: var(--color-acento);
-    color: var(--color-oscuro);
-    box-shadow: var(--glow);
-    transform: translateY(-3px);
-}
-
-/* Botón Danger (Reportar) */
 .btn-danger {
     background: transparent;
     color: var(--color-error);
@@ -164,58 +138,52 @@ nav {
     animation: pulse-red 2.5s infinite;
 }
 
-.btn-danger:hover {
-    background: var(--color-error);
-    color: #fff;
-    transform: scale(1.05);
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
 }
 
-/* Enlace simple "Más Páginas" */
 .enlaces {
     color: var(--color-acento);
     text-decoration: none;
     font-weight: 600;
     margin-top: 10px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
     transition: 0.3s;
     opacity: 0.8;
 }
 
 .enlaces:hover {
     opacity: 1;
-    border-bottom: 1px solid var(--color-acento);
-    letter-spacing: 1px;
+    text-shadow: var(--glow);
 }
 
 /* -------------------------------------------------------------------
-   4. FOOTER Y ANIMACIONES
+   4. FOOTER (CORRECCIÓN DE ALINEACIÓN)
    ------------------------------------------------------------------- */
 footer {
     width: 100%;
     background-color: var(--color-oscuro);
-    padding: 35px 0;
-    text-align: center;
+    padding: 40px 20px;
     border-top: 1px solid rgba(102, 252, 241, 0.2);
+    
+    /* Forzamos a que todo dentro del footer se centre en columna */
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
 }
 
-@keyframes pulse-red {
-    0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
-    70% { box-shadow: 0 0 0 12px rgba(255, 77, 77, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+footer p {
+    margin: 5px 0;
 }
 
-/* Animación de entrada suave */
-header, h2, nav, footer {
+/* Animación de entrada suave al cargar */
+header, main, footer {
     animation: fadeIn 0.6s ease-out forwards;
-    opacity: 0;
 }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-header { animation-delay: 0.1s; }
-main   { animation-delay: 0.3s; }
-footer { animation-delay: 0.5s; }
