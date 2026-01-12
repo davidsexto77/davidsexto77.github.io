@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------
-   VARIABLES Y CONFIGURACIÓN
+   1. VARIABLES Y CONFIGURACIÓN BASE
    ------------------------------------------------------------------- */
 :root {
     --color-fondo: #1f2833;
@@ -11,146 +11,140 @@
     --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --glow: 0 0 15px rgba(102, 252, 241, 0.4);
     --anim-velocidad: 0.5s;
+    /* Ancho estándar para que todos los botones sean iguales */
+    --ancho-boton: 320px; 
 }
 
-/* -------------------------------------------------------------------
-   BASE Y ESTRUCTURA (Sticky Footer)
-   ------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--color-fondo);
     color: var(--color-texto);
     font-family: var(--font-stack);
     margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Asegura que el cuerpo ocupe toda la pantalla */
+    min-height: 100vh;
     align-items: center;
     overflow-x: hidden;
 }
 
-/* Contenedor principal que empuja al footer hacia abajo */
-main.container {
-    flex: 1; 
-    width: 100%;
-    max-width: 800px;
-    padding: 40px 20px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
 /* -------------------------------------------------------------------
-   ANIMACIONES DE CARGA
-   ------------------------------------------------------------------- */
-header, h2, nav, footer {
-    animation: aparecer var(--anim-velocidad) ease-out forwards;
-    opacity: 0;
-}
-
-header { animation-delay: 0.1s; }
-h2     { animation-delay: 0.2s; }
-nav    { animation-delay: 0.3s; }
-footer { animation-delay: 0.4s; }
-
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* -------------------------------------------------------------------
-   HEADER
+   2. CENTRADO Y ESTRUCTURA PRINCIPAL
    ------------------------------------------------------------------- */
 header {
     background-color: var(--color-oscuro);
     width: 100%;
-    padding: 30px 0;
+    padding: 35px 0;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
     border-bottom: 1px solid rgba(102, 252, 241, 0.2);
 }
 
+main.container {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Centrado horizontal total */
+    justify-content: center; /* Centrado vertical total */
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 20px;
+}
+
 h1 {
     color: var(--color-acento);
     text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
     margin: 0;
+    font-size: 2.2rem;
     text-shadow: var(--glow);
 }
 
 h2 {
     color: #fff;
-    margin-top: 20px;
-    display: inline-block;
-    position: relative;
-    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
 h2::after {
     content: '';
     display: block;
-    width: 50%;
+    width: 60px;
     height: 2px;
     background: var(--color-acento);
-    margin: 5px auto 0;
-    transition: width 0.3s ease;
+    margin: 8px auto 0;
 }
 
-h2:hover::after { width: 100%; }
+/* Contenedor de los botones */
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px; /* Espaciado uniforme entre botones */
+    width: 100%;
+}
 
 /* -------------------------------------------------------------------
-   SISTEMA DE BOTONES (UI KIT)
+   3. SISTEMA DE BOTONES UNIFORMES
    ------------------------------------------------------------------- */
 .btn {
-    display: inline-block;
-    padding: 12px 28px;
-    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: var(--ancho-boton); /* Todos miden lo mismo */
+    height: 54px;                  /* Altura uniforme */
+    border-radius: 8px;
     font-weight: 700;
-    text-align: center;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     position: relative;
     overflow: hidden;
-    margin: 5px;
 }
 
-/* Efecto de rayo de luz (escaneo) para todos los .btn */
+/* Efecto de brillo al pasar el ratón */
 .btn::after {
     content: "";
     position: absolute;
     top: -50%;
-    left: -60%;
-    width: 20%;
+    left: -100%;
+    width: 50%;
     height: 200%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(30deg);
-    transition: none;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(35deg);
+    transition: all 0.5s ease;
 }
 
 .btn:hover::after {
-    left: 120%;
-    transition: all 0.6s ease;
+    left: 150%;
 }
 
-/* Estilo Primario */
+/* Estilo Primario (Sólido) */
 .btn-primary {
     background-color: var(--color-acento);
     color: var(--color-oscuro);
-    box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
     border: none;
+    box-shadow: 0 4px 15px rgba(102, 252, 241, 0.2);
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 20px rgba(102, 252, 241, 0.6);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(102, 252, 241, 0.4);
     background-color: #fff;
 }
 
-/* Estilo Outline */
+/* Estilo Outline (Borde) */
 .btn-outline {
-    background: transparent;
+    background: rgba(102, 252, 241, 0.03);
     color: var(--color-acento);
     border: 2px solid var(--color-acento);
 }
@@ -159,42 +153,69 @@ h2:hover::after { width: 100%; }
     background: var(--color-acento);
     color: var(--color-oscuro);
     box-shadow: var(--glow);
+    transform: translateY(-3px);
 }
 
-/* Botón Danger (con pulso) */
+/* Botón Danger (Reportar) */
 .btn-danger {
     background: transparent;
     color: var(--color-error);
-    border: 1px solid var(--color-error);
-    animation: pulse-red 2s infinite;
+    border: 2px solid var(--color-error);
+    animation: pulse-red 2.5s infinite;
 }
 
-@keyframes pulse-red {
-    0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 77, 77, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+.btn-danger:hover {
+    background: var(--color-error);
+    color: #fff;
+    transform: scale(1.05);
 }
 
-/* Estilo simple (Más Páginas) */
+/* Enlace simple "Más Páginas" */
 .enlaces {
     color: var(--color-acento);
     text-decoration: none;
     font-weight: 600;
-    transition: var(--anim-velocidad);
+    margin-top: 10px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+    opacity: 0.8;
 }
 
 .enlaces:hover {
-    text-shadow: var(--glow);
+    opacity: 1;
+    border-bottom: 1px solid var(--color-acento);
     letter-spacing: 1px;
 }
 
 /* -------------------------------------------------------------------
-   FOOTER
+   4. FOOTER Y ANIMACIONES
    ------------------------------------------------------------------- */
 footer {
     width: 100%;
     background-color: var(--color-oscuro);
-    padding: 30px 0;
+    padding: 35px 0;
     text-align: center;
-    border-top: 2px solid var(--color-acento-hover);
+    border-top: 1px solid rgba(102, 252, 241, 0.2);
 }
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.4); }
+    70% { box-shadow: 0 0 0 12px rgba(255, 77, 77, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); }
+}
+
+/* Animación de entrada suave */
+header, h2, nav, footer {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+header { animation-delay: 0.1s; }
+main   { animation-delay: 0.3s; }
+footer { animation-delay: 0.5s; }
