@@ -75,6 +75,18 @@ nav {
     gap: 15px; 
     width: 100%;
 }
+.descripcion {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.icon-advertencia {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    display: block;
+}
 
 /* -------------------------------------------------------------------
    3. SISTEMA DE BOTONES (SIMETRÍA TOTAL)
