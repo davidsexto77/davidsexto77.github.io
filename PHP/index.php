@@ -168,7 +168,7 @@ natsort($elementos);
         ¿Problemas? 
         <a href="mailto:dsexgar0311@g.educaand.es">Reportar un problema</a>
     </p>
-    <p style="margin-top: 5px;">DAVID SEXTO - 2025 &copy; </p>
+    <p style="margin-top: 5px;">DAVID SEXTO - 2026 &copy; </p>
 </footer>
 
 </body>
