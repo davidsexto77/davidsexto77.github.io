@@ -158,7 +158,7 @@ natsort($elementos);
         <?php endforeach; ?>
     </ul>
     
-    <a href="https://davidsexto77.github.io/" class="btn-acento" role="button">
+    <a href="../" class="btn-acento" role="button">
         Volver a la Página Principal
     </a>
 </div>
