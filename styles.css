@@ -10,7 +10,7 @@
     --color-error: #ff4d4d;
     --font-stack: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --glow: 0 0 15px rgba(102, 252, 241, 0.4);
-    /* Todos los botones medirán lo mismo para mantener la simetría */
+    /* Ancho estándar para escritorio */
     --ancho-boton: 320px; 
 }
 
@@ -27,7 +27,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    align-items: center; /* Centra horizontalmente header, main y footer */
+    align-items: center; 
 }
 
 /* -------------------------------------------------------------------
@@ -47,15 +47,16 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 6px;
     margin: 0;
+    font-size: 2.2rem;
     text-shadow: var(--glow);
 }
 
 main.container {
-    flex: 1; /* Empuja el footer hacia abajo */
+    flex: 1; 
     display: flex;
     flex-direction: column;
-    align-items: center;    /* Centra los botones horizontalmente */
-    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center;    
+    justify-content: center;
     width: 100%;
     max-width: 800px;
     padding: 40px 20px;
@@ -71,7 +72,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Espacio igual entre cada botón */
+    gap: 15px;
     width: 100%;
 }
 
@@ -83,8 +84,8 @@ nav {
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: var(--ancho-boton); /* Ancho idéntico para todos */
-    height: 52px;                  /* Altura idéntica para todos */
+    max-width: var(--ancho-boton);
+    height: 52px;
     border-radius: 8px;
     font-weight: 700;
     text-decoration: none;
@@ -97,7 +98,7 @@ nav {
     overflow: hidden;
 }
 
-/* Efecto de brillo al pasar el ratón */
+/* Efecto de brillo */
 .btn::after {
     content: "";
     position: absolute;
@@ -110,34 +111,21 @@ nav {
     transition: 0.5s;
 }
 
-.btn:hover::after {
-    left: 150%;
-}
+.btn:hover::after { left: 150%; }
 
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: var(--glow);
 }
 
-.btn-primary {
-    background-color: var(--color-acento);
-    color: var(--color-oscuro);
-    border: none;
-}
-
-.btn-outline {
-    background: transparent;
-    color: var(--color-acento);
-    border: 2px solid var(--color-acento);
-}
+.btn-primary { background-color: var(--color-acento); color: var(--color-oscuro); border: none; }
+.btn-outline { background: transparent; color: var(--color-acento); border: 2px solid var(--color-acento); }
 
 .btn-danger {
     background: transparent;
     color: var(--color-error);
     border: 2px solid var(--color-error);
     animation: pulse-red 2.5s infinite;
-    max-width: 320px;
-    height: 52px; 
 }
 
 @keyframes pulse-red {
@@ -155,32 +143,49 @@ nav {
     opacity: 0.8;
 }
 
-.enlaces:hover {
-    opacity: 1;
-    text-shadow: var(--glow);
-}
+.enlaces:hover { opacity: 1; text-shadow: var(--glow); }
 
 /* -------------------------------------------------------------------
-   4. FOOTER (CORRECCIÓN DE ALINEACIÓN)
+   4. FOOTER (CENTRADO TOTAL)
    ------------------------------------------------------------------- */
 footer {
     width: 100%;
     background-color: var(--color-oscuro);
     padding: 40px 20px;
     border-top: 1px solid rgba(102, 252, 241, 0.2);
-    
-    /* Forzamos a que todo dentro del footer se centre en columna */
     display: flex;
     flex-direction: column;
     align-items: center; 
     text-align: center;
 }
 
-footer p {
-    margin: 5px 0;
+footer p { margin: 5px 0; }
+
+/* -------------------------------------------------------------------
+   5. DISEÑO RESPONSIVO (MÓVILES)
+   ------------------------------------------------------------------- */
+@media (max-width: 480px) {
+    /* Ajustamos el tamaño para que no se corten en móviles */
+    :root {
+        --ancho-boton: 90%; 
+    }
+
+    h1 {
+        font-size: 1.6rem;
+        letter-spacing: 3px;
+    }
+
+    .btn {
+        height: 48px;
+        font-size: 0.75rem;
+    }
+
+    header {
+        padding: 25px 0;
+    }
 }
 
-/* Animación de entrada suave al cargar */
+/* Animación de entrada */
 header, main, footer {
     animation: fadeIn 0.6s ease-out forwards;
 }
