@@ -136,6 +136,8 @@ nav {
     color: var(--color-error);
     border: 2px solid var(--color-error);
     animation: pulse-red 2.5s infinite;
+    max-width: 320px;
+    height: 52px; 
 }
 
 @keyframes pulse-red {
