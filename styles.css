@@ -1,0 +1,142 @@
+/* -------------------------------------------------------------------
+   VARIABLES CSS
+   ------------------------------------------------------------------- */
+:root {
+    --color-fondo-principal: #1f2833; 
+    --color-header-footer: #0b0c10; 
+    --color-texto-principal: #c5c6c7; 
+    --color-acento: #66fcf1; 
+    --color-acento-hover: #45a29e; 
+    --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    --color-error: #ff4d4d; 
+}
+
+/* -------------------------------------------------------------------
+   ESTILOS GENERALES Y ESTRUCTURA
+   ------------------------------------------------------------------- */
+body {
+    background-color: var(--color-fondo-principal);
+    font-family: var(--font-stack);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: var(--color-texto-principal);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+/* -------------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------------- */
+header {
+    background-color: var(--color-header-footer);
+    width: 100%;
+    color: var(--color-acento);
+    text-align: center;
+    padding: 30px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+}
+
+header:hover {
+    background-color: #1a1a1e;
+}
+
+h1 {
+    color: var(--color-acento);
+    text-shadow: 0 0 8px rgba(102, 252, 241, 0.4);
+    font-weight: 700;
+    margin: 0;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: var(--color-texto-principal);
+    border-bottom: 2px solid var(--color-acento-hover);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Contenido principal */
+main {
+    flex-grow: 1;
+    padding: 40px 20px;
+    text-align: center;
+    max-width: 800px; 
+}
+
+/* -------------------------------------------------------------------
+   ENLACES Y BOTONES
+   ------------------------------------------------------------------- */
+.enlaces {
+    color: var(--color-acento);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.enlaces:hover {
+    color: var(--color-acento-hover);
+    background-color: rgba(102, 252, 241, 0.1);
+    text-shadow: 0 0 5px rgba(102, 252, 241, 0.7);
+}
+
+.btn-acento {
+    display: inline-block; 
+    text-decoration: none;
+    background-color: var(--color-header-footer); 
+    color: var(--color-acento);                   
+    border: 2px solid var(--color-acento);        
+
+    padding: 12px 26px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    margin-top: 20px;
+}
+
+.btn-acento:hover {
+    background-color: var(--color-acento);       
+    color: var(--color-header-footer);           
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); 
+}
+
+.btn-acento:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* -------------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------------- */
+footer {
+    width: 100%;
+    background-color: var(--color-header-footer);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.85em;
+    color: #45a29e;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: auto; 
+}
+
+footer a {
+    color: var(--color-acento-hover); 
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--color-acento); 
+    text-decoration: underline;
+}
