@@ -7,6 +7,10 @@ $companeros = [
     "Jorge"     => 17,
     "Manu"      => 17
 ];
+
+
+var_dump($companeros);
+echo "<br>";
 ?>
 
 <table border="1" cellpadding="8">
