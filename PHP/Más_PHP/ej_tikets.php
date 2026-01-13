@@ -1,14 +1,37 @@
-//ejercicio que crea tikets: 
-
 <?php 
-    $total_compra = 70;
-    $descuento= 10;
-    $compra_descontada = $total_compra - $descuento;
+//ejercicio para gestión de gym:
 
-    if ($total_compra >= 50) {
-        echo "El valor total de la compra con descuento es: " . $compra_descontada;
 
-    }else {
-        echo "NO tienes decuento, el valor de tu compra es: " . $total_compra;
-    }
+/* Instrucciones:
+
+Crea dos variables:
+
+$meses: el número de meses que se apunta (ej: 3).
+
+$precioMensual: lo que cuesta un mes (ej: 25).
+
+Cálculo:
+
+Crea una variable $total que sea la multiplicación de meses por precio mensual.
+
+Lógica:
+
+Si el $total es mayor a 60€, suma una "Cuota de Inscripción" de 5€ al total y muestra: "Total con inscripción: [resultado]€".
+
+Si es 60€ o menos, el cliente tiene la inscripción gratis. Muestra: "Inscripción gratuita. Total: [total]€".*/
+
+$meses = 3;
+$precio_mensual = 19.99;
+
+$total = $meses * $precio_mensual;
+
+if ($total > 60) {
+    $total +=5;
+    echo "Tu cuota de inscripción sube a: " . $total ;
+}else {
+    echo "Tienes la inscipción gratuita, tu valor de cuota total es: " . $total ; 
+}
+
+
+
 ?>
