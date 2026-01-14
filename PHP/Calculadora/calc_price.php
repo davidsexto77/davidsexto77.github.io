@@ -7,73 +7,96 @@
     <link rel="icon" type="image/png" href="imagenes/icono.png">
 </head>
 <body>
-    <h1>Calculadora de Precio Unitario</h1>
+    <h1>Calculadora de Gestión</h1>
     <hr>
+    
     <form action="" method="post">
         <div>
-                ¿Qué deseas hacer?:
-                <input type="radio" name="genero" id="hombre" value="hombre" >
-                <label for="hombre">Hombre</label>
+            <strong>¿Qué deseas hacer?:</strong><br>
+            <input type="radio" name="opcion" id="pm" value="pm" required>
+            <label for="pm">Calcular Punto Muerto</label>
 
-                <input type="radio" name="genero" id="mujer" value="mujer">
-                <label for="mujer">Mujer</label>
+            <input type="radio" name="opcion" id="dato_falta" value="dato_falta">
+            <label for="dato_falta">Cálculo Dato Faltante</label>
         </div>  
 
-
-
-        <button type="submit" name="proced">Calcular Precio Unitario</button>
+        <br>
+        <button type="submit" name="enviar">Continuar</button>
     </form>
+
     <?php 
-    switch ($proced) {
-    case "valor1":
-        // Código si $variable == "valor1"
-        break;
+    // 1. Verificamos si se ha pulsado el botón de enviar
+    if (isset($_POST['enviar'])) {
+        $proced = $_POST['opcion'];
 
-    case "valor2":
-        // Código si $variable == "valor2"
-        break;
+        // 3. Ejecutamos la lógica según la elección
+        switch ($proced) {
+            case "pm":
+                echo "<h3>Cálculo de Punto Muerto</h3>";
 
-}
-
-
-    ?>
-
-
-    <form action="" method="post">
-
-        <!-- pedir datos -->
+    // PASO 2: ¿Ya recibimos los números del segundo formulario?
+    if (isset($_POST['precio_total'], $_POST['coste_variable'], $_POST['coste_fijo'])) {
         
-        <div>
-            <label for="precio_total">Precio Total:</label><br>
-            <input type="number" name="precio_total" id="precio_total" step="0.01" required>
-        </div>
+        $p = (float)$_POST['precio_total'];
+        $cv = (float)$_POST['coste_variable'];
+        $cf = (float)$_POST['coste_fijo'];
 
-        <br>
+        // Validación matemática: Evitar división por cero
+        if ($p > $cv) {
+            $resultado = $cf / ($p - $cv); // LA FÓRMULA: Q = CF / (P - CV)
+            
+            echo "<div style='background:#d4edda; padding:15px; border-radius:5px;'>";
+            echo "<strong>Resultado:</strong> El punto muerto es de <b>" . number_format($resultado, 2) . "</b> unidades.";
+            echo "</div>";
+            echo "<br><a href=''>Reiniciar calculadora</a>";
+        } else {
+            echo "<p style='color:red;'>Error: El precio debe ser mayor al coste variable para cubrir costes.</p>";
+            echo "<a href='javascript:history.back()'>Volver a intentarlo</a>";
+        }
 
-        <div>
-            <label for="cantidad">Cantidad / Unidades:</label><br>
-            <input type="number" name="cantidad" id="cantidad" step="0.01" required>
-        </div>
+    } else {
+        // PASO 1: Si NO hay números, mostramos el formulario para pedirlos
+        // Usamos comillas simples en el HTML para evitar errores de sintaxis en el echo
+        echo "
+        <form action='' method='post'>
+            <input type='hidden' name='opcion' value='pm'>
+            <input type='hidden' name='enviar' value='1'>
 
-        <br>
-        <div>
-            <label for="precio_total">Precio Total:</label><br>
-            <input type="number" name="precio_total" id="precio_total" step="0.01" required>
-        </div>
+            <div>
+                <label>Precio de Venta (P):</label><br>
+                <input type='number' name='precio_total' step='0.01' required>
+            </div><br>
 
-        <br>
-        <div>
-            <label for="precio_total">Precio Total:</label><br>
-            <input type="number" name="precio_total" id="precio_total" step="0.01" required>
-        </div>
+            <div>
+                <label>Coste Variable Unitario (CV):</label><br>
+                <input type='number' name='coste_variable' step='0.01' required>
+            </div><br>
 
-        <br>
+            <div>
+                <label>Coste Fijo Total (CF):</label><br>
+                <input type='number' name='coste_fijo' step='0.01' required>
+            </div><br>
 
+            <button type='submit'>Calcular Ahora</button>
+        </form>";
+    }
+    break;
 
+            case "dato_falta":
+                echo "<h3>Has elegido calcular un dato faltante</h3>";
+                // Aquí iría tu lógica para despejar variables
+                break;
+            
+            default:
+                echo "Por favor, selecciona una opción válida.";
+                break;
+        }
+    }
+    ?>
         <!-- envio de datos -->
         <button type="submit" name="calcular">Calcular Precio Unitario</button>
         
     </form>
-    <!-- version 0.0.1 (php not ready)-->
+    <!-- version 0.0.2 (php not ready)-->
 </body>
 </html>
