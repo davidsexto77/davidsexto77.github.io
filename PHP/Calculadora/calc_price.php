@@ -149,5 +149,15 @@
         
     </form>
     <!-- version 0.0.2 (php not ready)-->
+    <footer align="center">
+    <a href="https://davidsexto77.github.io/" class="btn-acento" role="button">
+        Volver a la Página Principal
+    </a>
+    <p style="margin-bottom: 5px;">
+        ¿Problemas? 
+        <a href="mailto:dsexgar0311@g.educaand.es">Reportar un problema</a>
+    </p>
+    <p style="margin-top: 5px;">DAVID SEXTO - 2026 &copy; </p>
+</footer>
 </body>
 </html>
