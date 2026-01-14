@@ -15,6 +15,7 @@
         <div>
             <strong>¿Qué deseas hacer?:</strong>
             <br>
+            <br>
             <input type="radio" name="opcion" id="pm" value="pm" required>
             <label for="pm">Calcular Punto Muerto</label>
 
