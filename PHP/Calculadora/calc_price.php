@@ -9,10 +9,12 @@
 <body>
     <h1>Calculadora de Gestión</h1>
     <hr>
+    <br>
     
     <form action="" method="post">
         <div>
-            <strong>¿Qué deseas hacer?:</strong><br>
+            <strong>¿Qué deseas hacer?:</strong>
+            <br>
             <input type="radio" name="opcion" id="pm" value="pm" required>
             <label for="pm">Calcular Punto Muerto</label>
 
@@ -83,9 +85,57 @@
     break;
 
             case "dato_falta":
-                echo "<h3>Has elegido calcular un dato faltante</h3>";
-                // Aquí iría tu lógica para despejar variables
-                break;
+                echo "<h3>Calcular Precio Necesario (Dato Faltante)</h3>";
+    echo "<p>Calcula el precio mínimo de venta para no tener pérdidas según tu producción.</p>";
+
+    // PASO 2: ¿Ya recibimos los datos para despejar el Precio?
+    if (isset($_POST['cantidad_q'], $_POST['c_variable'], $_POST['c_fijo'])) {
+        
+        $Q = (float)$_POST['cantidad_q'];
+        $CV = (float)$_POST['c_variable'];
+        $CF = (float)$_POST['c_fijo'];
+
+        // Validación: No se puede calcular si la cantidad es 0
+        if ($Q > 0) {
+            // FÓRMULA DESPEJADA: P = (CF / Q) + CV
+            $precio_necesario = ($CF / $Q) + $CV;
+
+            echo "<div style='background:#fff3cd; padding:15px; border-radius:5px; border: 1px solid #ffeeba;'>";
+            echo "<strong>Resultado:</strong> Para cubrir costes con " . $Q . " unidades, el precio mínimo debe ser: ";
+            echo "<b>" . number_format($precio_necesario, 2) . " €</b>";
+            echo "</div>";
+            echo "<br><a href=''>Hacer otro cálculo</a>";
+        } else {
+            echo "<p style='color:red;'>Error: La cantidad de unidades (Q) debe ser mayor a cero.</p>";
+            echo "<a href='javascript:history.back()'>Volver</a>";
+        }
+
+    } else {
+        // PASO 1: Pedir los datos necesarios para hallar el Precio
+        echo "
+        <form action='' method='post'>
+            <input type='hidden' name='opcion' value='dato_falta'>
+            <input type='hidden' name='enviar' value='1'>
+
+            <div>
+                <label>Unidades que esperas vender (Q):</label><br>
+                <input type='number' name='cantidad_q' step='0.01' required>
+            </div><br>
+
+            <div>
+                <label>Coste Variable Unitario (CV):</label><br>
+                <input type='number' name='c_variable' step='0.01' required>
+            </div><br>
+
+            <div>
+                <label>Coste Fijo Total (CF):</label><br>
+                <input type='number' name='c_fijo' step='0.01' required>
+            </div><br>
+
+            <button type='submit'>Calcular Precio Mínimo</button>
+        </form>";
+    }
+    break;
             
             default:
                 echo "Por favor, selecciona una opción válida.";
@@ -94,7 +144,7 @@
     }
     ?>
         <!-- envio de datos -->
-        <button type="submit" name="calcular">Calcular Precio Unitario</button>
+        
         
     </form>
     <!-- version 0.0.2 (php not ready)-->
