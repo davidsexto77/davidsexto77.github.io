@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de precios - PHP</title>
-    <link rel="icon" type="image/png" href="imagenes/icono.png">
+    <link rel="icon" type="image/png" href="https://davidsexto77.github.io/imagenes/icono.png">
 </head>
 <body>
     <h1>Calculadora de Gestión</h1>
