@@ -319,8 +319,9 @@
         </a>
         <p style="margin: 15px 0 5px;">
             ¿Problemas? 
-            <a href="mailto:dsexgar0311@g.educaand.es">Reportar un problema</a>
-        </p>
+            
+        </p><br>
+        <a href="mailto:dsexgar0311@g.educaand.es">Reportar un problema</a>
         <p style="margin-top: 5px; opacity: 0.5; font-size: 0.8rem;">DAVID SEXTO - 2026 &copy; </p>
     </footer>
 
