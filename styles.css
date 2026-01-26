@@ -1,29 +1,24 @@
-/* --- 1. CONFIGURACIÓN Y VARIABLES --- */
+/* --- CONFIGURACIÓN Y VARIABLES --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 :root {
-    --bg-dark-deep: #050505;        /* Fondo negro base */
-    --bg-purple-glow: #1a0b2e;      /* Brillo morado central */
-    --neon-magenta: #ff00cc;        /* Rosa neón */
-    --neon-blue: #3333ff;           /* Azul eléctrico */
-    --btn-bg: #16121a;              /* Fondo de los botones */
+    --bg-dark: #050505;
+    --bg-glow: #1a0b2e;
+    --neon-pink: #ff00cc;
+    --neon-blue: #3333ff;
+    --btn-bg: #16121a;
     --text-white: #ffffff;
     --text-gray: #a9b2c3;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- 2. ESTRUCTURA GLOBAL --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: radial-gradient(circle at center 15%, var(--bg-purple-glow) 0%, var(--bg-dark-deep) 75%);
+    background: radial-gradient(circle at center 15%, var(--bg-glow) 0%, var(--bg-dark) 75%);
     background-attachment: fixed;
-    background-color: var(--bg-dark-deep);
+    background-color: var(--bg-dark);
     color: var(--text-white);
     min-height: 100vh;
     display: flex;
@@ -32,100 +27,64 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 3. TÍTULOS CON EFECTO GLOW Y GLITCH --- */
-header {
-    text-align: center;
-    padding: 60px 20px 20px;
-}
+/* --- CABECERA Y EFECTO GLITCH --- */
+header { text-align: center; padding: 60px 20px 20px; width: 100%; }
 
 header h1 {
     font-size: clamp(2.5rem, 10vw, 4.5rem);
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: -2px;
     background: linear-gradient(to right, #8a2be2, #4169e1);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     filter: drop-shadow(0 0 12px rgba(138, 43, 226, 0.8));
-    position: relative;
-    cursor: default;
 }
 
-/* Efecto Glitch al pasar el ratón */
 header h1:hover {
     animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
 }
 
 @keyframes glitch {
-    0% { transform: translate(0); text-shadow: -2px 2px var(--neon-magenta), 2px -2px var(--neon-blue); }
+    0% { transform: translate(0); text-shadow: -2px 2px var(--neon-pink), 2px -2px var(--neon-blue); }
     25% { transform: translate(-2px, 2px); }
-    50% { transform: translate(2px, -2px); text-shadow: 2px -2px var(--neon-magenta), -2px 2px var(--neon-blue); }
+    50% { transform: translate(2px, -2px); text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-blue); }
     75% { transform: translate(-2px, -2px); }
     100% { transform: translate(0); }
 }
 
 h2 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--text-gray);
-    margin: 20px 0 35px;
-    text-align: center;
+    font-size: 1rem; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; margin: 20px 0 35px; text-align: center;
 }
 
 h2::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 3px;
-    background: linear-gradient(to right, var(--neon-magenta), var(--neon-blue));
-    margin: 12px auto 0;
-    border-radius: 10px;
+    content: ''; display: block; width: 50px; height: 3px;
+    background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+    margin: 12px auto 0; border-radius: 10px;
 }
 
-/* --- 4. CONTENEDOR Y NAVEGACIÓN --- */
+/* --- CONTENEDOR Y BOTONES --- */
 .container {
-    width: 100%;
-    max-width: 480px;
-    padding: 20px;
-    flex: 1;
+    width: 100%; max-width: 500px; padding: 20px;
+    flex: 1; display: flex; flex-direction: column; align-items: center;
 }
 
-/* Esto organiza automáticamente cualquier menú en columna */
 nav, .menu-servicios {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    width: 100%;
+    display: flex; flex-direction: column; gap: 1.2rem; width: 100%;
 }
 
-/* --- 5. BOTONES ESTILO CYBER-NEÓN --- */
 .btn {
-    display: block;
-    text-decoration: none;
-    transition: var(--transition);
+    display: block; text-decoration: none; transition: var(--transition);
+    width: 100%; text-align: center;
 }
 
 .btn-outline {
-    position: relative;
-    padding: 1.1rem;
-    font-weight: 700;
-    color: white;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-align: center;
-    border-radius: 14px;
-    background: var(--btn-bg);
-    border: 2px solid transparent;
-    background-repeat: no-repeat;
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    background-image: 
-        linear-gradient(var(--btn-bg), var(--btn-bg)), 
-        linear-gradient(to right, var(--neon-magenta), var(--neon-blue));
+    padding: 1.1rem; font-weight: 700; color: white;
+    text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1.5px;
+    border-radius: 14px; background: var(--btn-bg); border: 2px solid transparent;
+    background-repeat: no-repeat; background-origin: border-box; background-clip: padding-box, border-box;
+    background-image: linear-gradient(var(--btn-bg), var(--btn-bg)), linear-gradient(to right, var(--neon-pink), var(--neon-blue));
 }
 
 .btn-outline:hover {
@@ -134,50 +93,30 @@ nav, .menu-servicios {
     filter: brightness(1.2);
 }
 
-/* --- 6. FOOTER Y ACCIONES --- */
-footer {
-    width: 100%;
-    max-width: 480px;
-    padding: 40px 20px;
-    text-align: center;
-    margin-top: auto;
+/* --- PÁGINA DE ADVERTENCIA --- */
+.icon-advertencia {
+    font-size: 4.5rem; display: block; margin-bottom: 1rem;
+    filter: drop-shadow(0 0 15px var(--neon-pink));
 }
 
-footer .btn-outline { margin-bottom: 25px; }
+.description, .descripcion {
+    color: var(--text-gray); font-size: 1rem; line-height: 1.6;
+    margin-bottom: 40px; text-align: center;
+}
+
+/* --- FOOTER --- */
+footer { width: 100%; max-width: 500px; padding: 40px 20px; text-align: center; margin-top: auto; }
 
 .btn-danger {
-    display: inline-block;
-    color: var(--neon-magenta);
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    border: 1px solid var(--neon-magenta);
-    padding: 10px 25px;
-    border-radius: 8px;
-    text-transform: uppercase;
+    display: inline-block; width: auto; color: var(--neon-pink);
+    text-decoration: none; font-weight: 800; font-size: 0.8rem;
+    border: 1px solid var(--neon-pink); padding: 10px 25px;
+    border-radius: 8px; text-transform: uppercase; margin-top: 10px;
 }
 
 .btn-danger:hover {
-    background: var(--neon-magenta);
-    color: white !important;
-    box-shadow: 0 0 20px var(--neon-magenta);
+    background: var(--neon-pink); color: white !important;
+    box-shadow: 0 0 20px var(--neon-pink);
 }
 
-footer p { color: var(--text-gray); margin-bottom: 8px; }
-
-/* Para la página de Advertencia */
-.icon-advertencia {
-    font-size: 4rem;
-    display: block;
-    margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 10px var(--neon-magenta));
-}
-
-.text-danger { color: var(--neon-magenta) !important; }
-
-/* --- 7. AJUSTES MÓVILES --- */
-@media (max-width: 450px) {
-    header h1 { font-size: 2.2rem; }
-    .btn-outline { padding: 0.9rem; font-size: 0.75rem; }
-}
+.copyright { margin-top: 20px; font-size: 0.8rem; opacity: 0.6; letter-spacing: 2px; }
