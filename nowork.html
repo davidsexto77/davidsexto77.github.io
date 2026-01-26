@@ -4,214 +4,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advertencia | No Disponible</title>
-    <!-- NOTA: La imagen del icono (favicon) no es accesible en el entorno de Canvas, por lo que se mantiene la ruta pero no cargará visualmente. -->
-    <link rel="icon" type="imagen/png" href="imagenes/advertencia_v2.png">
-    <style>
-        /* -------------------------------------------------------------------
-           VARIABLES CSS
-           Gestión de colores para la estética oscura/cian (Dark Theme)
-           ------------------------------------------------------------------- */
-        :root {
-            --color-fondo-principal: #1f2833; /* Gris muy oscuro / Azul pizarra */
-            --color-header-footer: #0b0c10; /* Negro profundo */
-            --color-texto-principal: #c5c6c7; /* Gris claro para texto */
-            --color-acento: #66fcf1; /* Azul/Cian vibrante para acentos e interacción */
-            --color-acento-hover: #45a29e; /* Tono más oscuro para el hover */
-            --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
-            --color-error: #ff4d4d; /* Rojo para mensajes de error */
-            --color-texto-hover-btn: #0d161a; /* Gris muy oscuro para mejor contraste en el hover del botón */
-        }
-
-        /* -------------------------------------------------------------------
-           ESTILOS GENERALES Y ESTRUCTURA
-           ------------------------------------------------------------------- */
-        body {
-            background-color: var(--color-fondo-principal);
-            font-family: var(--font-stack);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            color: var(--color-texto-principal);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-        }
-
-        /* -------------------------------------------------------------------
-           HEADER
-           ------------------------------------------------------------------- */
-        header {
-            background-color: var(--color-header-footer);
-            width: 100%;
-            color: var(--color-acento);
-            text-align: center;
-            padding: 30px 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            transition: background-color 0.3s ease;
-        }
-
-        header:hover {
-            background-color: #1a1a1e;
-        }
-
-        h1 {
-            color: var(--color-acento);
-            text-shadow: 0 0 8px rgba(102, 252, 241, 0.4);
-            font-weight: 700;
-            margin: 0;
-        }
-
-        h2 {
-            text-align: center;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            color: var(--color-error); 
-            border-bottom: 2px solid var(--color-acento-hover);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        /* Contenido principal para centrado */
-        main {
-            flex-grow: 1;
-            padding: 20px;
-            text-align: center;
-            max-width: 800px; 
-        }
-
-        /* -------------------------------------------------------------------
-           ICONO DE ADVERTENCIA (NUEVO)
-           ------------------------------------------------------------------- */
-        .icon-advertencia {
-            font-size: 4rem; 
-            color: var(--color-error); /* Color rojo llamativo */
-            display: block;
-            margin: 30px auto 10px;
-            animation: pulse 1.5s infinite alternate; /* Animación sutil de pulso */
-        }
-
-        /* Definición de la animación */
-        @keyframes pulse {
-            from { transform: scale(1); opacity: 1; }
-            to { transform: scale(1.05); opacity: 0.8; }
-        }
-
-        /* -------------------------------------------------------------------
-           ENLACES (MANTENIDOS)
-           ------------------------------------------------------------------- */
-        .enlaces {
-            color: var(--color-acento);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-            padding: 5px 10px;
-            border-radius: 3px;
-        }
-
-        .enlaces:hover {
-            color: var(--color-acento-hover);
-            background-color: #2a3a4f;
-            text-shadow: 0 0 5px rgba(102, 252, 241, 0.7);
-        }
-
-        /* -------------------------------------------------------------------
-           BOTÓN PRINCIPAL (CON MEJORA DE CONTRASTE)
-           ------------------------------------------------------------------- */
-        .btn-acento {
-            /* Estilos iniciales (Botón estilo "Outline" cian) */
-            display: inline-block; 
-            text-decoration: none;
-            
-            background-color: var(--color-header-footer); 
-            color: var(--color-acento);                   /* Texto Cian (¡COLOR DE LETRA INICIAL!) */
-            border: 2px solid var(--color-acento);        
-
-            padding: 12px 26px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease; 
-
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            margin-top: 20px;
-        }
-
-        /* Estilos Hover (El color de fondo y el color de la letra se invierten - MEJORA DE CONTRASTE) */
-        .btn-acento:hover {
-            background-color: var(--color-acento);       /* CAMBIO DE FONDO: relleno cyan */
-            color: var(--color-texto-hover-btn);         /* CAMBIO DE COLOR DE LETRA: usando variable de alto contraste */
-            
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(102, 252, 241, 0.4); 
-        }
-
-        /* Estilo Active (clic) */
-        .btn-acento:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-        }
-        
-        /* -------------------------------------------------------------------
-           FOOTER (Nuevo)
-           ------------------------------------------------------------------- */
-        footer {
-            width: 100%;
-            background-color: var(--color-header-footer);
-            text-align: center;
-            padding: 15px 0;
-            font-size: 0.85em;
-            color: #45a29e;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
-            margin-top: auto; /* Asegura que se quede al fondo si el contenido es corto */
-        }
-        
-        footer a {
-            color: var(--color-acento-hover); 
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--color-acento); 
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="icon" type="image/png" href="imagenes/advertencia_v2.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="page-error">
     <header>
         <h1>No Disponible</h1>
     </header>
 
-    <main>
-        <!-- ICONO DE ADVERTENCIA (NUEVO) -->
-        <span class="icon-advertencia" aria-hidden="true">
-            ❗
-        </span>
+    <main class="container">
+        <span class="icon-advertencia" aria-hidden="true">❗</span>
 
-        <!-- Título principal de la sección -->
-        <h2 style="color: var(--color-error);">Servicio Temporalmente Fuera de Funcionamiento</h2>
+        <h2 class="text-danger">Servicio Fuera de Funcionamiento</h2>
         
-        <!-- Contenido descriptivo -->
-        <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1.1em;">
-            Lamentamos los inconvenientes. Actualmente, esta página o servicio se encuentra en un proceso de
-            mantenimiento o actualización. Por favor, inténtalo de nuevo más tarde.
+        <p class="description">
+            Lamentamos los inconvenientes. Actualmente, esta página se encuentra en mantenimiento. 
+            Por favor, inténtalo de nuevo más tarde.
         </p>
 
-        <!-- Botón de acción (etiqueta <nav> eliminada) -->
-        <a href="https://davidsexto77.github.io/Proyecto_final_HTML/index.html" class="btn-acento" role="button">
+        <a href="https://davidsexto77.github.io/Proyecto_final_HTML/index.html" class="btn btn-outline">
             Volver a la Página Principal
         </a>
     </main>
 
     <footer>
-            <p style="margin-bottom: 5px;">
+        <p>
             ¿Problemas? <br>
-            <a href="mailto:dsexgar0311@g.educaand.es">
-              <strong>Reportar un problema</strong>
-        </a>
+            <a href="mailto:dsexgar0311@g.educaand.es" class="btn-danger-link">
+                <strong>Reportar un problema</strong>
+            </a>
         </p>
-        <p style="margin-top: 5px;">DAVID SEXTO - 2026 &copy; </p>
-        </footer>
+        <p class="copyright">DAVID SEXTO - 2026 &copy;</p>
+    </footer>
 </body>
 </html>
