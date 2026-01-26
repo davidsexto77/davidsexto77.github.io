@@ -2,26 +2,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 :root {
-    --bg-dark-deep: #050505;        /* Negro casi puro */
-    --bg-purple-glow: #1a0b2e;      /* Morado oscuro para el centro */
+    --bg-dark-deep: #050505;        /* Fondo negro base */
+    --bg-purple-glow: #1a0b2e;      /* Brillo morado central */
     --neon-magenta: #ff00cc;        /* Rosa neón */
     --neon-blue: #3333ff;           /* Azul eléctrico */
+    --btn-bg: #16121a;              /* Fondo de los botones */
     --text-white: #ffffff;
     --text-gray: #a9b2c3;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* --- 2. ESTRUCTURA GLOBAL --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* --- 2. FONDO DINÁMICO (Como tu imagen) --- */
 body {
     font-family: 'Inter', sans-serif;
-    /* Crea el efecto de iluminación desde el centro hacia los bordes */
-    background: radial-gradient(circle at center 20%, var(--bg-purple-glow) 0%, var(--bg-dark-deep) 80%);
+    background: radial-gradient(circle at center 15%, var(--bg-purple-glow) 0%, var(--bg-dark-deep) 75%);
+    background-attachment: fixed;
     background-color: var(--bg-dark-deep);
     color: var(--text-white);
     min-height: 100vh;
@@ -31,129 +32,120 @@ body {
     overflow-x: hidden;
 }
 
-/* --- 3. CABECERA Y TÍTULOS --- */
+/* --- 3. TÍTULOS CON EFECTO GLOW Y GLITCH --- */
 header {
     text-align: center;
     padding: 60px 20px 20px;
 }
 
 header h1 {
-    font-size: clamp(3rem, 10vw, 4.5rem);
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -2px;
-    
-    /* Degradado de texto morado/azul */
     background: linear-gradient(to right, #8a2be2, #4169e1);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    
-    /* Resplandor neón (Glow) */
-    filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.7));
+    filter: drop-shadow(0 0 12px rgba(138, 43, 226, 0.8));
+    position: relative;
+    cursor: default;
+}
+
+/* Efecto Glitch al pasar el ratón */
+header h1:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); text-shadow: -2px 2px var(--neon-magenta), 2px -2px var(--neon-blue); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); text-shadow: 2px -2px var(--neon-magenta), -2px 2px var(--neon-blue); }
+    75% { transform: translate(-2px, -2px); }
+    100% { transform: translate(0); }
 }
 
 h2 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--text-gray);
-    margin: 40px 0 30px;
+    margin: 20px 0 35px;
     text-align: center;
 }
 
-/* La línea decorativa debajo de Panel de Navegación */
 h2::after {
     content: '';
     display: block;
     width: 50px;
-    height: 4px;
+    height: 3px;
     background: linear-gradient(to right, var(--neon-magenta), var(--neon-blue));
-    margin: 15px auto 0;
+    margin: 12px auto 0;
     border-radius: 10px;
 }
 
-/* --- 4. CONTENEDOR Y BOTONES (ESTILO IMAGEN) --- */
+/* --- 4. CONTENEDOR Y NAVEGACIÓN --- */
 .container {
     width: 100%;
-    max-width: 500px;
-    padding: 0 20px;
+    max-width: 480px;
+    padding: 20px;
     flex: 1;
 }
 
-.menu-servicios {
+/* Esto organiza automáticamente cualquier menú en columna */
+nav, .menu-servicios {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+    width: 100%;
 }
 
-/* Botón con borde gradiente y fondo oscuro */
+/* --- 5. BOTONES ESTILO CYBER-NEÓN --- */
+.btn {
+    display: block;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
 .btn-outline {
     position: relative;
-    padding: 1.2rem;
-    text-decoration: none;
+    padding: 1.1rem;
     font-weight: 700;
     color: white;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 1.5px;
     text-align: center;
-    border-radius: 15px;
-    
-    /* El truco para el borde de dos colores */
-    background: #16121a; /* Fondo interno del botón */
+    border-radius: 14px;
+    background: var(--btn-bg);
     border: 2px solid transparent;
     background-repeat: no-repeat;
     background-origin: border-box;
     background-clip: padding-box, border-box;
     background-image: 
-        linear-gradient(#16121a, #16121a), 
+        linear-gradient(var(--btn-bg), var(--btn-bg)), 
         linear-gradient(to right, var(--neon-magenta), var(--neon-blue));
-    
-    transition: var(--transition);
 }
 
 .btn-outline:hover {
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 0 20px rgba(255, 0, 204, 0.2);
-    filter: brightness(1.3);
+    box-shadow: 0 5px 20px rgba(255, 0, 204, 0.3);
+    filter: brightness(1.2);
 }
 
-/* --- 5. PÁGINA DE ADVERTENCIA / ERROR --- */
-.icon-advertencia {
-    font-size: 5rem;
-    display: block;
-    margin: 20px auto;
-    filter: drop-shadow(0 0 10px var(--neon-magenta));
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.text-danger {
-    color: var(--neon-magenta) !important;
-    text-shadow: 0 0 10px rgba(255, 0, 204, 0.5);
-}
-
-.description {
-    color: var(--text-gray);
-    margin-bottom: 30px;
-    line-height: 1.8;
-}
-
-/* --- 6. FOOTER Y BOTÓN REPORTAR --- */
+/* --- 6. FOOTER Y ACCIONES --- */
 footer {
     width: 100%;
-    padding: 60px 20px 40px;
+    max-width: 480px;
+    padding: 40px 20px;
     text-align: center;
+    margin-top: auto;
 }
 
-.btn-danger, .btn-danger-link {
+footer .btn-outline { margin-bottom: 25px; }
+
+.btn-danger {
     display: inline-block;
     color: var(--neon-magenta);
     text-decoration: none;
@@ -163,26 +155,29 @@ footer {
     border: 1px solid var(--neon-magenta);
     padding: 10px 25px;
     border-radius: 8px;
-    transition: var(--transition);
     text-transform: uppercase;
 }
 
-.btn-danger:hover, .btn-danger-link:hover {
+.btn-danger:hover {
     background: var(--neon-magenta);
     color: white !important;
     box-shadow: 0 0 20px var(--neon-magenta);
 }
 
-.copyright {
-    margin-top: 25px;
-    font-size: 0.75rem;
-    color: var(--text-gray);
-    opacity: 0.5;
-    letter-spacing: 2px;
+footer p { color: var(--text-gray); margin-bottom: 8px; }
+
+/* Para la página de Advertencia */
+.icon-advertencia {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 10px var(--neon-magenta));
 }
 
-/* Responsividad para móviles */
-@media (max-width: 480px) {
-    header h1 { font-size: 2.5rem; }
-    .btn-outline { padding: 1rem; font-size: 0.75rem; }
+.text-danger { color: var(--neon-magenta) !important; }
+
+/* --- 7. AJUSTES MÓVILES --- */
+@media (max-width: 450px) {
+    header h1 { font-size: 2.2rem; }
+    .btn-outline { padding: 0.9rem; font-size: 0.75rem; }
 }
