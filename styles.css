@@ -1,140 +1,192 @@
-/* Importación de fuente moderna y limpia */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+/* --- Importación de Fuentes --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
 
+/* --- Variables Globales de Color y Efectos --- */
 :root {
-    --bg-color: #0b0f1a;
-    --card-bg: #161b2c;
-    --primary: #6366f1; /* Indigo vibrante */
-    --accent: #22d3ee;  /* Cian */
-    --danger: #ef4444;  /* Rojo vibrante */
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --radius: 12px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Fondo oscuro pero con tinte violeta */
+    --bg-main: #13111a;
+    --bg-secondary: #1e1b2e;
+    
+    /* Colores Vibrantes */
+    --neon-pink: #ff00cc;
+    --neon-blue: #3333ff;
+    --neon-cyan: #00f2fe;
+    --danger-orange: #ff5722;
+    
+    /* Textos */
+    --text-white: #ffffff;
+    --text-muted: #a9b2c3;
+    
+    /* Gradientes y Sombras */
+    --main-gradient: linear-gradient(135deg, var(--neon-pink), var(--neon-blue));
+    --glow-shadow: 0 0 20px rgba(255, 0, 204, 0.5), 0 0 40px rgba(51, 51, 255, 0.3);
+    
+    /* Transición con efecto rebote */
+    --bounce-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* --- Reseteo Básico --- */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
 }
 
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--bg-color);
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(34, 211, 238, 0.1) 0px, transparent 50%);
-    color: var(--text-main);
-    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-white);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* Fondo con patrones sutiles de luz */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(51, 51, 255, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(255, 0, 204, 0.2) 0%, transparent 40%);
+    background-attachment: fixed;
 }
 
-/* Header */
+/* --- Header Dinámico --- */
 header {
     text-align: center;
     padding: 4rem 1rem 2rem;
 }
 
 header h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
+    font-size: 4.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
     letter-spacing: -2px;
-    background: linear-gradient(to right, var(--primary), var(--accent));
-    
-    /* Versiones para que el editor no se queje y sea compatible con todo */
-    background-clip: text; 
+    /* Texto con gradiente */
+    background: linear-gradient(to right, var(--neon-cyan), var(--neon-pink));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent; /* Fallback estándar */
-    
-    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
+    background-clip: text;
+    color: transparent;
+    /* Animación de pulso */
+    animation: titlePulse 3s infinite alternate ease-in-out;
 }
 
-/* Contenedor Principal */
+@keyframes titlePulse {
+    0% { filter: drop-shadow(0 0 5px rgba(0, 242, 254, 0.5)); }
+    100% { filter: drop-shadow(0 0 20px rgba(255, 0, 204, 0.8)); }
+}
+
+/* --- Contenedor Principal --- */
 .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
-    flex: 1; /* Empuja el footer hacia abajo */
+    flex: 1;
+    /* Animación de entrada al cargar la página */
+    animation: fadeInUp 0.8s ease-out backwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 h2 {
-    font-size: 0.9rem;
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 3px;
+    margin-bottom: 3rem;
     color: var(--text-muted);
-    text-align: center;
-    margin-bottom: 2.5rem;
+    position: relative;
 }
 
-/* Grid de Navegación */
+/* Línea decorativa debajo del H2 */
+h2::after {
+    content: ''; display: block; width: 60px; height: 4px;
+    background: var(--main-gradient);
+    margin: 15px auto 0; border-radius: 10px;
+}
+
+/* --- Grid de Navegación --- */
 .menu-servicios {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
 }
 
-/* Botones Base */
+/* --- Estilos de Botones Dinámicos --- */
 .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.2rem;
-    border-radius: var(--radius);
+    padding: 1.5rem;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: var(--transition);
+    font-weight: 700;
+    border-radius: 16px;
     text-align: center;
+    transition: var(--bounce-transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
 }
 
-/* Estilo para los enlaces del menú (Outline Moderno) */
+/* Botones Principales (Outline con Gradiente) */
 .btn-outline {
-    background: var(--card-bg);
-    color: var(--text-main);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background: var(--bg-secondary);
+    color: var(--text-white);
+    /* Truco para borde con gradiente */
+    border: 3px solid transparent;
+    background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), 
+                      var(--main-gradient);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.5);
 }
 
+/* Hover Effect: El botón "salta" y brilla */
 .btn-outline:hover {
-    border-color: var(--primary);
-    transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 0 15px rgba(99, 102, 241, 0.4);
-    background: rgba(99, 102, 241, 0.05);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: var(--glow-shadow);
+    /* El texto se vuelve gradiente al hacer hover */
+    background: var(--main-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border-color: transparent; /* Ocultamos el borde falso */
 }
 
-/* Botón de Reportar Problema */
+/* Botón de Peligro (Footer) */
 .btn-danger {
-    background: var(--danger);
+    background: var(--danger-orange);
     color: white;
     border: none;
-    padding: 0.8rem 1.5rem;
-    display: inline-flex;
-    margin-top: 10px;
+    padding: 1rem 2.5rem;
+    font-weight: 900;
+    box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4);
+    display: inline-block;
 }
 
 .btn-danger:hover {
-    background: #dc2626;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+    transform: scale(1.1) rotate(-2deg); /* Efecto de "sacudida" urgente */
+    background: #ff3d00;
+    box-shadow: 0 10px 30px rgba(255, 87, 34, 0.7);
 }
 
-/* Footer */
+/* --- Footer --- */
 footer {
     text-align: center;
     padding: 4rem 1rem 2rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+    background: linear-gradient(to top, #00000040, transparent);
+    margin-top: 3rem;
 }
 
-footer p {
-    color: var(--text-muted);
+/* Sobreescribimos los estilos inline del HTML para mantener consistencia */
+footer p[style*="margin-bottom"] {
+    margin-bottom: 30px !important;
+    font-size: 1.1rem;
 }
 
-/* Responsividad para móviles */
+footer p[style*="opacity"] {
+    opacity: 0.6 !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- Responsivo --- */
 @media (max-width: 600px) {
-    header h1 { font-size: 2.5rem; }
-    .menu-servicios { grid-template-columns: 1fr; }
+    header h1 { font-size: 3rem; }
+    .btn { padding: 1.2rem; }
 }
