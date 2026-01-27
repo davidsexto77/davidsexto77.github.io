@@ -236,7 +236,7 @@ natsort($elementos);
         <?php endforeach; ?>
     </ul>
     
-    <a href="https://davidsexto77.github.io/" class="btn-outline" style="opacity: 0.7; margin-top: 20px;">
+    <a href="../" class="btn-outline" style="opacity: 0.7; margin-top: 20px;">
         Volver a la Página Principal
     </a>
 </div>
