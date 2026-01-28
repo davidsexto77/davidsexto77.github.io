@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual Maestro: Administración de NAS con OpenMediaVault</title>
+    <title>Administración de NAS con OpenMediaVault</title>
+    <link rel="icon" type="image/png" href="imagenes/icono.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
@@ -39,219 +41,249 @@
     <header class="bg-slate-900 text-white py-16 px-6">
         <div class="max-w-5xl mx-auto">
             <div class="flex items-center space-x-4 mb-4">
-                <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Nivel Avanzado</span>
+                <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Nivel Medio</span>
                 <span class="text-slate-400">|</span>
-                <span class="text-slate-300 italic">Sistemas Operativos en Red</span>
+                <span class="text-slate-300 italic">Seguridad Informática</span>
             </div>
             <h1 class="text-5xl font-black mb-6 tracking-tight">OpenMediaVault: <span class="text-blue-500">Manual de Ingeniería NAS</span></h1>
-            <p class="text-xl text-slate-400 max-w-3xl">Guía integral que fusiona la lógica de comandos Linux con la gestión de servicios en red y almacenamiento persistente.</p>
+            <p class="text-xl text-slate-400 max-w-3xl">Guía integral para la gestión de servicios en red y almacenamiento persistente.</p>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto p-6 md:p-12 space-y-20">
 
-        <!-- CASO PRÁCTICO: EL ESCENARIO -->
+        <!-- CASO PRÁCTICO -->
         <section class="bg-blue-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
             <div class="relative z-10">
                 <h2 class="text-2xl font-bold mb-4 flex items-center">
                     <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                    Caso Práctico: "Estudio de Edición 'Pixel Flow'"
+                    Caso Práctico: "Estudio Pixel Flow"
                 </h2>
                 <p class="text-blue-100 text-lg mb-6">
-                    Un estudio de video necesita centralizar 2TB de material bruto. 
-                    <strong>Requisitos:</strong> 
-                    1. Una carpeta "BRUTO" donde todos leen pero solo el jefe de edición escribe. 
-                    2. Una carpeta "ENTREGAS" pública para que los clientes descarguen sin contraseña.
+                    Necesitamos configurar una carpeta compartida central llamada <strong>"PROYECTOS"</strong>. El reto es gestionar tres tipos de perfiles distintos para que la información esté organizada y segura.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-blue-700 bg-opacity-50 p-4 rounded-xl border border-blue-400">
-                        <span class="font-bold block text-sm">Desafío Técnico</span>
-                        <p class="text-sm">Configurar jerarquía de permisos ACL y exposición de protocolo SMB para entornos Windows/Mac.</p>
+                        <span class="font-bold block text-sm">Escenario</span>
+                        <p class="text-sm">Un administrador total, un editor con permisos de trabajo y un cliente que solo puede revisar el material.</p>
                     </div>
                     <div class="bg-blue-700 bg-opacity-50 p-4 rounded-xl border border-blue-400">
-                        <span class="font-bold block text-sm">Meta de la Práctica</span>
-                        <p class="text-sm">Lograr latencia mínima y asegurar que el montaje sea persistente tras reinicios.</p>
+                        <span class="font-bold block text-sm">Meta Técnica</span>
+                        <p class="text-sm">Implementar permisos ACL y visibilidad SMB bajo una estructura jerárquica clara.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONCEPTOS FUNDAMENTALES -->
+        <!-- CONCEPTOS DETALLADOS -->
         <section>
-            <h2 class="text-3xl font-bold mb-10 text-slate-800 border-b-2 border-blue-100 pb-2">1. Diccionario de Conceptos</h2>
+            <h2 class="text-3xl font-bold mb-10 text-slate-800 border-b-2 border-blue-100 pb-2">1. Conceptos Fundamentales (A Fondo)</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 <div class="concept-card bg-white p-6 rounded-2xl">
-                    <h3 class="font-bold text-blue-600 mb-2">El Montaje (Mountpoint)</h3>
-                    <p class="text-sm text-slate-600 mb-4">En Linux, un disco no es una "letra D:". Es un dispositivo físico que debe "colgarse" de una carpeta. Si no hay montaje, el sistema ve el hardware pero no puede leer los datos.</p>
-                    <div class="bg-slate-50 p-3 rounded text-xs font-mono">/dev/sdb1 -> /srv/dev-disk-by-label-DATOS</div>
+                    <h3 class="font-bold text-blue-600 mb-2">Montaje (Mountpoint)</h3>
+                    <p class="text-sm text-slate-600 mb-4">En los sistemas Linux, el hardware no es accesible directamente por el usuario. El "montaje" es el proceso de asignar una partición de un disco duro a un directorio específico del árbol de archivos. Sin este paso, el sistema operativo no puede escribir ni leer en el disco físico.</p>
                 </div>
 
                 <div class="concept-card bg-white p-6 rounded-2xl">
-                    <h3 class="font-bold text-blue-600 mb-2">SMB / CIFS</h3>
-                    <p class="text-sm text-slate-600 mb-4">Protocolo de red que permite compartir archivos. Es el "traductor" que hace que una carpeta de Linux aparezca en el explorador de archivos de Windows.</p>
-                    <div class="bg-slate-50 p-3 rounded text-xs font-mono">Puerto estándar: 445 TCP</div>
+                    <h3 class="font-bold text-blue-600 mb-2">Protocolo SMB / CIFS</h3>
+                    <p class="text-sm text-slate-600 mb-4">Es el estándar de comunicación que permite a equipos Windows "hablar" con servidores Linux. Funciona en la capa de aplicación y se encarga de que las carpetas remotas aparezcan como locales en el Explorador de Archivos.</p>
                 </div>
 
                 <div class="concept-card bg-white p-6 rounded-2xl">
-                    <h3 class="font-bold text-blue-600 mb-2">Tabla de Particiones (GPT)</h3>
-                    <p class="text-sm text-slate-600 mb-4">Es el mapa del disco. Al hacer un "Wipe" en OMV, borramos este mapa para que OMV pueda dibujar uno nuevo optimizado para almacenamiento NAS.</p>
+                    <h3 class="font-bold text-blue-600 mb-2">Wipe y Particionado</h3>
+                    <p class="text-sm text-slate-600 mb-4">El "Wipe" elimina la tabla de particiones (MBR/GPT). Esto es crucial para que OpenMediaVault pueda crear un sistema de archivos limpio (normalmente EXT4) sin que existan conflictos con datos o formatos antiguos.</p>
                 </div>
 
                 <div class="concept-card bg-white p-6 rounded-2xl">
-                    <h3 class="font-bold text-blue-600 mb-2">Permisos ACL</h3>
-                    <p class="text-sm text-slate-600 mb-4">Listas de Control de Acceso. Van más allá del simple (Lectura/Escritura), permitiendo definir qué usuarios específicos pueden entrar a qué subcarpetas.</p>
+                    <h3 class="font-bold text-blue-600 mb-2">Permisos y ACL</h3>
+                    <p class="text-sm text-slate-600 mb-4">Las Listas de Control de Acceso (ACL) permiten definir reglas granulares. Mientras que los permisos estándar de Linux son básicos, las ACL nos permiten decir exactamente: "Este usuario lee, este escribe y este otro no puede ni entrar".</p>
                 </div>
 
             </div>
         </section>
 
-        <!-- GUÍA PASO A PASO CON COMANDOS -->
+        <!-- CHECKLIST DE PREPARACIÓN -->
         <section>
-            <h2 class="text-3xl font-bold mb-10 text-slate-800 border-b-2 border-blue-100 pb-2">2. Ejecución Técnica</h2>
-
-            <!-- Paso 1 -->
-            <div class="mb-12">
-                <div class="flex items-center mb-4">
-                    <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">01</span>
-                    <h3 class="text-xl font-bold">Identificación del "Sujeto"</h3>
-                </div>
-                <p class="text-slate-600 mb-6">Antes de tocar la web, debemos saber quién es nuestro servidor en la red y qué discos tiene físicamente conectados.</p>
-                
-                <div class="terminal-header">
-                    <span class="dot bg-red-500"></span><span class="dot bg-yellow-500"></span><span class="dot bg-green-500"></span>
-                    <span class="text-slate-400 text-xs font-mono ml-2">root@omv-server:~</span>
-                </div>
-                <div class="bg-slate-900 p-6 rounded-b-xl mb-4">
-                    <span class="text-slate-500 text-xs block mb-2 uppercase tracking-widest">// Averiguar la dirección IP para la interfaz web</span>
-                    <pre class="text-emerald-400 mb-6"><code>hostname -I</code></pre>
-                    
-                    <span class="text-slate-500 text-xs block mb-2 uppercase tracking-widest">// Listar discos físicos detectados por el kernel</span>
-                    <pre class="text-emerald-400"><code>lsblk</code></pre>
-                </div>
-                <p class="text-xs text-slate-500 italic">Explicación: <strong>lsblk</strong> (List Block Devices) te mostrará 'sda' (sistema) y 'sdb' (tu disco de datos). Es vital no confundirlos.</p>
+            <h2 class="text-3xl font-bold mb-10 text-slate-800 border-b-2 border-blue-100 pb-2">2. Preparación de la Práctica (Checklist)</h2>
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm">
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-600">
+                    <li class="flex items-center space-x-3">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        <span>Máquina Virtual OMV encendida y en modo <strong>Adaptador Puente</strong>.</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        <span>Segundo disco virtual (mínimo 10GB) conectado a la VM.</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        <span>Credenciales de Root (Consola) y Admin (Web) a mano.</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                        <span>Conexión IP establecida entre Anfitrión y Máquina Virtual.</span>
+                    </li>
+                </ul>
             </div>
+        </section>
 
-            <!-- Paso 2 -->
-            <div class="mb-12">
-                <div class="flex items-center mb-4">
-                    <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">02</span>
-                    <h3 class="text-xl font-bold">Preparación de la "Finca" (Almacenamiento)</h3>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <div class="bg-white p-4 rounded-xl border-l-4 border-orange-500 shadow-sm">
-                            <p class="font-bold text-sm">1. Storage > Disks > Wipe</p>
-                            <p class="text-xs text-slate-500">Elimina metadatos previos. Es como "aplanar el terreno" antes de construir.</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-xl border-l-4 border-orange-500 shadow-sm">
-                            <p class="font-bold text-sm">2. Storage > File Systems > Create</p>
-                            <p class="text-xs text-slate-500">Creamos EXT4. Aquí el disco recibe un UUID (Identificador Único Universal).</p>
-                        </div>
-                        <div class="bg-white p-4 rounded-xl border-l-4 border-orange-500 shadow-sm">
-                            <p class="font-bold text-sm">3. Mount</p>
-                            <p class="text-xs text-slate-500">Activamos el punto de montaje. Sin esto, el comando <code>df -h</code> no mostrará el disco.</p>
+        <!-- EXPLICACIÓN DE COMANDOS -->
+        <section>
+            <h2 class="text-3xl font-bold mb-10 text-slate-800 border-b-2 border-blue-100 pb-2">3. Comandos de Consola: Uso y Función</h2>
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="terminal-header">
+                        <span class="dot bg-red-500"></span><span class="dot bg-yellow-500"></span><span class="dot bg-green-500"></span>
+                        <span class="text-slate-400 text-xs font-mono ml-2">Diagnóstico de Red</span>
+                    </div>
+                    <div class="p-6 md:flex items-center justify-between">
+                        <code class="text-blue-600 font-bold text-lg mb-4 md:mb-0">hostname -I</code>
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-700 font-bold">Función:</p>
+                            <p class="text-sm text-slate-600">Muestra la dirección IP local del servidor. Es imprescindible para saber dónde apuntar el navegador para la configuración web.</p>
                         </div>
                     </div>
-                    <div class="bg-slate-900 p-6 rounded-xl">
-                        <span class="text-slate-500 text-xs block mb-2 uppercase tracking-widest">// Comprobar espacio real y montaje</span>
-                        <pre class="text-emerald-400 mb-4"><code>df -h</code></pre>
-                        <p class="text-xs text-slate-400">Este comando es vital: te dirá el % de uso y en qué carpeta exacta de Linux se ha montado el disco (ej: /srv/dev-disk-...).</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="terminal-header">
+                        <span class="dot bg-red-500"></span><span class="dot bg-yellow-500"></span><span class="dot bg-green-500"></span>
+                        <span class="text-slate-400 text-xs font-mono ml-2">Estructura de Discos</span>
+                    </div>
+                    <div class="p-6 md:flex items-center justify-between">
+                        <code class="text-blue-600 font-bold text-lg mb-4 md:mb-0">lsblk</code>
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-700 font-bold">Función:</p>
+                            <p class="text-sm text-slate-600">"List Block Devices". Te permite ver todos los discos y particiones. Se usa para verificar que el sistema ha detectado el disco de 10GB que añadimos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="terminal-header">
+                        <span class="dot bg-red-500"></span><span class="dot bg-yellow-500"></span><span class="dot bg-green-500"></span>
+                        <span class="text-slate-400 text-xs font-mono ml-2">Monitorización de Espacio</span>
+                    </div>
+                    <div class="p-6 md:flex items-center justify-between">
+                        <code class="text-blue-600 font-bold text-lg mb-4 md:mb-0">df -h</code>
+                        <div class="md:w-2/3">
+                            <p class="text-sm text-slate-700 font-bold">Función:</p>
+                            <p class="text-sm text-slate-600">"Disk Free" en formato legible (human). Sirve para confirmar que un disco está <strong>montado</strong> y ver el espacio real disponible.</p>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Paso 3 -->
-            <div class="mb-12">
-                <div class="flex items-center mb-4">
-                    <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">03</span>
-                    <h3 class="text-xl font-bold">Gestión de Accesos (Usuarios y Grupos)</h3>
+        <!-- CONFIGURACIÓN DE USUARIOS -->
+        <section>
+            <h2 class="text-3xl font-bold mb-10 text-slate-800 border-b-2 border-blue-100 pb-2">4. Perfiles de Usuario (Configuración)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Admon -->
+                <div class="concept-card bg-white p-6 rounded-2xl border-t-4 border-blue-600 shadow-sm">
+                    <h4 class="font-bold text-xl mb-4 text-blue-700">Admon</h4>
+                    <p class="text-xs text-slate-500 mb-4 uppercase font-bold tracking-wider">Rol: Super Administrador</p>
+                    <ul class="text-sm space-y-2 mb-6">
+                        <li><strong>Pass:</strong> <code class="bg-slate-100 px-1 font-mono">a1234</code></li>
+                        <li><strong>Acceso:</strong> Total (Gestión + Archivos)</li>
+                        <li><strong>Grupos:</strong> sudo, ssh, users</li>
+                    </ul>
                 </div>
-                <p class="text-slate-600 mb-4">Para el caso "Pixel Flow", necesitamos dos perfiles:</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
-                        <p class="font-bold text-indigo-900">Usuario: 'jefe_editor'</p>
-                        <p class="text-xs text-indigo-700">Grupo: users, ssh, sudo. <br>Acceso total.</p>
-                    </div>
-                    <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
-                        <p class="font-bold text-indigo-900">Usuario: 'cliente'</p>
-                        <p class="text-xs text-indigo-700">Grupo: users. <br>Acceso restringido.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl border border-slate-200">
-                    <h4 class="font-bold mb-2">¿Cómo se hace?</h4>
-                    <p class="text-sm">Ve a <strong>Users > Users</strong>. Crea los perfiles. OMV automáticamente sincroniza estos usuarios con el archivo <code>/etc/passwd</code> de Linux.</p>
-                </div>
-            </div>
 
-            <!-- Paso 4 -->
-            <div class="mb-12">
-                <div class="flex items-center mb-4">
-                    <span class="bg-slate-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-3">04</span>
-                    <h3 class="text-xl font-bold">Exposición de Servicios (SMB)</h3>
+                <!-- User1 -->
+                <div class="concept-card bg-white p-6 rounded-2xl border-t-4 border-emerald-500 shadow-sm">
+                    <h4 class="font-bold text-xl mb-4 text-emerald-700">user1</h4>
+                    <p class="text-xs text-slate-500 mb-4 uppercase font-bold tracking-wider">Rol: Usuario Operativo</p>
+                    <ul class="text-sm space-y-2 mb-6">
+                        <li><strong>Pass:</strong> <code class="bg-slate-100 px-1 font-mono">u1234</code></li>
+                        <li><strong>Acceso:</strong> Lectura / Escritura</li>
+                        <li><strong>Grupos:</strong> users</li>
+                    </ul>
                 </div>
-                <div class="bg-slate-800 text-white p-8 rounded-2xl shadow-lg">
-                    <p class="text-sm mb-6"><strong class="text-yellow-400 italic">Paso Crítico:</strong> Para que Windows vea las carpetas, SMB debe estar activo.</p>
-                    <ul class="space-y-4">
-                        <li class="flex items-center space-x-3">
-                            <div class="h-2 w-2 bg-yellow-400 rounded-full"></div>
-                            <p class="text-sm"><code>Services > SMB/CIFS > Settings</code>: Enabled (Guardar).</p>
-                        </li>
-                        <li class="flex items-center space-x-3">
-                            <div class="h-2 w-2 bg-yellow-400 rounded-full"></div>
-                            <p class="text-sm"><code>Shares</code>: Añadir la carpeta <strong>BRUTO</strong>. Desactivar "Public" (pide contraseña).</p>
-                        </li>
-                        <li class="flex items-center space-x-3">
-                            <div class="h-2 w-2 bg-yellow-400 rounded-full"></div>
-                            <p class="text-sm"><code>Shares</code>: Añadir <strong>ENTREGAS</strong>. Activar "Public: Guest allowed" (No pide contraseña).</p>
-                        </li>
+
+                <!-- Guest -->
+                <div class="concept-card bg-white p-6 rounded-2xl border-t-4 border-slate-400 shadow-sm">
+                    <h4 class="font-bold text-xl mb-4 text-slate-700">guest</h4>
+                    <p class="text-xs text-slate-500 mb-4 uppercase font-bold tracking-wider">Rol: Invitado</p>
+                    <ul class="text-sm space-y-2 mb-6">
+                        <li><strong>Pass:</strong> <code class="bg-slate-100 px-1 font-mono">guest</code></li>
+                        <li><strong>Acceso:</strong> Solo Lectura</li>
+                        <li><strong>Grupos:</strong> users</li>
                     </ul>
                 </div>
             </div>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-xl shadow-sm">
+                <div class="flex">
+                    <div class="shrink-0">
+                        <svg class="h-6 w-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-bold text-blue-800">Nota Técnica: Gestión de Identidades</h4>
+                        <p class="text-sm text-blue-700 mt-1">
+                            <strong>¿Debo crearlos en Debian?</strong> No. Los usuarios deben crearse exclusivamente a través de la interfaz web de OMV (<code>Usuarios > Usuarios</code>). OMV actúa como un orquestador que crea automáticamente la cuenta en la terminal de Debian y sincroniza las contraseñas con el servicio de red Samba.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <!-- SECCIÓN DE CÓDIGO DE EMERGENCIA -->
+        <!-- CONFIGURACIÓN GUI -->
+        <section>
+            <h2 class="text-3xl font-bold mb-10 text-slate-800 border-b-2 border-blue-100 pb-2">5. Pasos en la Interfaz Web (GUI)</h2>
+            <div class="bg-slate-800 text-white p-8 rounded-3xl shadow-lg">
+                <ol class="space-y-8">
+                    <li class="flex items-start">
+                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 shrink-0 text-sm">1</span>
+                        <div>
+                            <p class="font-bold">Preparar el Almacenamiento:</p>
+                            <p class="text-sm text-slate-400">Ve a <strong>Almacenamiento > Discos</strong>. Selecciona el disco de 10GB y realiza un <em>Wipe</em>. Luego en <strong>Sistemas de Archivos</strong>, créalo (EXT4) y móntalo.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 shrink-0 text-sm">2</span>
+                        <div>
+                            <p class="font-bold">Alta de Usuarios:</p>
+                            <p class="text-sm text-slate-400">En <strong>Usuarios > Usuarios</strong>, pulsa el botón <strong>+</strong> y crea a <code>Admon</code>, <code>user1</code> y <code>guest</code> con sus respectivas contraseñas.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mr-4 shrink-0 text-sm">3</span>
+                        <div>
+                            <p class="font-bold">Compartir Carpetas:</p>
+                            <p class="text-sm text-slate-400">En <strong>Servicios > SMB/CIFS > Shares</strong>, añade "PROYECTOS". Entra en la pestaña de <em>Permisos</em> de la carpeta para asignar a cada usuario su nivel de acceso correspondiente.</p>
+                        </div>
+                    </li>
+                </ol>
+                <div class="mt-8 p-4 bg-slate-700 rounded-xl border-l-4 border-yellow-400">
+                    <p class="text-xs text-yellow-100"><strong>IMPORTANTE:</strong> No olvides pulsar el botón amarillo de <strong>Aplicar cambios</strong> en la barra superior tras cada configuración.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMANDOS DE EMERGENCIA -->
         <section class="bg-red-50 p-8 rounded-3xl border border-red-100">
-            <h2 class="text-red-800 font-bold text-2xl mb-6">Mantenimiento de Emergencia (CLI)</h2>
-            <p class="text-sm text-red-700 mb-6">Si la web se queda "congelada" o no aplica los cambios, estos comandos fuerzan al NAS a obedecer:</p>
-            
+            <h2 class="text-red-800 font-bold text-2xl mb-6 text-center md:text-left">Comandos de Emergencia (CLI)</h2>
             <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                    <span class="text-xs font-bold text-red-900 uppercase">Reiniciar motor de configuración</span>
-                    <div class="bg-slate-900 p-4 rounded-lg mt-2">
-                        <pre class="text-red-400 text-xs"><code>omv-salt deploy run nginx
-omv-salt deploy run samba</code></pre>
+                    <span class="text-xs font-bold text-red-900 uppercase">Reiniciar servicios si la web falla</span>
+                    <div class="bg-slate-900 p-4 rounded-lg mt-2 font-mono text-xs text-red-400">
+                        omv-salt deploy run nginx<br>
+                        omv-salt deploy run samba
                     </div>
                 </div>
                 <div>
-                    <span class="text-xs font-bold text-red-900 uppercase">Forzar reinicio de interfaces</span>
-                    <div class="bg-slate-900 p-4 rounded-lg mt-2">
-                        <pre class="text-red-400 text-xs"><code>systemctl restart networking</code></pre>
+                    <span class="text-xs font-bold text-red-900 uppercase">Reiniciar red si pierdes conexión</span>
+                    <div class="bg-slate-900 p-4 rounded-lg mt-2 font-mono text-xs text-red-400">
+                        systemctl restart networking
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONCLUSIÓN TÉCNICA -->
+        <!-- CONCLUSIÓN Y NAVEGACIÓN -->
         <section class="text-center py-12">
-            <h2 class="text-3xl font-bold mb-4">Resumen del Flujo de Trabajo</h2>
-            <p class="text-slate-500 mb-8 max-w-xl mx-auto">Hardware (Disco) → Kernel (Reconocimiento) → OMV (Formateo/Montaje) → Linux (ACL/Permisos) → Protocolo (SMB) → Usuario Final.</p>
-            <div class="flex justify-center space-x-4 mb-12">
-                <div class="p-4 bg-white shadow rounded-lg border-t-4 border-blue-500">
-                    <span class="block text-2xl font-bold">SSH</span>
-                    <span class="text-xs uppercase text-slate-400">Control Remoto</span>
-                </div>
-                <div class="p-4 bg-white shadow rounded-lg border-t-4 border-emerald-500">
-                    <span class="block text-2xl font-bold">445</span>
-                    <span class="text-xs uppercase text-slate-400">Puerto SMB</span>
-                </div>
-                <div class="p-4 bg-white shadow rounded-lg border-t-4 border-purple-500">
-                    <span class="block text-2xl font-bold">JSON</span>
-                    <span class="text-xs uppercase text-slate-400">Config Base</span>
-                </div>
-            </div>
-
-            <!-- Botón de Volver Atrás -->
             <div class="mt-10">
                 <a href="../" class="inline-flex items-center px-6 py-3 bg-slate-700 text-white font-semibold rounded-full hover:bg-slate-600 transition shadow-lg group">
                     <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -262,9 +294,9 @@ omv-salt deploy run samba</code></pre>
 
     </main>
 
-    <footer class="bg-slate-900 text-slate-500 py-12 text-center text-sm">
-        <p>OpenMediaVault Technical Guide v3.0 | 2026</p>
-        <p class="mt-2 text-slate-600">Diseñado para la excelencia en infraestructuras de red.</p>
+    <footer class="bg-slate-900 text-slate-500 py-12 text-center text-sm border-t border-slate-800">
+        <p>OpenMediaVault Technical Guide v3.6 | 2026</p>
+        <p class="mt-2 text-slate-600">Manual enfocado en Seguridad y Administración.</p>
     </footer>
 
 </body>
