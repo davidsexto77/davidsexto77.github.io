@@ -96,7 +96,7 @@
             border-radius: 10px;
         }
 
-        /* --- ESTILOS ESPECÍFICOS DEL BUSCADOR --- */
+        /* --- ESTILOS DEL BUSCADOR --- */
         .search-input {
             width: 100%;
             padding: 1.1rem;
@@ -131,6 +131,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            margin-bottom: 2rem; /* Espacio extra para el botón */
         }
 
         .result-data {
@@ -148,6 +149,37 @@
             letter-spacing: 2px;
             color: var(--neon-pink);
             margin-bottom: 10px;
+        }
+
+        /* --- NUEVOS ESTILOS PARA EL BOTÓN VOLVER --- */
+        .btn-back {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .btn-back:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(51, 51, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            padding: 40px 20px;
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            opacity: 0.6;
         }
 
         @keyframes fondoVivo {
@@ -178,7 +210,8 @@
             <div id="resLabel" class="result-label">System Ready</div>
             <div id="resData" class="result-data">Waiting for query...</div>
         </div>
-        <a href="../" class="btn btn-outline">Volver a la Página Principal</a>
+
+        <a href="../" class="btn-back">← Volver al Menú</a>
     </div>
 
     <footer>
