@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory | Terminal</title>
+    <style>
+        /* --- 1. TU CSS PROPORCIONADO --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+        :root {
+            --bg-dark: #050505;
+            --bg-glow: #1a0b2e;
+            --neon-pink: #ff00cc;
+            --neon-blue: #3333ff;
+            --btn-bg: #16121a;
+            --text-white: #ffffff;
+            --text-gray: #a9b2c3;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background: radial-gradient(circle at center 15%, var(--bg-glow) 0%, var(--bg-dark) 75%);
+            background-attachment: fixed;
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.3;
+            background:
+                radial-gradient(circle at 20% 30%, var(--neon-pink), transparent 50%),
+                radial-gradient(circle at 80% 70%, var(--neon-blue), transparent 50%);
+            animation: fondoVivo 15s ease-in-out infinite alternate;
+            filter: blur(40px);
+        }
+
+        header { text-align: center; padding: 60px 20px 20px; width: 100%; }
+
+        header h1 {
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #8a2be2, #4169e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 12px rgba(138, 43, 226, 0.8));
+            cursor: default;
+        }
+
+        header h1:hover { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-gray);
+            margin: 20px 0 35px;
+            text-align: center;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+            margin: 12px auto 0;
+            border-radius: 10px;
+        }
+
+        /* --- ESTILOS ESPECÍFICOS DEL BUSCADOR --- */
+        .search-input {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--btn-bg);
+            border: 2px solid transparent;
+            border-radius: 14px;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            background-image: linear-gradient(var(--btn-bg), var(--btn-bg)), linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 20px rgba(51, 51, 255, 0.4);
+            transform: scale(1.02);
+        }
+
+        .result-box {
+            width: 100%;
+            min-height: 100px;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-data {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, var(--text-gray));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .result-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--neon-pink);
+            margin-bottom: 10px;
+        }
+
+        @keyframes fondoVivo {
+            0% { background-position: 0% 0%; transform: scale(1); }
+            50% { background-position: 50% 20%; transform: scale(1.1); }
+            100% { background-position: 100% 50%; transform: scale(1); }
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: -2px 2px var(--neon-pink), 2px -2px var(--neon-blue); }
+            50% { transform: translate(2px, -2px); text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-blue); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Inventory</h1>
+    </header>
+
+    <div class="container">
+        <h2>Database Search</h2>
+       
+        <input type="text" id="searchInput" class="search-input" placeholder="Type keywords..." onkeyup="searchInventory()">
+
+        <div class="result-box">
+            <div id="resLabel" class="result-label">System Ready</div>
+            <div id="resData" class="result-data">Waiting for query...</div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="copyright">© 2026 MANAGEMENT SYSTEM | Alejandro Fernández & David Sexto</div>
+    </footer>
+
+    <script>
+        const inventory = {
+            "monitors and cables": "14 Dells, 8 Samsungs | 12 HDMI, 2 DP (+20 ord. / 15 stock) ",
+            "laptop stands": "9 units available for newcomers",
+            "ergonomic chairs": "Status: Pending Warehouse Confirmation",
+            "hard drives": "25 x 1TB | 2TB: OVERSTOCKED"
+        };
+
+        function searchInventory() {
+            const input = document.getElementById('searchInput').value.toLowerCase().trim();
+            const resData = document.getElementById('resData');
+            const resLabel = document.getElementById('resLabel');
+
+            let foundKey = Object.keys(inventory).find(key => input.length > 2 && key.includes(input));
+
+            if (input === "") {
+                resLabel.innerText = "System Ready";
+                resData.innerText = "Waiting for query...";
+                resData.style.color = "var(--text-gray)";
+            } else if (foundKey) {
+                resLabel.innerText = "Record Found";
+                resData.innerText = inventory[foundKey];
+                resData.style.background = "none";
+                resData.style.color = "#fff";
+            } else {
+                resLabel.innerText = "System Error";
+                resData.innerText = "RESOURCE_NOT_FOUND";
+                resData.style.color = "var(--neon-pink)";
+            }
+        }
+    </script>
+</body>
+</html>
