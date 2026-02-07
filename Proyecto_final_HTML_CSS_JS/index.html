@@ -14,7 +14,10 @@
             <div id="pantalla-login">
                 <h1>Iniciar Sesión</h1>
                 <input type="text" id="usuario" placeholder="Usuario"> <input type="password" id="password" placeholder="Contraseña">
-                <button onclick="login()">Entrar</button>
+                <div class="botones-login">
+                    <button onclick="login()">Entrar</button>
+                    <button onclick="window.location.href='../'">Volver Atrás</button>
+                </div>
                 <p id="mensaje-error" style="color: red;"></p>
             </div>
             <div id="contenido-principal" class="oculto">
