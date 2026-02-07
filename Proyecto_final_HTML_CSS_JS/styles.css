@@ -167,15 +167,17 @@ button:hover {
     box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
     transform: scale(1.05);
 }
+/* --- AJUSTE ESPECÍFICO PARA BOTONES DE LOGIN --- */
 .botones-login {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Espacio entre los botones */
-    margin-top: 10px;
+    gap: 15px; /* Espacio entre botones */
+    margin-top: 15px;
 }
 
-/* Opcional: Estilo para que el botón de volver sea visualmente distinto */
-.botones-login button:last-child {
-    background-color: #6c757d;
-    color: white;
+/* Solo los botones dentro de la caja de login */
+.botones-login button {
+    flex: 1; /* Esto obliga a que ambos midan exactamente lo mismo */
+    padding: 12px 0; /* Ajustamos padding para que el ancho lo maneje el flex */
+    text-align: center;
 }
