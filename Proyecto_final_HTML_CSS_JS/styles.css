@@ -167,3 +167,15 @@ button:hover {
     box-shadow: 0 0 20px rgba(187, 134, 252, 0.4);
     transform: scale(1.05);
 }
+.botones-login {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre los botones */
+    margin-top: 10px;
+}
+
+/* Opcional: Estilo para que el botón de volver sea visualmente distinto */
+.botones-login button:last-child {
+    background-color: #6c757d;
+    color: white;
+}
