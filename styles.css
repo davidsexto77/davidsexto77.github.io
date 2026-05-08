@@ -216,6 +216,7 @@ footer p {
 .btn-danger {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     color: var(--neon-pink);
     border: 1px solid var(--neon-pink);
@@ -225,6 +226,10 @@ footer p {
     font-size: 0.75rem;
     text-transform: uppercase;
     transition: var(--transition);
+    
+    /* --- LA SOLUCIÓN AQUÍ --- */
+    width: fit-content; /* Hace que el botón mida solo lo que ocupa el texto */
+    margin: 0 auto;     /* Centra el botón en el footer */
 }
 
 .btn-danger:hover {
