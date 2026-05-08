@@ -265,3 +265,15 @@ footer p {
     .container { padding: 30px 20px; }
     .btn-outline { padding: 1rem; font-size: 0.8rem; }
 }
+
+/* --- 9. EFECTO MATRIX (CANVAS) --- */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -3; /* Fondo absoluto */
+    opacity: 0.25; /* Transparencia para que no abrume */
+    pointer-events: none; /* Para que no interfiera con los clics */
+}
