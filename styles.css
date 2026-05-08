@@ -6,13 +6,12 @@
     --bg-glow: #1a0b2e;        /* Brillo morado central superior */
     --neon-pink: #ff00cc;      /* Rosa neón / Magenta */
     --neon-blue: #3333ff;      /* Azul eléctrico */
-    --btn-bg: #16121a;         /* Fondo interno de botones antiguo (se mantiene por si acaso) */
     --text-white: #ffffff;
     --text-gray: #a9b2c3;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- 2. ESTRUCTURA GLOBAL Y FONDO ANIMADO --- */
+/* --- 2. ESTRUCTURA GLOBAL Y FONDOS --- */
 * {
     margin: 0; padding: 0; box-sizing: border-box;
 }
@@ -20,8 +19,8 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-dark);
-    /* El degradado radial de base */
-    background: radial-gradient(circle at center 15%, var(--bg-glow) 0%, var(--bg-dark) 75%);
+    /* Degradado radial de base */
+    background: radial-gradient(circle at center 15%, var(--bg-glow) 0%, var(--bg-dark) 85%);
     background-attachment: fixed;
     color: var(--text-white);
     min-height: 100vh;
@@ -32,22 +31,51 @@ body {
     position: relative;
 }
 
-/* Capa de fondo animado (Auroras) */
+/* Personalización del Scrollbar (Barra de desplazamiento) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, var(--neon-pink), var(--neon-blue));
+    border-radius: 10px;
+}
+
+/* Capa de fondo 1: Auroras animadas */
 body::before {
     content: '';
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
+    z-index: -2;
     pointer-events: none;
-    opacity: 0.3; /* Intensidad de las luces de fondo */
+    opacity: 0.35;
     background: 
         radial-gradient(circle at 20% 30%, var(--neon-pink), transparent 50%),
         radial-gradient(circle at 80% 70%, var(--neon-blue), transparent 50%);
     animation: fondoVivo 15s ease-in-out infinite alternate;
-    filter: blur(40px);
+    filter: blur(50px);
 }
 
-/* --- 3. CABECERA Y EFECTO GLITCH --- */
+/* Capa de fondo 2: Líneas de escáner (Efecto Monitor CRT) */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0) 50%,
+        rgba(0, 0, 0, 0.12) 50%,
+        rgba(0, 0, 0, 0.12)
+    );
+    background-size: 100% 4px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- 3. CABECERA Y TÍTULO --- */
 header {
     text-align: center;
     padding: 60px 20px 20px;
@@ -55,7 +83,7 @@ header {
 }
 
 header h1 {
-    font-size: clamp(2.5rem, 10vw, 4.5rem);
+    font-size: clamp(2.8rem, 12vw, 4.5rem);
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -2px;
@@ -63,185 +91,177 @@ header h1 {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    /* Resplandor más suave y moderno */
-    filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.4)) drop-shadow(0 0 40px rgba(65, 105, 225, 0.2));
+    filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.5));
     cursor: default;
+    transition: var(--transition);
 }
 
-/* El título baila con interferencias al pasar el ratón */
 header h1:hover {
-    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    animation: glitch 0.3s infinite;
+    filter: drop-shadow(0 0 25px var(--neon-pink));
 }
 
-/* --- 4. CONTENEDOR Y TÍTULOS DE SECCIÓN --- */
+/* --- 4. PANEL CENTRAL (GLASSMORPHISM) --- */
 .container {
-    width: 100%;
-    max-width: 500px;
-    padding: 40px 30px;
+    width: 90%;
+    max-width: 480px;
+    padding: 40px 25px;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     
-    /* Panel de fondo suave - Efecto Glassmorphism */
-    background: linear-gradient(180deg, rgba(20,20,30,0.4) 0%, rgba(10,10,15,0.1) 100%);
+    /* Efecto Cristal Esmerilado */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    margin-top: 10px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
 }
 
 h2 {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--text-gray);
-    margin: 10px 0 35px;
+    margin-bottom: 35px;
     text-align: center;
 }
 
 h2::after {
     content: '';
     display: block;
-    width: 50px;
+    width: 40px;
     height: 3px;
     background: linear-gradient(to right, var(--neon-pink), var(--neon-blue));
     margin: 12px auto 0;
     border-radius: 10px;
 }
 
-/* Organiza automáticamente cualquier menú de navegación en columna */
-nav, .menu-servicios {
+nav {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
     width: 100%;
 }
 
-/* --- 5. BOTONES ESTILO CYBER-NEÓN (NUEVO GLASSMORPHISM) --- */
+/* --- 5. BOTONES DE NAVEGACIÓN --- */
 .btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px; /* Espacio para el icono */
     text-decoration: none;
     transition: var(--transition);
     width: 100%;
-    text-align: center;
+    
+    /* Animación de entrada */
+    opacity: 0;
+    animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* Cascada de aparición (retraso por botón) */
+nav .btn:nth-child(1) { animation-delay: 0.1s; }
+nav .btn:nth-child(2) { animation-delay: 0.2s; }
+nav .btn:nth-child(3) { animation-delay: 0.3s; }
+nav .btn:nth-child(4) { animation-delay: 0.4s; }
+
 .btn-outline {
-    position: relative;
     padding: 1.1rem;
     font-weight: 700;
     color: var(--text-white);
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 2px;
-    border-radius: 12px;
-    
-    /* Efecto Cristal */
-    background: rgba(22, 18, 26, 0.4);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    
-    /* Borde fino y sombra profunda */
+    letter-spacing: 1.5px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.btn-outline i {
+    font-size: 1.1rem;
+    color: var(--neon-blue);
+    transition: var(--transition);
 }
 
 .btn-outline:hover {
-    transform: translateY(-4px);
-    background: rgba(22, 18, 26, 0.7);
-    border-color: rgba(255, 0, 204, 0.5);
-    box-shadow: 0 8px 32px rgba(255, 0, 204, 0.2), 0 0 15px rgba(51, 51, 255, 0.2);
-    color: #fff;
+    transform: translateY(-5px) scale(1.02);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--neon-pink);
+    box-shadow: 0 10px 25px rgba(255, 0, 204, 0.2);
 }
 
-/* --- 6. PÁGINA DE ADVERTENCIA / ERROR --- */
-.icon-advertencia {
-    font-size: 4.5rem;
-    display: block;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 0 15px var(--neon-pink));
-    animation: pulseIcon 2s infinite;
+.btn-outline:hover i {
+    color: var(--neon-pink);
+    transform: rotate(-10deg);
 }
 
-.description, .descripcion {
-    color: var(--text-gray);
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-/* --- 7. FOOTER Y ACCIÓN DE REPORTE --- */
+/* --- 6. FOOTER Y BOTÓN REPORTAR --- */
 footer {
     width: 100%;
-    max-width: 500px;
-    padding: 40px 20px;
+    padding: 20px;
     text-align: center;
     margin-top: auto;
 }
 
-/* Espacio extra para el botón de volver si está en el footer */
-footer .btn-outline { margin-bottom: 30px; }
+footer p {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    margin-bottom: 15px;
+}
 
 .btn-danger {
-    display: inline-block;
-    width: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     color: var(--neon-pink);
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
     border: 1px solid var(--neon-pink);
     padding: 10px 25px;
     border-radius: 8px;
+    font-weight: 800;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    margin-top: 10px;
     transition: var(--transition);
 }
 
 .btn-danger:hover {
     background: var(--neon-pink);
     color: white !important;
-    box-shadow: 0 0 20px var(--neon-pink);
+    box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
 }
 
 .copyright {
-    margin-top: 25px;
-    font-size: 0.8rem;
-    opacity: 0.6;
+    margin-top: 30px;
+    font-size: 0.7rem;
+    opacity: 0.5;
     letter-spacing: 2px;
 }
 
-/* --- 8. ANIMACIONES (KEYFRAMES) --- */
+/* --- 7. ANIMACIONES (KEYFRAMES) --- */
 
-/* Movimiento de auroras de fondo */
 @keyframes fondoVivo {
-    0% { background-position: 0% 0%, 0% 0%; transform: scale(1); }
-    50% { background-position: 50% 20%, -30% 50%; transform: scale(1.1); }
-    100% { background-position: 100% 50%, 20% 100%; transform: scale(1); }
+    0% { background-position: 0% 0%; transform: scale(1); }
+    100% { background-position: 100% 100%; transform: scale(1.1); }
 }
 
-/* Efecto Glitch para el texto */
 @keyframes glitch {
     0% { transform: translate(0); text-shadow: -2px 2px var(--neon-pink), 2px -2px var(--neon-blue); }
-    25% { transform: translate(-2px, 2px); }
-    50% { transform: translate(2px, -2px); text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-blue); }
-    75% { transform: translate(-2px, -2px); }
+    25% { transform: translate(-1px, 1px); }
+    50% { transform: translate(1px, -1px); text-shadow: 2px -2px var(--neon-pink), -2px 2px var(--neon-blue); }
     100% { transform: translate(0); }
 }
 
-/* Pulso para el icono de advertencia */
-@keyframes pulseIcon {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.7; }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- 9. ADAPTACIÓN MÓVIL --- */
+/* --- 8. ADAPTACIÓN MÓVIL --- */
 @media (max-width: 480px) {
-    header h1 { font-size: 2.2rem; }
-    header { padding: 40px 10px 10px; }
-    .container { padding: 30px 20px; } /* Ajuste para que el panel no quede pegado a los bordes */
-    .btn-outline { padding: 0.9rem; font-size: 0.75rem; }
+    header h1 { font-size: 2.5rem; }
+    .container { padding: 30px 20px; }
+    .btn-outline { padding: 1rem; font-size: 0.8rem; }
 }
