@@ -1,4 +1,3 @@
-
 /* --- 1. CONFIGURACIÓN Y VARIABLES --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
@@ -7,7 +6,7 @@
     --bg-glow: #1a0b2e;        /* Brillo morado central superior */
     --neon-pink: #ff00cc;      /* Rosa neón / Magenta */
     --neon-blue: #3333ff;      /* Azul eléctrico */
-    --btn-bg: #16121a;         /* Fondo interno de botones */
+    --btn-bg: #16121a;         /* Fondo interno de botones antiguo (se mantiene por si acaso) */
     --text-white: #ffffff;
     --text-gray: #a9b2c3;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -64,7 +63,8 @@ header h1 {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    filter: drop-shadow(0 0 12px rgba(138, 43, 226, 0.8));
+    /* Resplandor más suave y moderno */
+    filter: drop-shadow(0 0 20px rgba(138, 43, 226, 0.4)) drop-shadow(0 0 40px rgba(65, 105, 225, 0.2));
     cursor: default;
 }
 
@@ -76,12 +76,19 @@ header h1:hover {
 /* --- 4. CONTENEDOR Y TÍTULOS DE SECCIÓN --- */
 .container {
     width: 100%;
-    max-width: 500px; /* Ancho controlado para que se vea como en tu imagen */
-    padding: 20px;
+    max-width: 500px;
+    padding: 40px 30px;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    /* Panel de fondo suave - Efecto Glassmorphism */
+    background: linear-gradient(180deg, rgba(20,20,30,0.4) 0%, rgba(10,10,15,0.1) 100%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 10px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 h2 {
@@ -90,7 +97,7 @@ h2 {
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--text-gray);
-    margin: 20px 0 35px;
+    margin: 10px 0 35px;
     text-align: center;
 }
 
@@ -112,7 +119,7 @@ nav, .menu-servicios {
     width: 100%;
 }
 
-/* --- 5. BOTONES ESTILO CYBER-NEÓN --- */
+/* --- 5. BOTONES ESTILO CYBER-NEÓN (NUEVO GLASSMORPHISM) --- */
 .btn {
     display: block;
     text-decoration: none;
@@ -125,27 +132,28 @@ nav, .menu-servicios {
     position: relative;
     padding: 1.1rem;
     font-weight: 700;
-    color: white;
+    color: var(--text-white);
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    border-radius: 14px;
+    letter-spacing: 2px;
+    border-radius: 12px;
     
-    /* Efecto de borde de doble color */
-    background: var(--btn-bg);
-    border: 2px solid transparent;
-    background-repeat: no-repeat;
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    background-image: 
-        linear-gradient(var(--btn-bg), var(--btn-bg)), 
-        linear-gradient(to right, var(--neon-pink), var(--neon-blue));
+    /* Efecto Cristal */
+    background: rgba(22, 18, 26, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Borde fino y sombra profunda */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .btn-outline:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 5px 20px rgba(255, 0, 204, 0.3);
-    filter: brightness(1.2);
+    transform: translateY(-4px);
+    background: rgba(22, 18, 26, 0.7);
+    border-color: rgba(255, 0, 204, 0.5);
+    box-shadow: 0 8px 32px rgba(255, 0, 204, 0.2), 0 0 15px rgba(51, 51, 255, 0.2);
+    color: #fff;
 }
 
 /* --- 6. PÁGINA DE ADVERTENCIA / ERROR --- */
@@ -190,6 +198,7 @@ footer .btn-outline { margin-bottom: 30px; }
     border-radius: 8px;
     text-transform: uppercase;
     margin-top: 10px;
+    transition: var(--transition);
 }
 
 .btn-danger:hover {
@@ -233,5 +242,6 @@ footer .btn-outline { margin-bottom: 30px; }
 @media (max-width: 480px) {
     header h1 { font-size: 2.2rem; }
     header { padding: 40px 10px 10px; }
+    .container { padding: 30px 20px; } /* Ajuste para que el panel no quede pegado a los bordes */
     .btn-outline { padding: 0.9rem; font-size: 0.75rem; }
 }
