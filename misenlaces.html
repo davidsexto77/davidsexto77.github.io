@@ -6,10 +6,13 @@
     <title>Bienvenido - Enlaces</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="imagenes/icono.png">
-
+    
+    <!-- Librería FontAwesome para los iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <canvas id="matrix-canvas"></canvas>
+    
     <header>
         <h1>Más Enlaces</h1>
     </header>
@@ -17,27 +20,51 @@
     <main class="container">
         <h2>Mis Páginas</h2>
         <nav>
-            <a href="https://shoppixelzone.wixstudio.com/pixelzone" class="btn btn-outline">PixelZone</a>
-            <a href="https://www.instagram.com/daviii__2507/" class="btn btn-outline" target="_blank">Instagram</a>
-            <a href="https://x.com/GlxdeKroos" class="btn btn-outline" target="_blank">X (Twitter)</a>
-            <a href="encuesta.html" class="btn btn-outline">Ir a la Encuesta</a>
-            <a href="https://davidsexto77-github-io.onrender.com/Calculadora/calc_price.php" class="btn btn-outline">Calculadora PHP</a>
-            <a href="nowork2.html" class="btn btn-outline">Java</a>
-            <a href="nowork2.html" class="btn btn-outline">JavaScript</a>
-            <a href="https://davidsexto77-github-io.onrender.com/" class="btn btn-outline">PHP</a>
-            <a href="inventory.html" class="btn btn-outline">Inventory</a>
-            <br>
-
+            <a href="https://shoppixelzone.wixstudio.com/pixelzone" class="btn btn-outline" target="_blank">
+                <i class="fa-solid fa-shop"></i> PixelZone
+            </a>
+            <a href="https://www.instagram.com/daviii__2507/" class="btn btn-outline" target="_blank">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            <a href="https://x.com/GlxdeKroos" class="btn btn-outline" target="_blank">
+                <i class="fa-brands fa-x-twitter"></i> X (Twitter)
+            </a>
+            <a href="encuesta.html" class="btn btn-outline">
+                <i class="fa-solid fa-clipboard-list"></i> Ir a la Encuesta
+            </a>
+            <a href="https://davidsexto77-github-io.onrender.com/Calculadora/calc_price.php" class="btn btn-outline" target="_blank">
+                <i class="fa-solid fa-calculator"></i> Calculadora PHP
+            </a>
+            <a href="nowork2.html" class="btn btn-outline">
+                <i class="fa-brands fa-java"></i> Java
+            </a>
+            <a href="nowork2.html" class="btn btn-outline">
+                <i class="fa-brands fa-js"></i> JavaScript
+            </a>
+            <a href="https://davidsexto77-github-io.onrender.com/" class="btn btn-outline" target="_blank">
+                <i class="fa-brands fa-php"></i> PHP
+            </a>
+            <a href="inventory.html" class="btn btn-outline">
+                <i class="fa-solid fa-boxes-stacked"></i> Inventory
+            </a>
         </nav>
     </main>
 
     <footer>
-        <a href="../" class="btn btn-outline">Volver a la Página Principal</a>
-        <div style="margin-top: 30px;">
+        <a href="../" class="btn btn-outline" style="width: max-content; margin: 0 auto 30px;">
+            <i class="fa-solid fa-arrow-left"></i> Volver a la Página Principal
+        </a>
+        
+        <div>
             <p>¿Problemas?</p>
-            <a href="mailto:dsexgar0311@g.educaand.es" class="btn btn-danger">Reportar un problema</a>
+            <a href="mailto:dsexgar0311@g.educaand.es" class="btn btn-danger">
+                <i class="fa-solid fa-bug"></i> REPORTAR UN PROBLEMA
+            </a>
         </div>
         <p class="copyright">DAVID SEXTO - 2026 &copy;</p>
     </footer>
+
+    <!-- Script para la lluvia de letras estilo Matrix -->
+    <script src="script.js"></script>
 </body>
 </html>
